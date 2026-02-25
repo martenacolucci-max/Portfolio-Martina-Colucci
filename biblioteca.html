@@ -2,30 +2,31 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca sospesa - Martina Colucci</title>
     <style>
+        /* Reset per eliminare spazi indesiderati */
+        * { box-sizing: border-box; }
         body, html {
             margin: 0; padding: 0;
             height: 100%; width: 100%;
             font-family: Arial, sans-serif;
             cursor: none;
             overflow: hidden;
-            display: flex;
-            flex-direction: column; /* Divide lo schermo verticalmente */
+            background-color: white;
         }
 
-        /* --- PARTE SUPERIORE (70%): GRIGLIA + IMMAGINE --- */
-        .top-section {
-            height: 70%;
+        /* --- CONTENITORE PRINCIPALE (GRIGLIA BLU) --- */
+        .main-canvas {
+            height: 70%; /* Occupa il 70% superiore */
             width: 100%;
-            background-color: white;
+            position: relative;
             background-image: linear-gradient(rgb(122, 161, 190) 1px, transparent 1px),
                               linear-gradient(90deg, rgb(122, 161, 190) 1px, transparent 1px);
             background-size: 60px 60px;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
         }
 
         .back-btn { 
@@ -33,47 +34,52 @@
             color: rgb(122, 161, 190); text-decoration: none; 
             font-size: 14px; font-weight: bold; z-index: 100;
         }
-        .back-btn:hover { font-style: italic; }
 
-        /* Rettangolo per l'immagine (distanziato 15% dai lati) */
-        .image-container {
-            width: 70%; /* 100% - 15% sinistra - 15% destra */
-            height: 80%; /* Un po' di margine interno alto/basso */
+        /* --- IL RETTANGOLO CENTRALE --- */
+        /* Margini: 5% alto, 15% lati, 30% libero sotto (gestito dal 70% del padre) */
+        .photo-rect {
+            width: 70%; /* 100% - 15% - 15% */
+            height: 90%; /* Lascia un piccolo margine interno */
+            background-color: #f2f2f2; /* TINTA UNITA GRIGIA (dove caricherai le foto) */
+            border: 1px solid #d0d0d0;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
+            margin-top: 5%;
         }
 
-        .image-container img {
+        .photo-rect img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
         }
 
+        /* Freccia a destra */
         .next-arrow {
             position: absolute;
-            right: -60px; /* Posizionata a destra del rettangolo immagine */
+            right: -60px;
             font-size: 50px;
             color: black;
             cursor: none;
             user-select: none;
+            z-index: 20;
         }
 
-        /* --- PARTE INFERIORE (30%): TESTO SU SFONDO BIANCO --- */
-        .bottom-section {
+        /* --- FASCIA BIANCA INFERIORE (30%) --- */
+        .footer-text-area {
             height: 30%;
             width: 100%;
-            background-color: white; /* Copre la griglia */
+            background-color: white; /* Sfondo bianco pieno */
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 10;
-            border-top: 1px solid rgba(122, 161, 190, 0.3);
+            z-index: 30;
+            border-top: 1px solid rgb(122, 161, 190);
         }
 
-        .description-text {
-            width: 50%; /* Occupa il 50% centrale dello schermo */
+        .description {
+            width: 50%; /* Larghezza limitata al 50% */
             text-align: center;
             font-style: italic;
             color: black;
@@ -81,11 +87,13 @@
             font-size: 16px;
         }
 
-        /* Cursore personalizzato */
+        /* Cursore Rosso */
         #cursor-dot {
-            width: 10px; height: 10px; background-color: rgb(173, 54, 35);
-            border-radius: 50%; position: fixed; pointer-events: none;
-            z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s ease-out;
+            width: 10px; height: 10px; 
+            background-color: rgb(173, 54, 35);
+            border-radius: 50%; position: fixed; 
+            pointer-events: none; z-index: 9999; 
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
@@ -93,14 +101,41 @@
 
     <div id="cursor-dot"></div>
 
-    <div class="top-section">
+    <div class="main-canvas">
         <a href="projects.html" class="back-btn">< BACK</a>
         
-        <div class="image-container">
-            <img id="project-img" src="biblioteca_1.jpg">
-            <div class="next-arrow" onclick="nextImage()">&#10233;</div>
+        <div class="photo-rect">
+            <img id="display-img" src="" alt="Spazio per immagine">
+            <div class="next-arrow" onclick="changeImage()">&#10233;</div>
         </div>
     </div>
 
-    <div class="bottom-section">
-        <div class="
+    <div class="footer-text-area">
+        <div class="description">
+            L'edificio è ubicato a Torino nel quartiere Cit Turin. Il progetto prevede la realizzazione di un edificio polifunzionale, sorretto da una struttura totalmente in acciaio a vista con una forma a ponte, per non interferire con la presenza di una rampa che collega il lotto alla stazione metropolitana. Si è pensato di realizzare un edificio che sembrasse sospeso, lasciando completamente a vista la sua struttura portante.
+        </div>
+    </div>
+
+    <script>
+        // Gestione Cursore
+        const dot = document.getElementById('cursor-dot');
+        document.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+        });
+
+        // Gestione Immagini
+        // Quando avrai le foto, inserisci i nomi qui (es: ["foto1.jpg", "foto2.jpg"])
+        const immagini = []; 
+        let index = 0;
+        const imgTag = document.getElementById('display-img');
+
+        function changeImage() {
+            if (immagini.length > 0) {
+                index = (index + 1) % immagini.length;
+                imgTag.src = immagini[index];
+            }
+        }
+    </script>
+</body>
+</html>
