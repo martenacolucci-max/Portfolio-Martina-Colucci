@@ -9,45 +9,54 @@
             margin: 0; padding: 0;
             width: 100%; height: 100%;
             overflow: hidden;
-            background-color: white;
+            background-color: white; /* Sfondo bianco iniziale */
             font-family: Arial, sans-serif;
-            cursor: none; /* Nasconde il cursore originale */
+            cursor: none; /* Nasconde cursore di sistema */
         }
 
-        /* Video di sfondo */
-        #bg-video {
+        /* Container Video */
+        #video-container {
             position: fixed;
-            right: 0; bottom: 0;
-            min-width: 100%; min-height: 100%;
-            z-index: -1;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
         }
 
-        /* Bottone Enter */
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Il video copre tutto lo schermo senza distorcersi */
+        }
+
+        /* Bottone Enter: Nero con scritta bianca Arial */
         #enter-btn {
             position: fixed;
-            bottom: 50px;
-            right: 50px;
+            bottom: 40px;
+            right: 40px;
             background-color: black;
             color: white;
             border: none;
-            padding: 15px 40px;
+            padding: 12px 35px;
             font-size: 16px;
             font-family: Arial, sans-serif;
-            display: none; /* Nascosto inizialmente */
-            cursor: none;
             text-decoration: none;
+            display: none; /* Apparirà dopo 3 secondi */
+            z-index: 10;
+            transition: opacity 0.5s ease;
         }
 
-        /* Cursore personalizzato */
+        /* Cursore coordinato: Piccolo e Rosso RGB(173, 54, 35) */
         #cursor-dot {
-            width: 20px;
-            height: 20px;
-            background-color: red;
+            width: 10px;
+            height: 10px;
+            background-color: rgb(173, 54, 35);
             border-radius: 50%;
             position: fixed;
-            pointer-events: none; /* Non blocca i click */
+            pointer-events: none;
             z-index: 9999;
-            transition: transform 0.1s ease-out; /* Effetto smooth */
+            /* Effetto smooth: il ritardo nel seguire il mouse */
+            transition: transform 0.1s ease-out; 
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
@@ -55,25 +64,28 @@
 
     <div id="cursor-dot"></div>
 
-    <video autoplay muted loop id="bg-video">
-        <source src="tuo-video.mp4" type="video/mp4">
-        Il tuo browser non supporta i video.
-    </video>
+    <div id="video-container">
+        <video autoplay muted loop playsinline>
+            <source src="tuo-video.mp4" type="video/mp4">
+        </video>
+    </div>
 
     <a href="projects.html" id="enter-btn">Enter</a>
 
     <script>
-        // Mostra il bottone dopo 3 secondi
+        // Gestione apparizione tasto dopo 3 secondi
         setTimeout(() => {
-            document.getElementById('enter-btn').style.display = 'block';
+            const btn = document.getElementById('enter-btn');
+            btn.style.display = 'block';
         }, 3000);
 
-        // Movimento del cursore
+        // Movimento fluido del cursore
         const dot = document.getElementById('cursor-dot');
+        
         document.addEventListener('mousemove', (e) => {
-            // Delay calcolato tramite trasformazione fluida
-            dot.style.left = e.clientX - 10 + 'px';
-            dot.style.top = e.clientY - 10 + 'px';
+            // Usiamo requestAnimationFrame per una fluidità superiore
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
         });
     </script>
 </body>
