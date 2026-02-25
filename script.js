@@ -1,163 +1,121 @@
-// Gestione delle schermate
-class Portfolio {
-    constructor() {
-        this.currentScreen = 'intro';
-        this.init();
-    }
+document.addEventListener('DOMContentLoaded', function() {
+  // Elementi DOM
+  const intro = document.getElementById('intro');
+  const works = document.getElementById('works');
+  const project = document.getElementById('project');
+  const enterBtn = document.getElementById('enter-btn');
+  const workLinks = document.querySelectorAll('.center-list a');
+  const backBtn = document.querySelector('.back-btn');
 
-    init() {
-        this.setupIntroScreen();
-        this.setupMainScreen();
-        this.setupProjectScreen();
-        this.createBubbles();
-    }
+  // Mostra tasto ENTER dopo 3 secondi
+  setTimeout(() => {
+    enterBtn.classList.remove('hidden');
+  }, 3000);
 
-    // Schermata di introduzione
-    setupIntroScreen() {
-        const enterButton = document.getElementById('enter-button');
-        const introVideo = document.getElementById('intro-video');
+  // Click su ENTER -> passa a pagina lavori
+  enterBtn.addEventListener('click', () => {
+    intro.classList.remove('active');
+    works.classList.add('active');
+    setupBubbleEffect();
+  });
 
-        // Mostra il pulsante Enter dopo 3 secondi
-        setTimeout(() => {
-            enterButton.classList.remove('hidden');
-        }, 3000);
+  // Setup hover sui lavori
+  workLinks.forEach(link => {
+    link.addEventListener('mouseenter', (e) => {
+      workLinks.forEach(l => l.classList.remove('active'));
+      e.currentTarget.classList.add('active');
+    });
 
-        enterButton.addEventListener('click', () => {
-            this.switchScreen('main');
-        });
+    link.addEventListener('mouseleave', (e) => {
+      e.currentTarget.classList.remove('active');
+    });
 
-        // Fallback se il video non si carica
-        introVideo.addEventListener('ended', () => {
-            enterButton.classList.remove('hidden');
-        });
-    }
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const id = this.dataset.id;
+      const titolo = this.textContent.trim();
+      showProject(id, titolo);
+    });
+  });
 
-    // Schermata principale con lista lavori
-    setupMainScreen() {
-        const workLinks = document.querySelectorAll('.works-list a');
+  // Torna indietro dalla pagina progetto
+  backBtn.addEventListener('click', function() {
+    project.classList.remove('active');
+    works.classList.add('active');
+  });
 
-        workLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const project = link.dataset.project;
-                this.showProject(project);
-            });
-        });
+  // Effetto Bubble Zoom
+  function setupBubbleEffect() {
+    const bubbleCanvas = document.getElementById('bubble-canvas');
+    bubbleCanvas.innerHTML = ''; // Pulisci canvas
 
-        // Effetto bolle con movimento del mouse
-        this.setupBubbleEffect();
-    }
+    const bubble = document.createElement('div');
+    bubble.style.position = 'fixed';
+    bubble.style.borderRadius = '50%';
+    bubble.style.background = 'radial-gradient(circle at 30% 30%, rgba(180, 180, 220, 0.25), rgba(150, 150, 200, 0.1) 60%, transparent 100%)';
+    bubble.style.width = '250px';
+    bubble.style.height = '250px';
+    bubble.style.pointerEvents = 'none';
+    bubble.style.transition = 'transform 0.25s ease-out';
+    bubble.style.transform = 'scale(0.7)';
+    bubble.style.filter = 'blur(2px)';
+    bubbleCanvas.appendChild(bubble);
 
-    // Effetto bolle che si deformano
-    setupBubbleEffect() {
-        const bubblesContainer = document.getElementById('bubbles-container');
-        const mainScreen = document.getElementById('main-screen');
+    works.addEventListener('mousemove', function(e) {
+      bubble.style.left = (e.clientX - 125) + 'px';
+      bubble.style.top = (e.clientY - 125) + 'px';
+      bubble.style.transform = 'scale(1.25)';
+    });
 
-        mainScreen.addEventListener('mousemove', (e) => {
-            const bubbles = bubblesContainer.querySelectorAll('.bubble');
-            const mouseX = e.clientX;
-            const mouseY = e.clientY;
+    works.addEventListener('mouseleave', () => {
+      bubble.style.transform = 'scale(0.7)';
+    });
+  }
 
-            bubbles.forEach(bubble => {
-                const bubbleRect = bubble.getBoundingClientRect();
-                const bubbleCenterX = bubbleRect.left + bubbleRect.width / 2;
-                const bubbleCenterY = bubbleRect.top + bubbleRect.height / 2;
+  // Mostra pagina progetto
+  function showProject(id, titolo) {
+    works.classList.remove('active');
+    project.classList.add('active');
 
-                const distX = mouseX - bubbleCenterX;
-                const distY = mouseY - bubbleCenterY;
-                const distance = Math.sqrt(distX * distX + distY * distY);
+    // Contenuti dei progetti (personalizza come desideri)
+    const progetti = {
+      biblioteca: {
+        titolo: 'Biblioteca sospesa',
+        descrizione: `
+          <p>Progetto di riqualificazione per la creazione di una biblioteca innovativa.</p>
+          <p>Aggiungi qui immagini, descrizioni dettagliate e rendering del tuo progetto.</p>
+        `
+      },
+      ospedale: {
+        titolo: 'Riqualificazione di un complesso ospedaliero',
+        descrizione: `
+          <p>Progetto di riqualificazione e modernizzazione di strutture ospedaliere.</p>
+          <p>Aggiungi qui immagini, descrizioni dettagliate e rendering del tuo progetto.</p>
+        `
+      },
+      bordi: {
+        titolo: 'Agire sui bordi',
+        descrizione: `
+          <p>Intervento architettonico sui confini urbani e territoriali.</p>
+          <p>Aggiungi qui immagini, descrizioni dettagliate e rendering del tuo progetto.</p>
+        `
+      },
+      reloadingenova: {
+        titolo: 'ReloadinGenova',
+        descrizione: `
+          <p>Progetto di rigenerazione urbana per la città di Genova.</p>
+          <p>Aggiungi qui immagini, descrizioni dettagliate e rendering del tuo progetto.</p>
+        `
+      }
+    };
 
-                if (distance < 200) {
-                    const force = (200 - distance) / 200;
-                    const moveX = (distX / distance) * force * 50;
-                    const moveY = (distY / distance) * force * 50;
-
-                    bubble.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
-                } else {
-                    bubble.style.transform = 'translate(-50%, -50%)';
-                }
-            });
-        });
-    }
-
-    // Crea le bolle che si muovono
-    createBubbles() {
-        const bubblesContainer = document.getElementById('bubbles-container');
-        const bubbleCount = 5;
-
-        for (let i = 0; i < bubbleCount; i++) {
-            const bubble = document.createElement('div');
-            bubble.className = 'bubble';
-            bubble.style.left = Math.random() * 100 + '%';
-            bubble.style.top = Math.random() * 100 + '%';
-            bubble.style.width = (Math.random() * 150 + 100) + 'px';
-            bubble.style.height = bubble.style.width;
-            bubblesContainer.appendChild(bubble);
-        }
-    }
-
-    // Pagina del progetto
-    setupProjectScreen() {
-        const backButton = document.querySelector('.back-button');
-        backButton.addEventListener('click', () => {
-            this.switchScreen('main');
-        });
-    }
-
-    // Mostra il progetto selezionato
-    showProject(projectName) {
-        const projectTitle = document.getElementById('project-title');
-        const projectContent = document.getElementById('project-content');
-
-        const projects = {
-            'biblioteca-sospesa': {
-                title: 'Biblioteca sospesa',
-                content: '<p>Contenuto del progetto "Biblioteca sospesa"</p>'
-            },
-            'riqualificazione-ospedaliero': {
-                title: 'Riqualificazione di un complesso ospedaliero',
-                content: '<p>Contenuto del progetto "Riqualificazione di un complesso ospedaliero"</p>'
-            },
-            'agire-sui-bordi': {
-                title: 'Agire sui bordi',
-                content: '<p>Contenuto del progetto "Agire sui bordi"</p>'
-            },
-            'reloading-genova': {
-                title: 'ReloadinGenova',
-                content: '<p>Contenuto del progetto "ReloadinGenova"</p>'
-            }
-        };
-
-        const project = projects[projectName];
-        projectTitle.textContent = project.title;
-        projectContent.innerHTML = project.content;
-
-        this.switchScreen('project');
-    }
-
-    // Cambia schermata
-    switchScreen(screenName) {
-        document.querySelectorAll('.screen').forEach(screen => {
-            screen.classList.remove('active');
-        });
-
-        switch (screenName) {
-            case 'intro':
-                document.getElementById('intro-screen').classList.add('active');
-                this.currentScreen = 'intro';
-                break;
-            case 'main':
-                document.getElementById('main-screen').classList.add('active');
-                this.currentScreen = 'main';
-                break;
-            case 'project':
-                document.getElementById('project-screen').classList.add('active');
-                this.currentScreen = 'project';
-                break;
-        }
-    }
-}
-
+    const prog = progetti[id] || { titolo: titolo, descrizione: '<p>Contenuto da definire</p>' };
+    document.getElementById('project-content').innerHTML = `
+      <h2>${prog.titolo}</h2>
+      ${prog.descrizione}
+    `;
+  }
+});
 // Inizializza il portfolio quando il DOM è pronto
 document.addEventListener('DOMContentLoaded', () => {
     new Portfolio();
