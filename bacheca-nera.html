@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>ReloadinGenova</title>
+    <style>
+        body {
+            margin: 0;
+            cursor: none;
+            background-color: black;
+            /* Griglia Blu su sfondo Nero */
+            background-image: 
+                linear-gradient(rgb(122, 161, 190) 1px, transparent 1px),
+                linear-gradient(90deg, rgb(122, 161, 190) 1px, transparent 1px);
+            background-size: 30px 30px;
+            min-height: 100vh;
+            color: white; /* Scritte bianche su sfondo nero */
+            font-family: Arial, sans-serif;
+            padding: 50px;
+        }
+
+        #cursor-dot {
+            width: 10px;
+            height: 10px;
+            background-color: rgb(173, 54, 35);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="cursor-dot"></div>
+
+    <h1>ReloadinGenova</h1>
+    <p>Bacheca nera con griglia blu.</p>
+
+    <script>
+        const dot = document.getElementById('cursor-dot');
+        document.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX - 5 + 'px';
+            dot.style.top = e.clientY - 5 + 'px';
+        });
+    </script>
+</body>
+</html>
