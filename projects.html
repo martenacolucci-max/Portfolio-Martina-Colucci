@@ -14,25 +14,48 @@
             background-color: white;
             font-family: Arial, sans-serif;
             cursor: none;
+            overflow: hidden;
         }
+
+        /* Nome in alto a destra */
         .header-name {
             position: fixed;
-            top: 40px; right: 40px;
+            top: 40px;
+            right: 40px;
             font-weight: bold;
             font-size: 16px;
+            color: black;
         }
+
+        /* Contenitore Menu */
+        .menu { 
+            text-align: center; /* Centra il testo all'interno dei link */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Allinea i blocchi dei link al centro */
+        }
+
         .menu a {
             display: block;
             text-decoration: none;
             color: black;
-            font-size: 18px;
+            font-size: 18px; 
             font-weight: bold;
-            margin: 30px 0; /* Spaziatura aumentata */
+            margin: 30px 0; 
             transition: font-style 0.2s;
+            text-align: center; /* Forza l'allineamento del testo */
+            width: fit-content;
         }
-        .menu a:hover { font-style: italic; }
+
+        /* Effetto corsivo al passaggio del cursore */
+        .menu a:hover { 
+            font-style: italic; 
+        }
+
+        /* Cursore personalizzato RGB 173 54 35 */
         #cursor-dot {
-            width: 10px; height: 10px;
+            width: 10px;
+            height: 10px;
             background-color: rgb(173, 54, 35);
             border-radius: 50%;
             position: fixed;
@@ -44,16 +67,21 @@
     </style>
 </head>
 <body>
+
     <div id="cursor-dot"></div>
+
     <div class="header-name">MARTINA COLUCCI</div>
+
     <div class="menu">
         <a href="biblioteca.html">Biblioteca sospesa</a>
         <a href="ospedale.html">Riqualificazione di un complesso ospedaliero</a>
         <a href="bordi.html">Agire sui bordi</a>
         <a href="genova.html">ReloadinGenova</a>
     </div>
+
     <script>
         const dot = document.getElementById('cursor-dot');
+        
         document.addEventListener('mousemove', (e) => {
             dot.style.left = e.clientX + 'px';
             dot.style.top = e.clientY + 'px';
