@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martina Colucci - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Schermata di introduzione con video -->
+    <div id="intro-screen" class="screen active">
+        <video id="intro-video" autoplay muted playsinline>
+            <source src="your-video.mp4" type="video/mp4">
+            Il tuo browser non supporta il tag video.
+        </video>
+        <button id="enter-button" class="enter-button hidden">ENTER</button>
+    </div>
+
+    <!-- Pagina principale con lista lavori -->
+    <div id="main-screen" class="screen">
+        <!-- Bolle che si muovono con il mouse -->
+        <div id="bubbles-container"></div>
+
+        <!-- Intestazione in alto a destra -->
+        <div class="header">
+            <h1>Martina Colucci</h1>
+            <p>Politecnico di Torino</p>
+            <p>Laurea Magistrale in Architettura Costruzione Città</p>
+        </div>
+
+        <!-- Lista lavori al centro -->
+        <div class="works-container">
+            <ul class="works-list">
+                <li><a href="#" data-project="biblioteca-sospesa">Biblioteca sospesa</a></li>
+                <li><a href="#" data-project="riqualificazione-ospedaliero">Riqualificazione di un complesso ospedaliero</a></li>
+                <li><a href="#" data-project="agire-sui-bordi">Agire sui bordi</a></li>
+                <li><a href="#" data-project="reloading-genova">ReloadinGenova</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Pagine dei singoli progetti -->
+    <div id="project-screen" class="screen">
+        <div class="project-header">
+            <button class="back-button">&larr; Indietro</button>
+            <h2 id="project-title"></h2>
+        </div>
+        <div id="project-content" class="project-content">
+            <!-- Il contenuto del progetto verrà inserito qui -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
