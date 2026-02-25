@@ -3,36 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Architettura</title>
+    <title>Portfolio - Martina Colucci</title>
     <style>
         body, html {
             margin: 0; padding: 0;
             width: 100%; height: 100%;
             overflow: hidden;
-            background-color: white; /* Sfondo bianco iniziale */
+            background-color: white;
             font-family: Arial, sans-serif;
-            cursor: none; /* Nasconde cursore di sistema */
+            cursor: none;
         }
-
-        /* Container Video */
         #video-container {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 1;
         }
-
         video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Il video copre tutto lo schermo senza distorcersi */
+            width: 100%; height: 100%;
+            object-fit: cover;
         }
-
-        /* Bottone Enter: Nero con scritta bianca Arial */
         #enter-btn {
             position: fixed;
-            bottom: 40px;
-            right: 40px;
+            bottom: 40px; right: 40px;
             background-color: black;
             color: white;
             border: none;
@@ -40,50 +33,34 @@
             font-size: 16px;
             font-family: Arial, sans-serif;
             text-decoration: none;
-            display: none; /* Apparirà dopo 3 secondi */
+            display: none;
             z-index: 10;
-            transition: opacity 0.5s ease;
         }
-
-        /* Cursore coordinato: Piccolo e Rosso RGB(173, 54, 35) */
         #cursor-dot {
-            width: 10px;
-            height: 10px;
+            width: 10px; height: 10px;
             background-color: rgb(173, 54, 35);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            /* Effetto smooth: il ritardo nel seguire il mouse */
-            transition: transform 0.1s ease-out; 
             transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out;
         }
     </style>
 </head>
 <body>
-
     <div id="cursor-dot"></div>
-
     <div id="video-container">
         <video autoplay muted loop playsinline>
             <source src="tuo-video.mp4" type="video/mp4">
         </video>
     </div>
-
     <a href="projects.html" id="enter-btn">Enter</a>
 
     <script>
-        // Gestione apparizione tasto dopo 3 secondi
-        setTimeout(() => {
-            const btn = document.getElementById('enter-btn');
-            btn.style.display = 'block';
-        }, 3000);
-
-        // Movimento fluido del cursore
+        setTimeout(() => { document.getElementById('enter-btn').style.display = 'block'; }, 3000);
         const dot = document.getElementById('cursor-dot');
-        
         document.addEventListener('mousemove', (e) => {
-            // Usiamo requestAnimationFrame per una fluidità superiore
             dot.style.left = e.clientX + 'px';
             dot.style.top = e.clientY + 'px';
         });
