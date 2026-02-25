@@ -1,53 +1,80 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Martina Colucci Portfolio</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Architettura</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+            background-color: white;
+            font-family: Arial, sans-serif;
+            cursor: none; /* Nasconde il cursore originale */
+        }
+
+        /* Video di sfondo */
+        #bg-video {
+            position: fixed;
+            right: 0; bottom: 0;
+            min-width: 100%; min-height: 100%;
+            z-index: -1;
+        }
+
+        /* Bottone Enter */
+        #enter-btn {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            display: none; /* Nascosto inizialmente */
+            cursor: none;
+            text-decoration: none;
+        }
+
+        /* Cursore personalizzato */
+        #cursor-dot {
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none; /* Non blocca i click */
+            z-index: 9999;
+            transition: transform 0.1s ease-out; /* Effetto smooth */
+        }
+    </style>
 </head>
 <body>
-  <!-- Intro con video -->
-  <div id="intro" class="screen active">
-    <video id="intro-video" autoplay muted playsinline>
-      <source src="TUO-VIDEO.mp4" type="video/mp4">
-      Il tuo browser non supporta il tag video.
+
+    <div id="cursor-dot"></div>
+
+    <video autoplay muted loop id="bg-video">
+        <source src="tuo-video.mp4" type="video/mp4">
+        Il tuo browser non supporta i video.
     </video>
-    <button id="enter-btn" class="hidden">ENTER</button>
-  </div>
 
-  <!-- Pagina Lavori -->
-  <div id="works" class="screen">
-    <!-- Header in alto a destra -->
-    <div class="header">
-      <div class="nome">MARTINA COLUCCI</div>
-      <div class="sottotitolo">Politecnico di Torino</div>
-      <div class="corso">Laurea Magistrale in Architettura Costruzione Città</div>
-    </div>
-    <!-- Bubble effetto zoom -->
-    <div id="bubble-canvas"></div>
-    <!-- Elenco lavori -->
-    <div class="center-list">
-      <ul>
-        <li><a href="#" data-id="biblioteca">Biblioteca sospesa</a></li>
-        <li><a href="#" data-id="ospedale">Riqualificazione di un complesso ospedaliero</a></li>
-        <li><a href="#" data-id="bordi">Agire sui bordi</a></li>
-        <li><a href="#" data-id="reloadingenova">ReloadinGenova</a></li>
-      </ul>
-    </div>
-  </div>
+    <a href="projects.html" id="enter-btn">Enter</a>
 
-  <!-- Pagina Progetto -->
-  <div id="project" class="screen">
-    <div class="header">
-      <div class="nome">MARTINA COLUCCI</div>
-      <div class="sottotitolo">Politecnico di Torino</div>
-      <div class="corso">Laurea Magistrale in Architettura Costruzione Città</div>
-    </div>
-    <button class="back-btn">&larr; Indietro</button>
-    <div id="project-content" class="content-project"></div>
-  </div>
+    <script>
+        // Mostra il bottone dopo 3 secondi
+        setTimeout(() => {
+            document.getElementById('enter-btn').style.display = 'block';
+        }, 3000);
 
-  <script src="script.js"></script>
+        // Movimento del cursore
+        const dot = document.getElementById('cursor-dot');
+        document.addEventListener('mousemove', (e) => {
+            // Delay calcolato tramite trasformazione fluida
+            dot.style.left = e.clientX - 10 + 'px';
+            dot.style.top = e.clientY - 10 + 'px';
+        });
+    </script>
 </body>
 </html>
