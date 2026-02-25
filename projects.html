@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Progetti - Portfolio</title>
+    <title>Progetti - Martina Colucci</title>
     <style>
         body, html {
             margin: 0; padding: 0;
@@ -15,48 +15,48 @@
             font-family: Arial, sans-serif;
             cursor: none;
         }
-
-        .menu { text-align: center; }
-
+        .header-name {
+            position: fixed;
+            top: 40px; right: 40px;
+            font-weight: bold;
+            font-size: 16px;
+        }
         .menu a {
             display: block;
             text-decoration: none;
             color: black;
             font-size: 18px;
-            margin: 15px 0;
+            font-weight: bold;
+            margin: 30px 0; /* Spaziatura aumentata */
             transition: font-style 0.2s;
         }
-
         .menu a:hover { font-style: italic; }
-
-        /* Cursore aggiornato: Piccolo e colore specifico */
         #cursor-dot {
-            width: 10px; /* Più piccolo */
-            height: 10px;
+            width: 10px; height: 10px;
             background-color: rgb(173, 54, 35);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            transition: transform 0.15s ease-out;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out;
         }
     </style>
 </head>
 <body>
     <div id="cursor-dot"></div>
-
+    <div class="header-name">MARTINA COLUCCI</div>
     <div class="menu">
-        <a href="bacheca-bianca.html">Biblioteca sospesa</a>
-        <a href="bacheca-bianca.html">Riqualificazione di un complesso ospedaliero</a>
-        <a href="bacheca-bianca.html">Agire sui bordi</a>
-        <a href="bacheca-nera.html">ReloadinGenova</a>
+        <a href="biblioteca.html">Biblioteca sospesa</a>
+        <a href="ospedale.html">Riqualificazione di un complesso ospedaliero</a>
+        <a href="bordi.html">Agire sui bordi</a>
+        <a href="genova.html">ReloadinGenova</a>
     </div>
-
     <script>
         const dot = document.getElementById('cursor-dot');
         document.addEventListener('mousemove', (e) => {
-            dot.style.left = e.clientX - 5 + 'px';
-            dot.style.top = e.clientY - 5 + 'px';
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
         });
     </script>
 </body>
