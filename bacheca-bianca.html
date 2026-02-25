@@ -8,24 +8,26 @@
             margin: 0;
             cursor: none;
             background-color: white;
-            /* Griglia Blu RGB(122, 161, 190) */
             background-image: 
                 linear-gradient(rgb(122, 161, 190) 1px, transparent 1px),
                 linear-gradient(90deg, rgb(122, 161, 190) 1px, transparent 1px);
-            background-size: 30px 30px; /* Dimensione dei quadretti */
+            background-size: 30px 30px;
             min-height: 100vh;
             font-family: Arial, sans-serif;
             padding: 50px;
         }
 
-        /* Esempio di come inserire elementi "liberi" nella bacheca */
-        .elemento-libero {
-            position: absolute;
-            background: white;
-            border: 1px solid #ccc;
-            padding: 10px;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+        /* Tasto Back */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: rgb(122, 161, 190); /* Colore della griglia per coerenza */
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
         }
+        .back-btn:hover { font-style: italic; }
 
         #cursor-dot {
             width: 10px;
@@ -36,22 +38,24 @@
             pointer-events: none;
             z-index: 9999;
             transition: transform 0.1s ease-out;
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
 <body>
     <div id="cursor-dot"></div>
+    <a href="projects.html" class="back-btn">< Back</a>
 
-    <div class="elemento-libero" style="top: 100px; left: 150px;">
-        <h2>Titolo Progetto</h2>
-        <p>Qui puoi scrivere la descrizione o inserire immagini.</p>
+    <div style="position: absolute; top: 150px; left: 100px;">
+        <h1 style="font-weight: normal;">Titolo del Progetto</h1>
+        <p>Inserisci qui la tua descrizione o trascina le tue immagini.</p>
     </div>
-
+    
     <script>
         const dot = document.getElementById('cursor-dot');
         document.addEventListener('mousemove', (e) => {
-            dot.style.left = e.clientX - 5 + 'px';
-            dot.style.top = e.clientY - 5 + 'px';
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
         });
     </script>
 </body>
