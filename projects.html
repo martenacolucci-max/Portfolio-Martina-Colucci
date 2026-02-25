@@ -16,52 +16,47 @@
             cursor: none;
         }
 
-        .menu {
-            text-align: center;
-        }
+        .menu { text-align: center; }
 
         .menu a {
             display: block;
             text-decoration: none;
             color: black;
-            font-size: 18px; /* Carattere medio-piccolo */
+            font-size: 18px;
             margin: 15px 0;
             transition: font-style 0.2s;
         }
 
-        /* Effetto corsivo al passaggio del mouse */
-        .menu a:hover {
-            font-style: italic;
-        }
+        .menu a:hover { font-style: italic; }
 
+        /* Cursore aggiornato: Piccolo e colore specifico */
         #cursor-dot {
-            width: 20px;
-            height: 20px;
-            background-color: red;
+            width: 10px; /* Più piccolo */
+            height: 10px;
+            background-color: rgb(173, 54, 35);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            transition: transform 0.1s ease-out;
+            transition: transform 0.15s ease-out;
         }
     </style>
 </head>
 <body>
-
     <div id="cursor-dot"></div>
 
     <div class="menu">
-        <a href="biblioteca.html">Biblioteca sospesa</a>
-        <a href="ospedale.html">Riqualificazione di un complesso ospedaliero</a>
-        <a href="bordi.html">Agire sui bordi</a>
-        <a href="genova.html">ReloadinGenova</a>
+        <a href="bacheca-bianca.html">Biblioteca sospesa</a>
+        <a href="bacheca-bianca.html">Riqualificazione di un complesso ospedaliero</a>
+        <a href="bacheca-bianca.html">Agire sui bordi</a>
+        <a href="bacheca-nera.html">ReloadinGenova</a>
     </div>
 
     <script>
         const dot = document.getElementById('cursor-dot');
         document.addEventListener('mousemove', (e) => {
-            dot.style.left = e.clientX - 10 + 'px';
-            dot.style.top = e.clientY - 10 + 'px';
+            dot.style.left = e.clientX - 5 + 'px';
+            dot.style.top = e.clientY - 5 + 'px';
         });
     </script>
 </body>
