@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Progetto - Lavagna</title>
+    <style>
+        body {
+            margin: 0;
+            cursor: none;
+            background-color: white;
+            /* Griglia Blu RGB(122, 161, 190) */
+            background-image: 
+                linear-gradient(rgb(122, 161, 190) 1px, transparent 1px),
+                linear-gradient(90deg, rgb(122, 161, 190) 1px, transparent 1px);
+            background-size: 30px 30px; /* Dimensione dei quadretti */
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            padding: 50px;
+        }
+
+        /* Esempio di come inserire elementi "liberi" nella bacheca */
+        .elemento-libero {
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+        }
+
+        #cursor-dot {
+            width: 10px;
+            height: 10px;
+            background-color: rgb(173, 54, 35);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="cursor-dot"></div>
+
+    <div class="elemento-libero" style="top: 100px; left: 150px;">
+        <h2>Titolo Progetto</h2>
+        <p>Qui puoi scrivere la descrizione o inserire immagini.</p>
+    </div>
+
+    <script>
+        const dot = document.getElementById('cursor-dot');
+        document.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX - 5 + 'px';
+            dot.style.top = e.clientY - 5 + 'px';
+        });
+    </script>
+</body>
+</html>
