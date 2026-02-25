@@ -46,16 +46,15 @@
 
         .menu a:hover { font-style: italic; }
 
-        /* BARRA INFO: Centratura Forzata */
+        /* --- BARRA INFO: NUOVA LOGICA DI CENTRATURA --- */
         #info-bar {
             position: fixed;
             bottom: 50px;
-            left: 0;         /* Parte da sinistra... */
-            right: 0;        /* ...fino a destra */
-            margin: 0 auto;  /* Centra orizzontalmente */
+            left: 0;
+            width: 100%; /* Occupa tutto lo schermo */
             display: flex;
-            justify-content: center; /* Centra il contenuto interno */
-            align-items: center;
+            justify-content: center; /* Centra orizzontalmente il contenuto */
+            align-items: center;     /* Centra verticalmente gli elementi tra loro */
             opacity: 0; 
             transition: opacity 0.4s ease;
             pointer-events: none;
@@ -69,7 +68,7 @@
             font-weight: bold;
             font-size: 13px;
             letter-spacing: 1px;
-            margin-right: 50px; /* Spazio aumentato tra tasto e software */
+            /* Rimuoviamo margini fissi e usiamo il gap del contenitore */
         }
 
         .software-list {
@@ -77,7 +76,8 @@
             font-style: italic;
             font-size: 14px;
             display: flex;
-            gap: 40px; /* Software ancora più distanziati */
+            margin-left: 50px; /* Spazio tra tasto nero e prima scritta rossa */
+            gap: 40px; /* Spazio tra i software */
         }
 
         #cursor-dot {
@@ -117,7 +117,7 @@
 
         function showInfo(city, softwares) {
             cityText.innerText = city;
-            // Genera i software spaziati
+            // Creiamo i singoli elementi per i software
             softwareText.innerHTML = softwares.split(', ').map(s => `<span>${s}</span>`).join('');
             infoBar.style.opacity = '1';
         }
