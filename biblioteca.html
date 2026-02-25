@@ -2,10 +2,8 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca sospesa - Martina Colucci</title>
     <style>
-        /* Reset per eliminare spazi indesiderati */
         * { box-sizing: border-box; }
         body, html {
             margin: 0; padding: 0;
@@ -14,11 +12,13 @@
             cursor: none;
             overflow: hidden;
             background-color: white;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* --- CONTENITORE PRINCIPALE (GRIGLIA BLU) --- */
-        .main-canvas {
-            height: 70%; /* Occupa il 70% superiore */
+        /* --- SEZIONE SUPERIORE (70%) --- */
+        .top-section {
+            height: 70%;
             width: 100%;
             position: relative;
             background-image: linear-gradient(rgb(122, 161, 190) 1px, transparent 1px),
@@ -35,65 +35,67 @@
             font-size: 14px; font-weight: bold; z-index: 100;
         }
 
-        /* --- IL RETTANGOLO CENTRALE --- */
-        /* Margini: 5% alto, 15% lati, 30% libero sotto (gestito dal 70% del padre) */
+        /* Rettangolo Foto Bianco e più Largo */
         .photo-rect {
-            width: 70%; /* 100% - 15% - 15% */
-            height: 90%; /* Lascia un piccolo margine interno */
-            background-color: #f2f2f2; /* TINTA UNITA GRIGIA (dove caricherai le foto) */
-            border: 1px solid #d0d0d0;
+            width: 85%; /* Più largo lateralmente */
+            height: 85%;
+            background-color: white; /* Rettangolo Bianco */
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
-            margin-top: 5%;
+            margin-top: 2%;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05); /* Ombra leggera per staccare dalla griglia */
+            /* Area cliccabile per scorrere */
+            cursor: none; 
         }
 
         .photo-rect img {
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 95%;
+            max-height: 95%;
             object-fit: contain;
         }
 
-        /* Freccia a destra */
-        .next-arrow {
-            position: absolute;
-            right: -60px;
-            font-size: 50px;
-            color: black;
-            cursor: none;
-            user-select: none;
-            z-index: 20;
-        }
-
-        /* --- FASCIA BIANCA INFERIORE (30%) --- */
-        .footer-text-area {
+        /* --- SEZIONE INFERIORE (30%) --- */
+        .bottom-section {
             height: 30%;
             width: 100%;
-            background-color: white; /* Sfondo bianco pieno */
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 30;
-            border-top: 1px solid rgb(122, 161, 190);
+            padding: 20px;
+            /* La griglia continua qui, ma il testo avrà lo sfondo bianco */
+            background-image: linear-gradient(rgb(122, 161, 190) 1px, transparent 1px),
+                              linear-gradient(90deg, rgb(122, 161, 190) 1px, transparent 1px);
+            background-size: 60px 60px;
         }
 
-        .description {
-            width: 50%; /* Larghezza limitata al 50% */
+        .description-text {
+            width: 50%;
             text-align: center;
+            line-height: 2.2; /* Aumentato per separare i rettangoli bianchi */
             font-style: italic;
             color: black;
-            line-height: 1.6;
             font-size: 16px;
         }
 
-        /* Cursore Rosso */
+        /* Effetto Rettangolo Bianco Sotto Ogni Riga */
+        .description-text span {
+            background-color: white;
+            padding: 0.3em 1%; /* Sbordamento dell'1% */
+            box-shadow: 0.3em 0 0 white, -0.3em 0 0 white; /* Estensione laterale pulita */
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+        }
+
+        /* Cursore */
         #cursor-dot {
             width: 10px; height: 10px; 
             background-color: rgb(173, 54, 35);
             border-radius: 50%; position: fixed; 
             pointer-events: none; z-index: 9999; 
             transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s; /* Transizione per feedback click */
         }
     </style>
 </head>
@@ -101,39 +103,50 @@
 
     <div id="cursor-dot"></div>
 
-    <div class="main-canvas">
+    <div class="top-section">
         <a href="projects.html" class="back-btn">< BACK</a>
         
-        <div class="photo-rect">
-            <img id="display-img" src="" alt="Spazio per immagine">
-            <div class="next-arrow" onclick="changeImage()">&#10233;</div>
+        <div class="photo-rect" onclick="nextImage()" onmouseenter="expandCursor()" onmouseleave="shrinkCursor()">
+            <img id="project-img" src="biblioteca_1.jpg" alt="[Spazio per immagine]">
         </div>
     </div>
 
-    <div class="footer-text-area">
-        <div class="description">
-            L'edificio è ubicato a Torino nel quartiere Cit Turin. Il progetto prevede la realizzazione di un edificio polifunzionale, sorretto da una struttura totalmente in acciaio a vista con una forma a ponte, per non interferire con la presenza di una rampa che collega il lotto alla stazione metropolitana. Si è pensato di realizzare un edificio che sembrasse sospeso, lasciando completamente a vista la sua struttura portante.
+    <div class="bottom-section">
+        <div class="description-text">
+            <span>L'edificio è ubicato a Torino nel quartiere Cit Turin. Il progetto prevede la realizzazione di un edificio polifunzionale, sorretto da una struttura totalmente in acciaio a vista con una forma a ponte, per non interferire con la presenza di una rampa che collega il lotto alla stazione metropolitana. Si è pensato di realizzare un edificio che sembrasse sospeso, lasciando completamente a vista la sua struttura portante.</span>
         </div>
     </div>
 
     <script>
-        // Gestione Cursore
         const dot = document.getElementById('cursor-dot');
+        
         document.addEventListener('mousemove', (e) => {
             dot.style.left = e.clientX + 'px';
             dot.style.top = e.clientY + 'px';
         });
 
-        // Gestione Immagini
-        // Quando avrai le foto, inserisci i nomi qui (es: ["foto1.jpg", "foto2.jpg"])
-        const immagini = []; 
-        let index = 0;
-        const imgTag = document.getElementById('display-img');
+        // Feedback visivo sul cursore quando si può cliccare per scorrere
+        function expandCursor() {
+            dot.style.width = '20px';
+            dot.style.height = '20px';
+            dot.style.backgroundColor = 'rgba(173, 54, 35, 0.7)';
+        }
 
-        function changeImage() {
+        function shrinkCursor() {
+            dot.style.width = '10px';
+            dot.style.height = '10px';
+            dot.style.backgroundColor = 'rgb(173, 54, 35)';
+        }
+
+        // Logica Slider (clic sull'immagine)
+        const immagini = ["biblioteca_1.jpg", "biblioteca_2.jpg"]; 
+        let currentIdx = 0;
+        const imgElement = document.getElementById('project-img');
+
+        function nextImage() {
             if (immagini.length > 0) {
-                index = (index + 1) % immagini.length;
-                imgTag.src = immagini[index];
+                currentIdx = (currentIdx + 1) % immagini.length;
+                imgElement.src = immagini[currentIdx];
             }
         }
     </script>
