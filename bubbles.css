@@ -1,0 +1,29 @@
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+    filter: blur(40px);
+    transition: transform 0.1s ease-out;
+    will-change: transform;
+    pointer-events: none;
+}
+
+.bubble:nth-child(1) {
+    background: radial-gradient(circle at 30% 30%, rgba(100, 200, 255, 0.3), rgba(100, 200, 255, 0.1));
+}
+
+.bubble:nth-child(2) {
+    background: radial-gradient(circle at 30% 30%, rgba(200, 100, 255, 0.3), rgba(200, 100, 255, 0.1));
+}
+
+.bubble:nth-child(3) {
+    background: radial-gradient(circle at 30% 30%, rgba(255, 100, 200, 0.3), rgba(255, 100, 200, 0.1));
+}
+
+.bubble:nth-child(4) {
+    background: radial-gradient(circle at 30% 30%, rgba(100, 255, 200, 0.3), rgba(100, 255, 200, 0.1));
+}
+
+.bubble:nth-child(5) {
+    background: radial-gradient(circle at 30% 30%, rgba(255, 200, 100, 0.3), rgba(255, 200, 100, 0.1));
+}
