@@ -17,17 +17,14 @@
             overflow: hidden;
         }
 
-        /* Nome in alto a destra */
         .header-name {
             position: fixed;
             top: 40px;
             right: 40px;
             font-weight: bold;
             font-size: 16px;
-            color: black;
         }
 
-        /* Contenitore Menu */
         .menu { 
             display: flex;
             flex-direction: column;
@@ -47,22 +44,22 @@
             width: 100%;
         }
 
-        .menu a:hover { 
-            font-style: italic; 
-        }
+        .menu a:hover { font-style: italic; }
 
-        /* Barra Info posizionata in BASSO AL CENTRO */
+        /* BARRA INFO: Centratura Forzata */
         #info-bar {
             position: fixed;
-            bottom: 50px; /* Distanza dal bordo inferiore */
-            left: 50%;
-            transform: translateX(-50%); /* Centratura esatta */
+            bottom: 50px;
+            left: 0;         /* Parte da sinistra... */
+            right: 0;        /* ...fino a destra */
+            margin: 0 auto;  /* Centra orizzontalmente */
             display: flex;
+            justify-content: center; /* Centra il contenuto interno */
             align-items: center;
             opacity: 0; 
             transition: opacity 0.4s ease;
             pointer-events: none;
-            width: max-content;
+            z-index: 5;
         }
 
         .city-tag {
@@ -72,7 +69,7 @@
             font-weight: bold;
             font-size: 13px;
             letter-spacing: 1px;
-            margin-right: 40px; /* Spazio generoso tra tasto e software */
+            margin-right: 50px; /* Spazio aumentato tra tasto e software */
         }
 
         .software-list {
@@ -80,10 +77,9 @@
             font-style: italic;
             font-size: 14px;
             display: flex;
-            gap: 30px; /* Spazio aumentato tra i nomi dei software */
+            gap: 40px; /* Software ancora più distanziati */
         }
 
-        /* Cursore personalizzato */
         #cursor-dot {
             width: 10px; height: 10px;
             background-color: rgb(173, 54, 35);
@@ -121,7 +117,7 @@
 
         function showInfo(city, softwares) {
             cityText.innerText = city;
-            // Inserisce i software con una spaziatura pulita
+            // Genera i software spaziati
             softwareText.innerHTML = softwares.split(', ').map(s => `<span>${s}</span>`).join('');
             infoBar.style.opacity = '1';
         }
