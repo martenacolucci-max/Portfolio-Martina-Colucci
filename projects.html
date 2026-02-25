@@ -17,14 +17,31 @@
             overflow: hidden;
         }
 
-        .header-name {
+        /* Header Martina Colucci + Info Università */
+        .header-container {
             position: fixed;
             top: 40px;
             right: 40px;
-            font-weight: bold;
-            font-size: 16px;
+            text-align: right;
+            z-index: 10;
         }
 
+        .header-name {
+            font-weight: bold;
+            font-size: 16px;
+            color: black;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .header-sub {
+            color: #808080; /* Grigio */
+            font-size: 13px;
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* Contenitore Menu Centrale */
         .menu { 
             display: flex;
             flex-direction: column;
@@ -46,15 +63,15 @@
 
         .menu a:hover { font-style: italic; }
 
-        /* --- BARRA INFO: NUOVA LOGICA DI CENTRATURA --- */
+        /* Barra Info in basso al centro */
         #info-bar {
             position: fixed;
             bottom: 50px;
             left: 0;
-            width: 100%; /* Occupa tutto lo schermo */
+            width: 100%;
             display: flex;
-            justify-content: center; /* Centra orizzontalmente il contenuto */
-            align-items: center;     /* Centra verticalmente gli elementi tra loro */
+            justify-content: center;
+            align-items: center;
             opacity: 0; 
             transition: opacity 0.4s ease;
             pointer-events: none;
@@ -68,18 +85,18 @@
             font-weight: bold;
             font-size: 13px;
             letter-spacing: 1px;
-            /* Rimuoviamo margini fissi e usiamo il gap del contenitore */
         }
 
         .software-list {
-            color: rgb(173, 54, 35);
+            color: rgb(173, 54, 35); /* Rosso specifico */
             font-style: italic;
             font-size: 14px;
             display: flex;
-            margin-left: 50px; /* Spazio tra tasto nero e prima scritta rossa */
-            gap: 40px; /* Spazio tra i software */
+            margin-left: 50px;
+            gap: 40px;
         }
 
+        /* Cursore personalizzato */
         #cursor-dot {
             width: 10px; height: 10px;
             background-color: rgb(173, 54, 35);
@@ -95,7 +112,12 @@
 <body>
 
     <div id="cursor-dot"></div>
-    <div class="header-name">MARTINA COLUCCI</div>
+
+    <div class="header-container">
+        <span class="header-name">MARTINA COLUCCI</span>
+        <span class="header-sub">Politecnico di Torino</span>
+        <span class="header-sub">Laurea Magistrale in Architettura Costruzione e Città</span>
+    </div>
 
     <div class="menu">
         <a href="biblioteca.html" onmouseover="showInfo('TORINO', 'Revit, Illustrator')" onmouseout="hideInfo()">Biblioteca sospesa</a>
@@ -117,7 +139,6 @@
 
         function showInfo(city, softwares) {
             cityText.innerText = city;
-            // Creiamo i singoli elementi per i software
             softwareText.innerHTML = softwares.split(', ').map(s => `<span>${s}</span>`).join('');
             infoBar.style.opacity = '1';
         }
