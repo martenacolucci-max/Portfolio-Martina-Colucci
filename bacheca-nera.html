@@ -8,14 +8,15 @@
             margin: 0;
             cursor: none;
             background-color: black;
+            /* Griglia spaziosa blu su nero (60px) */
             background-image: 
                 linear-gradient(rgb(122, 161, 190) 1px, transparent 1px),
                 linear-gradient(90deg, rgb(122, 161, 190) 1px, transparent 1px);
-            background-size: 30px 30px;
+            background-size: 60px 60px;
             min-height: 100vh;
             color: white;
             font-family: Arial, sans-serif;
-            padding: 50px;
+            padding: 60px;
         }
 
         .back-btn {
@@ -40,13 +41,19 @@
             transition: transform 0.1s ease-out;
             transform: translate(-50%, -50%);
         }
+
+        h1 {
+            font-weight: bold;
+            font-size: 24px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <div id="cursor-dot"></div>
     <a href="projects.html" class="back-btn">< Back</a>
 
-    <h1 style="font-weight: normal; margin-top: 60px;">ReloadinGenova</h1>
+    <h1>ReloadinGenova</h1>
 
     <script>
         const dot = document.getElementById('cursor-dot');
