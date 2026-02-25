@@ -4,59 +4,103 @@
     <meta charset="UTF-8">
     <title>Biblioteca sospesa - Martina Colucci</title>
     <style>
-        body {
-            margin: 0; cursor: none; background-color: white;
+        body, html {
+            margin: 0; padding: 0;
+            height: 100%; width: 100%;
+            font-family: Arial, sans-serif;
+            cursor: none;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column; /* Divide lo schermo verticalmente */
+        }
+
+        /* --- PARTE SUPERIORE (70%): GRIGLIA + IMMAGINE --- */
+        .top-section {
+            height: 70%;
+            width: 100%;
+            background-color: white;
             background-image: linear-gradient(rgb(122, 161, 190) 1px, transparent 1px),
                               linear-gradient(90deg, rgb(122, 161, 190) 1px, transparent 1px);
             background-size: 60px 60px;
-            min-height: 100vh; font-family: Arial, sans-serif;
-            overflow: hidden;
-        }
-
-        .back-btn { position: fixed; top: 20px; left: 20px; color: rgb(122, 161, 190); text-decoration: none; font-size: 14px; z-index: 100; font-weight: bold; }
-        .back-btn:hover { font-style: italic; }
-
-        /* --- RETTANGOLO IMMAGINE --- */
-        .slider-container {
-            position: absolute;
-            top: 5%;
-            left: 15%;
-            right: 15%;
-            bottom: 30%; /* Spazio dal basso per il testo */
-            background-color: transparent; 
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            position: relative;
         }
 
-        .slider-container img {
+        .back-btn { 
+            position: absolute; top: 20px; left: 20px; 
+            color: rgb(122, 161, 190); text-decoration: none; 
+            font-size: 14px; font-weight: bold; z-index: 100;
+        }
+        .back-btn:hover { font-style: italic; }
+
+        /* Rettangolo per l'immagine (distanziato 15% dai lati) */
+        .image-container {
+            width: 70%; /* 100% - 15% sinistra - 15% destra */
+            height: 80%; /* Un po' di margine interno alto/basso */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .image-container img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            /* Se vuoi un bordo sottile intorno all'immagine scommenta la riga sotto */
-            /* border: 1px solid rgb(122, 161, 190); */
         }
 
-        /* Freccia Successivo */
         .next-arrow {
             position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
+            right: -60px; /* Posizionata a destra del rettangolo immagine */
             font-size: 50px;
             color: black;
             cursor: none;
             user-select: none;
-            z-index: 10;
-            padding: 20px;
         }
 
-        /* --- AREA TESTO SOTTOSTANTE (30% INFERIORE) --- */
-        .description-wrapper {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
+        /* --- PARTE INFERIORE (30%): TESTO SU SFONDO BIANCO --- */
+        .bottom-section {
             height: 30%;
-            background-color: white; /* S
+            width: 100%;
+            background-color: white; /* Copre la griglia */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            border-top: 1px solid rgba(122, 161, 190, 0.3);
+        }
+
+        .description-text {
+            width: 50%; /* Occupa il 50% centrale dello schermo */
+            text-align: center;
+            font-style: italic;
+            color: black;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* Cursore personalizzato */
+        #cursor-dot {
+            width: 10px; height: 10px; background-color: rgb(173, 54, 35);
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor-dot"></div>
+
+    <div class="top-section">
+        <a href="projects.html" class="back-btn">< BACK</a>
+        
+        <div class="image-container">
+            <img id="project-img" src="biblioteca_1.jpg">
+            <div class="next-arrow" onclick="nextImage()">&#10233;</div>
+        </div>
+    </div>
+
+    <div class="bottom-section">
+        <div class="
