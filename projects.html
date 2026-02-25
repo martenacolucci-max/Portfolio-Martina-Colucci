@@ -29,10 +29,10 @@
 
         /* Contenitore Menu */
         .menu { 
-            text-align: center; /* Centra il testo all'interno dei link */
             display: flex;
             flex-direction: column;
-            align-items: center; /* Allinea i blocchi dei link al centro */
+            align-items: center; /* Centra i blocchi orizzontalmente */
+            width: 100%;
         }
 
         .menu a {
@@ -41,10 +41,11 @@
             color: black;
             font-size: 18px; 
             font-weight: bold;
-            margin: 30px 0; 
+            margin: 25px 0; 
             transition: font-style 0.2s;
-            text-align: center; /* Forza l'allineamento del testo */
-            width: fit-content;
+            /* La riga magica: */
+            text-align: center; 
+            width: 100%; /* Occupa tutto lo spazio per permettere al testo di centrarsi */
         }
 
         /* Effetto corsivo al passaggio del cursore */
