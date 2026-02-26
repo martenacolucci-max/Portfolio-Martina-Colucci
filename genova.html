@@ -33,98 +33,112 @@
             color: rgb(122, 161, 190); text-decoration: none; 
             font-size: 14px; font-weight: bold; 
         }
-        .back-btn:hover { text-decoration: underline; }
 
-        /* --- BARRA DI SCORRIMENTO ROSSA (DESTRA) --- */
+        /* --- BARRA DI SCORRIMENTO ROSSA --- */
         .scroll-container {
-            position: fixed;
-            right: 15px;
-            top: 20%;
-            height: 60%;
-            width: 4px;
+            position: fixed; right: 15px; top: 20%;
+            height: 60%; width: 4px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            z-index: 1000;
+            border-radius: 2px; z-index: 1000;
         }
         .scroll-bar {
-            width: 100%;
-            height: 0%;
+            width: 100%; height: 0%;
             background-color: rgb(173, 54, 35);
             border-radius: 2px;
-            transition: height 0.1s ease-out;
         }
 
         /* --- CONTENUTO --- */
         .wrapper {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 120px 5% 100px 5%;
+            padding: 120px 5% 50px 5%;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* Titolo Centrale (Normal, non corsivo) */
         .main-title {
             color: rgb(173, 54, 35);
             font-size: 52px;
             margin-bottom: 80px;
             text-align: center;
             font-weight: normal;
-            font-style: normal; /* Forza stile normale */
         }
 
-        /* Sezione Bilingue */
         .bilingual-grid {
-            display: flex;
-            width: 100%;
-            gap: 80px;
-            margin-bottom: 100px;
+            display: flex; width: 100%; gap: 80px; margin-bottom: 100px;
         }
-
         .lang-col { flex: 1; }
-
-        .lang-label {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .description {
-            font-size: 16px;
-            line-height: 1.6;
-            font-style: normal; /* Forza stile normale */
-        }
-
-        /* IT: Allineato a destra */
+        .lang-label { font-size: 28px; font-weight: bold; margin-bottom: 15px; }
+        .description { font-size: 16px; line-height: 1.6; }
         .it-side { text-align: right; }
-        
-        /* EN: Allineato a sinistra (Specchiato) */
         .en-side { text-align: left; }
 
-        /* --- RIQUADRO BIANCO VIDEO --- */
         .video-box {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            background-color: white;
-            margin-bottom: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: black;
-            font-weight: bold;
-            font-size: 20px;
+            width: 100%; aspect-ratio: 16 / 9;
+            background-color: white; margin-bottom: 80px;
         }
 
-        /* --- TESTO GIUSTIFICATO FINALE --- */
         .justified-footer {
-            width: 100%;
-            text-align: justify;
-            font-size: 18px;
-            line-height: 1.8;
-            color: white;
-            font-style: normal; /* Forza stile normale */
+            width: 100%; text-align: justify;
+            font-size: 18px; line-height: 1.8;
+            margin-bottom: 150px;
         }
+
+        /* --- SEZIONE SCHEMA TECNICO --- */
+        .schema-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 150px; /* Spazio tra le 4 ripetizioni */
+            padding-bottom: 200px;
+        }
+
+        .schema-row {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            width: 100%;
+        }
+
+        /* Riquadro Grigio Scuro (1/5 dello schermo) */
+        .gray-box {
+            width: 20vw;
+            height: 150px;
+            background-color: #1a1a1a;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        /* Il Filo (Colore 122 161 190) */
+        .connector-line {
+            position: absolute;
+            /* Parte dalla metà dell'altezza del grigio */
+            top: 75px; 
+            left: 20vw;
+            width: 10vw; /* Spazio di connessione */
+            height: calc(50% + 2px); /* Si adatta all'offset verticale */
+            border-left: 2px solid rgb(122, 161, 190);
+            border-bottom: 2px solid rgb(122, 161, 190);
+            pointer-events: none;
+        }
+
+        /* Riquadro 16:9 (1/3 dello schermo) */
+        .large-box-wrapper {
+            /* Parte dalla metà dell'altezza del riquadro precedente */
+            margin-top: 75px; 
+            margin-left: 10vw;
+            width: 33.33vw;
+            flex-shrink: 0;
+        }
+
+        .large-box {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: #333; /* Placeholder per contenuto futuro */
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
     </style>
 </head>
 <body>
@@ -158,31 +172,46 @@
             </div>
         </div>
 
-        <div class="video-box">
-            [ INSERIRE VIDEO ]
-        </div>
+        <div class="video-box"></div>
 
         <div class="justified-footer">
             Genova è una città bifronte, contesa tra mare e montagna. Questo ha condotto, nel corso dei secoli, ad un uso intensivo del suo suolo. Genova è una città che ha un forte rapporto con il porto, tanto da far ruotare la sua economia intorno ad esso. Le industrie a partire dall'Ottocento si insediano sulla sua costa, motivo per il quale la città smette di avere un legame visivo con il mare.
         </div>
+
+        <div class="schema-container">
+            <div class="schema-row">
+                <div class="gray-box"></div>
+                <div class="connector-line"></div>
+                <div class="large-box-wrapper">
+                    <div class="large-box"></div>
+                </div>
+            </div>
+            <div class="schema-row">
+                <div class="gray-box"></div>
+                <div class="connector-line"></div>
+                <div class="large-box-wrapper">
+                    <div class="large-box"></div>
+                </div>
+            </div>
+            <div class="schema-row">
+                <div class="gray-box"></div>
+                <div class="connector-line"></div>
+                <div class="large-box-wrapper">
+                    <div class="large-box"></div>
+                </div>
+            </div>
+            <div class="schema-row">
+                <div class="gray-box"></div>
+                <div class="connector-line"></div>
+                <div class="large-box-wrapper">
+                    <div class="large-box"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Cursore
         const dot = document.getElementById('cursor-dot');
         document.addEventListener('mousemove', (e) => {
             dot.style.left = e.clientX + 'px';
-            dot.style.top = e.clientY + 'px';
-        });
-
-        // Barra di scorrimento dinamica
-        const indicator = document.getElementById('indicator');
-        window.onscroll = function() {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
-            indicator.style.height = scrolled + "%";
-        };
-    </script>
-</body>
-</html>
+            dot.style.top =
