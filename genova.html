@@ -11,7 +11,7 @@
             width: 100%;
             font-family: Arial, sans-serif;
             cursor: none;
-            background-color: black; /* Sfondo nero, nessuna griglia */
+            background-color: black;
             color: white;
             overflow-x: hidden;
         }
@@ -33,7 +33,7 @@
             color: rgb(122, 161, 190); text-decoration: none; 
             font-size: 14px; font-weight: bold; 
         }
-        .back-btn:hover { font-style: italic; }
+        .back-btn:hover { text-decoration: underline; }
 
         /* --- BARRA DI SCORRIMENTO ROSSA (DESTRA) --- */
         .scroll-container {
@@ -64,14 +64,14 @@
             align-items: center;
         }
 
-        /* Titolo Centrale */
+        /* Titolo Centrale (Normal, non corsivo) */
         .main-title {
             color: rgb(173, 54, 35);
-            font-style: italic;
             font-size: 52px;
             margin-bottom: 80px;
             text-align: center;
             font-weight: normal;
+            font-style: normal; /* Forza stile normale */
         }
 
         /* Sezione Bilingue */
@@ -91,9 +91,9 @@
         }
 
         .description {
-            font-style: italic;
             font-size: 16px;
             line-height: 1.6;
+            font-style: normal; /* Forza stile normale */
         }
 
         /* IT: Allineato a destra */
@@ -120,10 +120,10 @@
         .justified-footer {
             width: 100%;
             text-align: justify;
-            font-style: italic;
             font-size: 18px;
             line-height: 1.8;
             color: white;
+            font-style: normal; /* Forza stile normale */
         }
     </style>
 </head>
@@ -159,7 +159,7 @@
         </div>
 
         <div class="video-box">
-            [ PLACEHOLDER VIDEO ]
+            [ INSERIRE VIDEO ]
         </div>
 
         <div class="justified-footer">
