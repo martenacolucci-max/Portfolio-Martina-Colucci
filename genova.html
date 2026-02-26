@@ -63,14 +63,16 @@
             margin-bottom: 80px;
             text-align: center;
             font-weight: normal;
+            font-style: normal;
         }
 
+        /* Sezione Bilingue (No Corsivo) */
         .bilingual-grid {
             display: flex; width: 100%; gap: 80px; margin-bottom: 100px;
         }
         .lang-col { flex: 1; }
-        .lang-label { font-size: 28px; font-weight: bold; margin-bottom: 15px; }
-        .description { font-size: 16px; line-height: 1.6; }
+        .lang-label { font-size: 28px; font-weight: bold; margin-bottom: 15px; font-style: normal; }
+        .description { font-size: 16px; line-height: 1.6; font-style: normal; }
         .it-side { text-align: right; }
         .en-side { text-align: left; }
 
@@ -79,10 +81,12 @@
             background-color: white; margin-bottom: 80px;
         }
 
+        /* Testo Giustificato (No Corsivo) */
         .justified-footer {
             width: 100%; text-align: justify;
             font-size: 18px; line-height: 1.8;
             margin-bottom: 150px;
+            font-style: normal;
         }
 
         /* --- SEZIONE SCHEMA --- */
@@ -98,7 +102,7 @@
             display: flex;
             position: relative;
             width: 100%;
-            margin-bottom: 150px; /* Distanza tra i moduli */
+            margin-bottom: 200px; 
             align-items: flex-start;
         }
 
@@ -128,21 +132,21 @@
             width: 50vw; aspect-ratio: 16 / 9;
             background-color: #2a2a2a;
             margin-left: 10vw;
-            margin-top: 80px; /* Offset a metà altezza del grigio */
+            margin-top: 80px; 
             flex-shrink: 0;
         }
 
-        /* Riquadro Bianco Finale (Unico) */
+        /* Riquadro Bianco Finale - Proporzioni B5 Orizzontale (250/176) */
         .final-white-box {
-            width: 90vw;
-            aspect-ratio: 21 / 9;
+            width: 70vw; /* Regolato per stare nei margini */
+            aspect-ratio: 250 / 176;
             background-color: white;
-            margin: 200px auto 300px auto;
+            margin: 300px auto 400px auto;
             position: relative;
             z-index: 10;
         }
 
-        /* --- SVG OVERLAY PER I FILI --- */
+        /* --- SVG OVERLAY --- */
         #master-svg {
             position: absolute;
             top: 0; left: 0;
@@ -197,9 +201,7 @@
 
     <div id="schema-master-container">
         <svg id="master-svg"></svg>
-
         <div id="rows-container"></div>
-
         <div id="final-box" class="box-container final-white-box">
             <div class="corner tl"></div><div class="corner tr"></div>
             <div class="corner bl"></div><div class="corner br"></div>
@@ -245,13 +247,13 @@
             }
             rowsContainer.innerHTML = rowsHtml;
 
-            // Disegno i fili dopo un micro-timeout per assicurarmi che i box siano renderizzati
             setTimeout(() => {
                 const finalRect = finalBox.getBoundingClientRect();
                 const containerRect = document.getElementById('schema-master-container').getBoundingClientRect();
                 
-                const finalCenterY = (finalRect.top + finalRect.height/2) - containerRect.top;
                 const finalRightX = finalRect.right - containerRect.left;
+                const finalHeight = finalRect.height;
+                const finalTopY = finalRect.top - containerRect.top;
 
                 for(let i=0; i<4; i++) {
                     const row = document.getElementById(`row-${i}`);
@@ -271,11 +273,21 @@
                     path1.setAttribute("d", `M ${grayRightX},${grayMidY} H ${grayRightX + (midLeftX - grayRightX)/2} V ${midMidY} H ${midLeftX}`);
                     svg.appendChild(path1);
 
-                    // 2. Filo Medio -> Finale Bianco (entra a destra del finale)
+                    // 2. Filo Medio -> Finale Bianco (ENTRATA A DESTRA PARALLELA)
                     const path2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
                     path2.setAttribute("class", "connector-path");
-                    // Esce da destra del medio, va orizzontale, scende fino al finale, entra da destra
-                    path2.setAttribute("d", `M ${midRightX},${midMidY} H ${finalRightX + 40} V ${finalCenterY} H ${finalRightX}`);
+                    
+                    // Spaziatura tra i fili verticali (staccati tra loro)
+                    const lineOffset = 20 + (i * 15); 
+                    // Punti di entrata distribuiti sul lato destro del box finale
+                    const entryY = finalTopY + (finalHeight / 2) - 30 + (i * 20);
+
+                    path2.setAttribute("d", `
+                        M ${midRightX},${midMidY} 
+                        H ${finalRightX + lineOffset} 
+                        V ${entryY} 
+                        H ${finalRightX}
+                    `);
                     svg.appendChild(path2);
                 }
             }, 100);
