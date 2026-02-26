@@ -25,6 +25,7 @@
                               linear-gradient(90deg, rgb(122, 161, 190) 1px, transparent 1px);
             background-size: 60px 60px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
@@ -35,25 +36,50 @@
             font-size: 14px; font-weight: bold; z-index: 100;
         }
 
-        /* Rettangolo Foto Bianco e più Largo */
+        /* Riquadro Bianco ottimizzato B5 */
         .photo-rect {
-            width: 85%; /* Più largo lateralmente */
-            height: 85%;
-            background-color: white; /* Rettangolo Bianco */
+            width: 85%;
+            height: 75%;
+            background-color: white;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
-            margin-top: 2%;
-            box-shadow: 0 0 15px rgba(0,0,0,0.05); /* Ombra leggera per staccare dalla griglia */
-            /* Area cliccabile per scorrere */
-            cursor: none; 
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
         }
 
         .photo-rect img {
-            max-width: 95%;
-            max-height: 95%;
-            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* L'immagine occupa tutto il riquadro */
+            display: none; /* Nascoste di base */
+        }
+
+        .photo-rect img.active {
+            display: block;
+        }
+
+        /* --- BARRA DI SCORRIMENTO --- */
+        .slider-controls {
+            margin-top: 20px;
+            width: 300px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 50;
+        }
+
+        input[type=range] {
+            flex-grow: 1;
+            cursor: none;
+            accent-color: rgb(173, 54, 35);
+        }
+
+        .nav-label {
+            font-size: 12px;
+            color: black;
+            font-weight: bold;
         }
 
         /* --- SEZIONE INFERIORE (30%) --- */
@@ -63,8 +89,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            /* La griglia continua qui, ma il testo avrà lo sfondo bianco */
             background-image: linear-gradient(rgb(122, 161, 190) 1px, transparent 1px),
                               linear-gradient(90deg, rgb(122, 161, 190) 1px, transparent 1px);
             background-size: 60px 60px;
@@ -73,29 +97,26 @@
         .description-text {
             width: 50%;
             text-align: center;
-            line-height: 2.2; /* Aumentato per separare i rettangoli bianchi */
+            line-height: 2.2;
             font-style: italic;
             color: black;
             font-size: 16px;
         }
 
-        /* Effetto Rettangolo Bianco Sotto Ogni Riga */
         .description-text span {
             background-color: white;
-            padding: 0.3em 1%; /* Sbordamento dell'1% */
-            box-shadow: 0.3em 0 0 white, -0.3em 0 0 white; /* Estensione laterale pulita */
+            padding: 0.3em 1%;
+            box-shadow: 0.3em 0 0 white, -0.3em 0 0 white;
             box-decoration-break: clone;
             -webkit-box-decoration-break: clone;
         }
 
-        /* Cursore */
         #cursor-dot {
             width: 10px; height: 10px; 
             background-color: rgb(173, 54, 35);
             border-radius: 50%; position: fixed; 
             pointer-events: none; z-index: 9999; 
             transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s; /* Transizione per feedback click */
         }
     </style>
 </head>
@@ -106,8 +127,18 @@
     <div class="top-section">
         <a href="projects.html" class="back-btn">< BACK</a>
         
-        <div class="photo-rect" onclick="nextImage()" onmouseenter="expandCursor()" onmouseleave="shrinkCursor()">
-            <img id="project-img" src="biblioteca_1.jpg" alt="[Spazio per immagine]">
+        <div class="photo-rect">
+            <img src="img1.jpg" class="active" alt="Tavola 1">
+            <img src="img2.jpg" alt="Tavola 2">
+            <img src="img3.jpg" alt="Tavola 3">
+            <img src="img4.jpg" alt="Tavola 4">
+            <img src="img5.jpg" alt="Tavola 5">
+        </div>
+
+        <div class="slider-controls">
+            <span class="nav-label">01</span>
+            <input type="range" id="imageSlider" min="0" max="4" value="0" oninput="updateSlider(this.value)">
+            <span class="nav-label">05</span>
         </div>
     </div>
 
@@ -119,35 +150,17 @@
 
     <script>
         const dot = document.getElementById('cursor-dot');
-        
         document.addEventListener('mousemove', (e) => {
             dot.style.left = e.clientX + 'px';
             dot.style.top = e.clientY + 'px';
         });
 
-        // Feedback visivo sul cursore quando si può cliccare per scorrere
-        function expandCursor() {
-            dot.style.width = '20px';
-            dot.style.height = '20px';
-            dot.style.backgroundColor = 'rgba(173, 54, 35, 0.7)';
-        }
-
-        function shrinkCursor() {
-            dot.style.width = '10px';
-            dot.style.height = '10px';
-            dot.style.backgroundColor = 'rgb(173, 54, 35)';
-        }
-
-        // Logica Slider (clic sull'immagine)
-        const immagini = ["biblioteca_1.jpg", "biblioteca_2.jpg"]; 
-        let currentIdx = 0;
-        const imgElement = document.getElementById('project-img');
-
-        function nextImage() {
-            if (immagini.length > 0) {
-                currentIdx = (currentIdx + 1) % immagini.length;
-                imgElement.src = immagini[currentIdx];
-            }
+        function updateSlider(val) {
+            const images = document.querySelectorAll('.photo-rect img');
+            images.forEach((img, index) => {
+                img.classList.remove('active');
+                if(index == val) img.classList.add('active');
+            });
         }
     </script>
 </body>
