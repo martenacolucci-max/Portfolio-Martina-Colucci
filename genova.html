@@ -4,34 +4,185 @@
     <meta charset="UTF-8">
     <title>ReloadinGenova</title>
     <style>
-        body {
-            margin: 0; cursor: none; background-color: black;
-            background-image: linear-gradient(rgb(122, 161, 190) 1px, transparent 1px),
-                              linear-gradient(90deg, rgb(122, 161, 190) 1px, transparent 1px);
-            background-size: 60px 60px;
-            min-height: 100vh; font-family: Arial, sans-serif; padding: 60px; color: white;
+        * { box-sizing: border-box; }
+        
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            cursor: none;
+            background-color: black; /* Sfondo nero, nessuna griglia */
+            color: white;
+            overflow-x: hidden;
         }
-        .back-btn { position: fixed; top: 20px; left: 20px; color: white; text-decoration: none; font-size: 14px; z-index: 100; font-weight: bold; }
-        .back-btn:hover { font-style: italic; }
-        h1 { font-weight: bold; font-size: 24px; margin-top: 20px; }
+
+        /* --- CURSORE ROSSO --- */
         #cursor-dot {
-            width: 10px; height: 10px; background-color: rgb(173, 54, 35);
-            border-radius: 50%; position: fixed; pointer-events: none;
-            z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s ease-out;
+            width: 10px; height: 10px; 
+            background-color: rgb(173, 54, 35);
+            border-radius: 50%; position: fixed; 
+            pointer-events: none; z-index: 99999; 
+            transform: translate(-50%, -50%);
+        }
+
+        /* --- NAVIGAZIONE BACK --- */
+        .header-nav {
+            position: fixed; top: 30px; left: 5%; z-index: 1000;
+        }
+        .back-btn { 
+            color: rgb(122, 161, 190); text-decoration: none; 
+            font-size: 14px; font-weight: bold; 
+        }
+        .back-btn:hover { font-style: italic; }
+
+        /* --- BARRA DI SCORRIMENTO ROSSA (DESTRA) --- */
+        .scroll-container {
+            position: fixed;
+            right: 15px;
+            top: 20%;
+            height: 60%;
+            width: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            z-index: 1000;
+        }
+        .scroll-bar {
+            width: 100%;
+            height: 0%;
+            background-color: rgb(173, 54, 35);
+            border-radius: 2px;
+            transition: height 0.1s ease-out;
+        }
+
+        /* --- CONTENUTO --- */
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 5% 100px 5%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Titolo Centrale */
+        .main-title {
+            color: rgb(173, 54, 35);
+            font-style: italic;
+            font-size: 52px;
+            margin-bottom: 80px;
+            text-align: center;
+            font-weight: normal;
+        }
+
+        /* Sezione Bilingue */
+        .bilingual-grid {
+            display: flex;
+            width: 100%;
+            gap: 80px;
+            margin-bottom: 100px;
+        }
+
+        .lang-col { flex: 1; }
+
+        .lang-label {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            font-style: italic;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* IT: Allineato a destra */
+        .it-side { text-align: right; }
+        
+        /* EN: Allineato a sinistra (Specchiato) */
+        .en-side { text-align: left; }
+
+        /* --- RIQUADRO BIANCO VIDEO --- */
+        .video-box {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: white;
+            margin-bottom: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        /* --- TESTO GIUSTIFICATO FINALE --- */
+        .justified-footer {
+            width: 100%;
+            text-align: justify;
+            font-style: italic;
+            font-size: 18px;
+            line-height: 1.8;
+            color: white;
         }
     </style>
 </head>
 <body>
+
     <div id="cursor-dot"></div>
-    <a href="projects.html" class="back-btn">< BACK</a>
-    <h1>ReloadinGenova</h1>
+
+    <div class="header-nav">
+        <a href="projects.html" class="back-btn">< BACK</a>
+    </div>
+
+    <div class="scroll-container">
+        <div class="scroll-bar" id="indicator"></div>
+    </div>
+
+    <div class="wrapper">
+        <h1 class="main-title">ReloadinGenova</h1>
+
+        <div class="bilingual-grid">
+            <div class="lang-col it-side">
+                <div class="lang-label">IT</div>
+                <div class="description">
+                    L'obiettivo della tesi è stato quello di progettare la riqualificazione di un'area industriale a Genova, riconnettendo la città con il mare, grazie all'uso degli strumenti parametrici. L’uso degli strumenti parametrici consente di affrontare la progettazione urbana, e in misura maggiore quella architettonica, permettendo di gestire la complessità e di generare molteplici scenari. Per secoli la crescita di Genova si è intrecciata con la storia del suo porto. Come è possibile affrontare un progetto la cui storia è così strettamente legata alle trasformazioni della sua costa?
+                </div>
+            </div>
+
+            <div class="lang-col en-side">
+                <div class="lang-label">EN</div>
+                <div class="description">
+                    The goal of the thesis was to design the redevelopment of an industrial area in Genoa, reconnecting the city with the sea, through the use of parametric tools. The use of parametric tools allows for urban design, and to an even greater extent architectural design, to manage complexity and generate multiple scenarios. For centuries, the growth of Genoa has been intertwined with the history of its port. How is it possible to approach a project whose history is so closely linked to the transformations of its coastline?
+                </div>
+            </div>
+        </div>
+
+        <div class="video-box">
+            [ PLACEHOLDER VIDEO ]
+        </div>
+
+        <div class="justified-footer">
+            Genova è una città bifronte, contesa tra mare e montagna. Questo ha condotto, nel corso dei secoli, ad un uso intensivo del suo suolo. Genova è una città che ha un forte rapporto con il porto, tanto da far ruotare la sua economia intorno ad esso. Le industrie a partire dall'Ottocento si insediano sulla sua costa, motivo per il quale la città smette di avere un legame visivo con il mare.
+        </div>
+    </div>
 
     <script>
+        // Cursore
         const dot = document.getElementById('cursor-dot');
         document.addEventListener('mousemove', (e) => {
             dot.style.left = e.clientX + 'px';
             dot.style.top = e.clientY + 'px';
         });
+
+        // Barra di scorrimento dinamica
+        const indicator = document.getElementById('indicator');
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            indicator.style.height = scrolled + "%";
+        };
     </script>
 </body>
 </html>
