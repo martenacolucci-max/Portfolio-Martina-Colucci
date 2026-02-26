@@ -17,15 +17,12 @@
             background-size: 60px 60px;
         }
 
-        /* Header con Back e Titolo */
+        /* Navigazione Back */
         .header-nav {
             position: fixed;
             top: 20px;
             left: 5%;
             z-index: 100;
-            display: flex;
-            align-items: center;
-            gap: 15px;
         }
 
         .back-btn { 
@@ -36,19 +33,13 @@
         }
         .back-btn:hover { font-style: italic; }
 
-        .page-title {
-            color: black;
-            font-style: italic;
-            font-size: 14px;
-        }
-
-        /* RIQUADRO BIANCO PRINCIPALE */
+        /* RIQUADRO BIANCO */
         .white-rect {
             position: absolute;
             top: 5%;
             left: 5%;
             right: 5%;
-            bottom: 12%; /* Lascia spazio sotto per lo slider */
+            bottom: 12%;
             background-color: white;
             display: flex;
             padding: 40px;
@@ -56,9 +47,9 @@
             align-items: center;
         }
 
-        /* Contenitore Immagine (Sinistra) */
+        /* Immagine (Sinistra) */
         .image-container {
-            flex: 2; /* Più spazio all'immagine */
+            flex: 2;
             height: 100%;
             display: flex;
             justify-content: center;
@@ -68,7 +59,7 @@
         .image-container img {
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain; /* Non taglia l'immagine */
+            object-fit: contain;
             display: none;
         }
 
@@ -76,17 +67,31 @@
             display: block;
         }
 
-        /* Contenitore Testo (Destra) */
-        .text-container {
-            flex: 1; /* Spazio ridotto per il testo */
-            color: rgb(173, 54, 35); /* Rosso richiesto */
-            font-style: italic;
+        /* Contenitore Testi (Destra) */
+        .text-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             text-align: right;
-            line-height: 1.3; /* Interlinea minore */
+        }
+
+        .project-title-large {
+            color: black;
+            font-style: italic;
+            font-size: 24px; /* Più grande */
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        .project-description {
+            color: rgb(173, 54, 35);
+            font-style: italic;
+            line-height: 1.3;
             font-size: 16px;
         }
 
-        /* SLIDER E CONTROLLI */
+        /* SLIDER */
         .slider-wrapper {
             position: absolute;
             bottom: 3%;
@@ -97,6 +102,15 @@
             flex-direction: column;
             align-items: center;
             z-index: 50;
+        }
+
+        .tick-labels {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
         }
 
         .slider-ticks {
@@ -110,86 +124,3 @@
         .tick {
             width: 2px;
             height: 8px;
-            background-color: black;
-        }
-
-        .tick-labels {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        input[type=range] {
-            width: 100%;
-            cursor: none;
-            accent-color: rgb(173, 54, 35);
-        }
-
-        /* Cursore */
-        #cursor-dot {
-            width: 10px; height: 10px; 
-            background-color: rgb(173, 54, 35);
-            border-radius: 50%; position: fixed; 
-            pointer-events: none; z-index: 9999; 
-            transform: translate(-50%, -50%);
-        }
-    </style>
-</head>
-<body>
-
-    <div id="cursor-dot"></div>
-
-    <div class="header-nav">
-        <a href="projects.html" class="back-btn">< BACK</a>
-        <span class="page-title">Biblioteca sospesa - 2023</span>
-    </div>
-
-    <div class="white-rect">
-        <div class="image-container">
-            <img src="biblioteca1.png" class="active" alt="01">
-            <img src="biblioteca2.png" alt="02">
-            <img src="biblioteca3.png" alt="03">
-            <img src="biblioteca4.png" alt="04">
-            <img src="biblioteca5.png" alt="05">
-        </div>
-        
-        <div class="text-container">
-            L'edificio è ubicato a Torino nel quartiere Cit Turin. Il progetto prevede la realizzazione di un edificio polifunzionale, sorretto da una struttura totalmente in acciaio a vista con una forma a ponte, per non interferire con la presenza di una rampa che collega il lotto alla stazione metropolitana. Si è pensato di realizzare un edificio che sembrasse sospeso, lasciando completamente a vista la sua struttura portante.
-        </div>
-    </div>
-
-    <div class="slider-wrapper">
-        <div class="tick-labels">
-            <span>01</span>
-            <span>05</span>
-        </div>
-        <div class="slider-ticks">
-            <div class="tick"></div>
-            <div class="tick"></div>
-            <div class="tick"></div>
-            <div class="tick"></div>
-            <div class="tick"></div>
-        </div>
-        <input type="range" id="imageSlider" min="0" max="4" value="0" step="1" oninput="updateSlider(this.value)">
-    </div>
-
-    <script>
-        const dot = document.getElementById('cursor-dot');
-        document.addEventListener('mousemove', (e) => {
-            dot.style.left = e.clientX + 'px';
-            dot.style.top = e.clientY + 'px';
-        });
-
-        function updateSlider(val) {
-            const images = document.querySelectorAll('.image-container img');
-            images.forEach((img, index) => {
-                img.classList.remove('active');
-                if(index == val) img.classList.add('active');
-            });
-        }
-    </script>
-</body>
-</html>
