@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -47,7 +47,7 @@
             border-radius: 2px;
         }
 
-        /* --- CONTENUTO --- */
+        /* --- CONTENUTO SUPERIORE --- */
         .wrapper {
             max-width: 1200px;
             margin: 0 auto;
@@ -85,13 +85,14 @@
             margin-bottom: 150px;
         }
 
-        /* --- SEZIONE SCHEMA TECNICO --- */
-        .schema-container {
+        /* --- SEZIONE SCHEMA TECNICO (Full Width) --- */
+        .schema-section {
             width: 100%;
+            padding: 0 5%;
             display: flex;
             flex-direction: column;
-            gap: 200px; 
-            padding-bottom: 200px;
+            gap: 250px; /* Più spazio perché i riquadri sono grandi */
+            padding-bottom: 300px;
         }
 
         .schema-row {
@@ -101,39 +102,39 @@
             width: 100%;
         }
 
-        /* Riquadri con Vertici */
         .box-with-corners {
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        /* I quadratini ai vertici (122 161 190) */
         .corner {
-            width: 6px;
-            height: 6px;
+            width: 8px; height: 8px;
             background-color: rgb(122, 161, 190);
             position: absolute;
         }
-        .tl { top: -3px; left: -3px; }
-        .tr { top: -3px; right: -3px; }
-        .bl { bottom: -3px; left: -3px; }
-        .br { bottom: -3px; right: -3px; }
+        .tl { top: -4px; left: -4px; }
+        .tr { top: -4px; right: -4px; }
+        .bl { bottom: -4px; left: -4px; }
+        .br { bottom: -4px; right: -4px; }
 
+        /* Riquadro Grigio (1/5) */
         .gray-box {
             width: 20vw;
             height: 180px;
             background-color: #1a1a1a;
             flex-shrink: 0;
+            z-index: 5;
         }
 
-        /* Filo SVG per precisione tecnica */
+        /* SVG del Filo */
         .connector-svg {
             position: absolute;
             top: 0;
             left: 20vw;
             width: 15vw;
-            height: 500px; /* Altezza sufficiente per coprire l'offset */
+            height: 100%;
             pointer-events: none;
+            overflow: visible;
         }
 
         .connector-path {
@@ -142,17 +143,19 @@
             stroke-width: 2;
         }
 
+        /* Riquadro Grande (Metà schermo - 50vw) */
         .large-box-wrapper {
-            margin-top: 90px; /* Parte dalla metà del riquadro grigio (180/2) */
-            margin-left: 15vw; /* Distanza per il filo */
-            width: 33.33vw;
+            margin-top: 90px; /* Parte dalla metà del grigio */
+            margin-left: 10vw; /* Distanza orizzontale */
+            width: 50vw;
             flex-shrink: 0;
+            z-index: 5;
         }
 
         .large-box {
             width: 100%;
             aspect-ratio: 16 / 9;
-            background-color: #333;
+            background-color: #2a2a2a;
         }
 
     </style>
@@ -192,43 +195,20 @@
         <div class="justified-footer">
             Genova è una città bifronte, contesa tra mare e montagna. Questo ha condotto, nel corso dei secoli, ad un uso intensivo del suo suolo. Genova è una città che ha un forte rapporto con il porto, tanto da far ruotare la sua economia intorno ad esso. Le industrie a partire dall'Ottocento si insediano sulla sua costa, motivo per il quale la città smette di avere un legame visivo con il mare.
         </div>
-
-        <div class="schema-container">
-            
-            <script>
-                for(let i=0; i<4; i++) {
-                    document.write(`
-                        <div class="schema-row">
-                            <div class="box-with-corners gray-box">
-                                <div class="corner tl"></div><div class="corner tr"></div>
-                                <div class="corner bl"></div><div class="corner br"></div>
-                            </div>
-
-                            <svg class="connector-svg">
-                                <path class="connector-path" d="M 0,90 L 50,90 L 50,183.7 L 225,183.7" />
-                            </svg>
-
-                            <div class="large-box-wrapper">
-                                <div class="box-with-corners large-box">
-                                    <div class="corner tl"></div><div class="corner tr"></div>
-                                    <div class="corner bl"></div><div class="corner br"></div>
-                                </div>
-                            </div>
-                        </div>
-                    `);
-                }
-            </script>
-
-        </div>
     </div>
 
+    <div class="schema-section" id="schema-container">
+        </div>
+
     <script>
+        // Cursore
         const dot = document.getElementById('cursor-dot');
         document.addEventListener('mousemove', (e) => {
             dot.style.left = e.clientX + 'px';
             dot.style.top = e.clientY + 'px';
         });
 
+        // Barra Scroll
         const indicator = document.getElementById('indicator');
         window.onscroll = function() {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -236,6 +216,6 @@
             let scrolled = (winScroll / height) * 100;
             indicator.style.height = scrolled + "%";
         };
-    </script>
-</body>
-</html>
+
+        // Generatore Schema con calcolo del punto medio
+        const container = document.getElementById
