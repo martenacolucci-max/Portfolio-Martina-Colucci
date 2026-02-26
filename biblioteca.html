@@ -5,6 +5,7 @@
     <title>Biblioteca sospesa - 2023</title>
     <style>
         * { box-sizing: border-box; }
+        
         body, html {
             margin: 0; padding: 0;
             height: 100%; width: 100%;
@@ -12,6 +13,7 @@
             cursor: none;
             overflow: hidden;
             background-color: white;
+            /* Griglia Blu di sfondo */
             background-image: linear-gradient(rgb(122, 161, 190) 1px, transparent 1px),
                               linear-gradient(90deg, rgb(122, 161, 190) 1px, transparent 1px);
             background-size: 60px 60px;
@@ -22,7 +24,7 @@
             position: fixed;
             top: 20px;
             left: 5%;
-            z-index: 100;
+            z-index: 1000;
         }
 
         .back-btn { 
@@ -39,21 +41,23 @@
             top: 5%;
             left: 5%;
             right: 5%;
-            bottom: 12%;
+            bottom: 12%; /* Spazio per lo slider sotto */
             background-color: white;
             display: flex;
             padding: 40px;
             gap: 40px;
             align-items: center;
+            border: 1px solid rgba(122, 161, 190, 0.2);
         }
 
-        /* Immagine (Sinistra) */
+        /* Sezione Immagine (Sinistra) */
         .image-container {
             flex: 2;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
 
         .image-container img {
@@ -67,7 +71,7 @@
             display: block;
         }
 
-        /* Contenitore Testi (Destra) */
+        /* Sezione Testi (Destra) */
         .text-side {
             flex: 1;
             display: flex;
@@ -79,29 +83,29 @@
         .project-title-large {
             color: black;
             font-style: italic;
-            font-size: 24px; /* Più grande */
-            margin-bottom: 20px;
+            font-size: 26px; /* Più grande */
+            margin-bottom: 15px;
             font-weight: normal;
         }
 
         .project-description {
-            color: rgb(173, 54, 35);
+            color: rgb(173, 54, 35); /* Rosso RGB 173 54 35 */
             font-style: italic;
             line-height: 1.3;
             font-size: 16px;
         }
 
-        /* SLIDER */
+        /* CONTROLLI SLIDER */
         .slider-wrapper {
             position: absolute;
             bottom: 3%;
             left: 50%;
             transform: translateX(-50%);
-            width: 300px;
+            width: 320px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            z-index: 50;
+            z-index: 500;
         }
 
         .tick-labels {
@@ -110,17 +114,100 @@
             justify-content: space-between;
             font-size: 12px;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            color: black;
         }
 
         .slider-ticks {
-            width: 100%;
+            width: 94%;
             display: flex;
             justify-content: space-between;
-            padding: 0 10px;
             margin-bottom: 5px;
         }
 
         .tick {
             width: 2px;
             height: 8px;
+            background-color: black;
+        }
+
+        input[type=range] {
+            width: 100%;
+            cursor: none;
+            accent-color: rgb(173, 54, 35);
+        }
+
+        /* Cursore Personalizzato */
+        #cursor-dot {
+            width: 10px; height: 10px; 
+            background-color: rgb(173, 54, 35);
+            border-radius: 50%; position: fixed; 
+            pointer-events: none; z-index: 9999; 
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor-dot"></div>
+
+    <div class="header-nav">
+        <a href="projects.html" class="back-btn">< BACK</a>
+    </div>
+
+    <div class="white-rect">
+        <div class="image-container">
+            <img src="biblioteca1.png" class="active" alt="Pagina 1">
+            <img src="biblioteca2.png" alt="Pagina 2">
+            <img src="biblioteca3.png" alt="Pagina 3">
+            <img src="biblioteca4.png" alt="Pagina 4">
+            <img src="biblioteca5.png" alt="Pagina 5">
+        </div>
+        
+        <div class="text-side">
+            <div class="project-title-large">Biblioteca sospesa - 2023</div>
+            <div class="project-description">
+                L'edificio è ubicato a Torino nel quartiere Cit Turin. Il progetto prevede la realizzazione di un edificio polifunzionale, sorretto da una struttura totalmente in acciaio a vista con una forma a ponte, per non interferire con la presenza di una rampa che collega il lotto alla stazione metropolitana. Si è pensato di realizzare un edificio che sembrasse sospeso, lasciando completamente a vista la sua struttura portante.
+            </div>
+        </div>
+    </div>
+
+    <div class="slider-wrapper">
+        <div class="tick-labels">
+            <span>01</span>
+            <span>02</span>
+            <span>03</span>
+            <span>04</span>
+            <span>05</span>
+        </div>
+        <div class="slider-ticks">
+            <div class="tick"></div>
+            <div class="tick"></div>
+            <div class="tick"></div>
+            <div class="tick"></div>
+            <div class="tick"></div>
+        </div>
+        <input type="range" id="imageSlider" min="0" max="4" value="0" step="1" oninput="updateSlider(this.value)">
+    </div>
+
+    <script>
+        // Gestione Cursore
+        const dot = document.getElementById('cursor-dot');
+        document.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+        });
+
+        // Funzione per cambiare immagine
+        function updateSlider(val) {
+            const images = document.querySelectorAll('.image-container img');
+            images.forEach((img, index) => {
+                img.classList.remove('active');
+                if(index == val) {
+                    img.classList.add('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
