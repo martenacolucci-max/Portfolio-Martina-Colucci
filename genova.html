@@ -63,16 +63,14 @@
             margin-bottom: 80px;
             text-align: center;
             font-weight: normal;
-            font-style: normal;
         }
 
-        /* Sezione Bilingue (No Corsivo) */
         .bilingual-grid {
             display: flex; width: 100%; gap: 80px; margin-bottom: 100px;
         }
         .lang-col { flex: 1; }
-        .lang-label { font-size: 28px; font-weight: bold; margin-bottom: 15px; font-style: normal; }
-        .description { font-size: 16px; line-height: 1.6; font-style: normal; }
+        .lang-label { font-size: 28px; font-weight: bold; margin-bottom: 15px; }
+        .description { font-size: 16px; line-height: 1.6; }
         .it-side { text-align: right; }
         .en-side { text-align: left; }
 
@@ -81,12 +79,10 @@
             background-color: white; margin-bottom: 80px;
         }
 
-        /* Testo Giustificato (No Corsivo) */
         .justified-footer {
             width: 100%; text-align: justify;
             font-size: 18px; line-height: 1.8;
             margin-bottom: 150px;
-            font-style: normal;
         }
 
         /* --- SEZIONE SCHEMA --- */
@@ -102,7 +98,7 @@
             display: flex;
             position: relative;
             width: 100%;
-            margin-bottom: 200px; 
+            margin-bottom: 220px; 
             align-items: flex-start;
         }
 
@@ -110,6 +106,17 @@
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.15);
             z-index: 10;
+        }
+
+        /* Etichette sopra i riquadri grigi */
+        .box-label {
+            position: absolute;
+            top: -30px;
+            left: 0;
+            font-size: 12px;
+            font-weight: bold;
+            color: rgb(122, 161, 190);
+            letter-spacing: 1px;
         }
 
         .corner {
@@ -136,7 +143,7 @@
             flex-shrink: 0;
         }
 
-        /* Riquadro Bianco Finale - Proporzioni B5 Orizzontale (250/176) */
+        /* --- RIQUADRO BIANCO FINALE (B5 Orizzontale) --- */
         .final-white-box {
             width: 70vw; 
             aspect-ratio: 250 / 176;
@@ -144,6 +151,38 @@
             margin: 300px auto 400px auto;
             position: relative;
             z-index: 10;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .final-white-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Freccia di navigazione */
+        .nav-arrow {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.05);
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 20;
+            transition: background 0.3s;
+            border-radius: 4px;
+        }
+        .nav-arrow:hover {
+            background-color: rgba(0, 0, 0, 0.1);
         }
 
         /* --- SVG OVERLAY --- */
@@ -176,7 +215,7 @@
 
     <div class="wrapper">
         <h1 class="main-title">ReloadinGenova</h1>
-
+        
         <div class="bilingual-grid">
             <div class="lang-col it-side">
                 <div class="lang-label">IT</div>
@@ -202,25 +241,44 @@
     <div id="schema-master-container">
         <svg id="master-svg"></svg>
         <div id="rows-container"></div>
+        
         <div id="final-box" class="box-container final-white-box">
             <div class="corner tl"></div><div class="corner tr"></div>
             <div class="corner bl"></div><div class="corner br"></div>
+            
+            <img src="finale1.png" id="main-image-display" alt="Progetto Finale">
+            
+            <div class="nav-arrow" onclick="nextImage()">→</div>
         </div>
     </div>
 
     <script>
+        // Gestione Immagini Finali
+        const finalImages = ["finale1.png", "finale2.png", "finale3.png"]; 
+        let currentImgIndex = 0;
+
+        function nextImage() {
+            currentImgIndex = (currentImgIndex + 1) % finalImages.length;
+            document.getElementById('main-image-display').src = finalImages[currentImgIndex];
+        }
+
+        // Cursore
         const dot = document.getElementById('cursor-dot');
         document.addEventListener('mousemove', (e) => {
             dot.style.left = e.clientX + 'px';
             dot.style.top = e.clientY + 'px';
         });
 
+        // Scroll progress
         const indicator = document.getElementById('indicator');
         window.onscroll = function() {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             indicator.style.height = (winScroll / height) * 100 + "%";
         };
+
+        // Costruzione Schema
+        const labels = ["MASTERPLAN", "VOLUME", "DISTRIBUZIONE", "DISPOSITIVI ESTERNI"];
 
         function buildSchema() {
             const rowsContainer = document.getElementById('rows-container');
@@ -235,6 +293,7 @@
                 rowsHtml += `
                     <div class="schema-row" id="row-${i}">
                         <div class="box-container gray-left">
+                            <div class="box-label">${labels[i]}</div>
                             <div class="corner tl"></div><div class="corner tr"></div>
                             <div class="corner bl"></div><div class="corner br"></div>
                         </div>
@@ -257,46 +316,4 @@
                 for(let i=0; i<4; i++) {
                     const row = document.getElementById(`row-${i}`);
                     const gray = row.querySelector('.gray-left').getBoundingClientRect();
-                    const mid = row.querySelector('.mid-right').getBoundingClientRect();
-
-                    const grayMidY = (gray.top + gray.height/2) - containerRect.top;
-                    const grayRightX = gray.right - containerRect.left;
-                    
-                    const midLeftX = mid.left - containerRect.left;
-                    const midRightX = mid.right - containerRect.left;
-                    const midMidY = (mid.top + mid.height/2) - containerRect.top;
-
-                    // 1. Filo Grigio -> Medio
-                    const path1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                    path1.setAttribute("class", "connector-path");
-                    path1.setAttribute("d", `M ${grayRightX},${grayMidY} H ${grayRightX + (midLeftX - grayRightX)/2} V ${midMidY} H ${midLeftX}`);
-                    svg.appendChild(path1);
-
-                    // 2. Filo Medio -> Finale Bianco (ARRIVO SULLA STESSA LINEA ORIZZONTALE)
-                    const path2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                    path2.setAttribute("class", "connector-path");
-                    
-                    // Spaziatura per mantenere i fili verticali paralleli e staccati
-                    const lineOffset = 20 + (i * 15); 
-
-                    // Percorso: 
-                    // - Esce orizzontalmente dal medio
-                    // - Si sposta lateralmente a diverse distanze (offset) per non sovrapporsi in verticale
-                    // - Scende in verticale
-                    // - Arriva tutto sulla stessa linea orizzontale (finalCenterY)
-                    path2.setAttribute("d", `
-                        M ${midRightX},${midMidY} 
-                        H ${finalRightX + lineOffset} 
-                        V ${finalCenterY} 
-                        H ${finalRightX}
-                    `);
-                    svg.appendChild(path2);
-                }
-            }, 100);
-        }
-
-        window.onload = buildSchema;
-        window.onresize = buildSchema;
-    </script>
-</body>
-</html>
+                    const mid = row.querySelector('.mid-right').getBounding
