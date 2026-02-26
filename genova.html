@@ -34,7 +34,7 @@
             font-size: 14px; font-weight: bold; 
         }
 
-        /* --- BARRA SCROLL ROSSA --- */
+        /* --- BARRA SCROLL --- */
         .scroll-container {
             position: fixed; right: 15px; top: 20%;
             height: 60%; width: 4px;
@@ -47,7 +47,7 @@
             border-radius: 2px;
         }
 
-        /* --- WRAPPER CONTENUTI --- */
+        /* --- CONTENUTI SUPERIORI --- */
         .wrapper {
             max-width: 1200px;
             margin: 0 auto;
@@ -85,31 +85,28 @@
             margin-bottom: 150px;
         }
 
-        /* --- SEZIONE SCHEMA (FUORI DAL WRAPPER PER USARE TUTTA LA LARGHEZZA) --- */
+        /* --- SEZIONE SCHEMA --- */
         .schema-section {
             width: 100%;
             padding: 0 5%;
             display: flex;
             flex-direction: column;
-            gap: 100px; /* Distanza tra le righe */
-            padding-bottom: 200px;
+            gap: 150px; 
+            padding-bottom: 300px;
         }
 
         .schema-row {
             display: flex;
-            align-items: center; /* Allinea i centri dei riquadri orizzontalmente */
+            align-items: flex-start; /* Allinea in alto per gestire l'offset */
             position: relative;
             width: 100%;
-            height: 400px; /* Altezza fissa per gestire il filo */
         }
 
         /* BOX CON VERTICI */
         .box-container {
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            z-index: 5;
         }
 
         .corner {
@@ -125,25 +122,27 @@
         /* Riquadro Grigio (1/5 schermo) */
         .gray-box {
             width: 20vw;
-            height: 200px;
+            height: 160px;
             background-color: #1a1a1a;
         }
 
-        /* Riquadro Grande (1/2 schermo) */
+        /* Riquadro Grande (1/2 schermo) - Più in basso */
         .large-box-container {
             width: 50vw;
             aspect-ratio: 16 / 9;
             background-color: #2a2a2a;
-            margin-left: 10vw; /* Spazio per il filo */
+            margin-left: 10vw;
+            margin-top: 80px; /* Offset verticale: parte dalla metà del grigio */
         }
 
-        /* FILO SVG */
+        /* FILO SVG DINAMICO */
         .connector-svg {
             position: absolute;
-            left: 20vw; /* Inizia dove finisce il grigio */
-            width: 10vw; /* Copre lo spazio vuoto */
-            height: 100%;
+            left: 20vw;
+            width: 10vw;
+            height: 100%; /* Copre l'altezza della riga */
             pointer-events: none;
+            overflow: visible;
         }
 
         .connector-path {
@@ -168,69 +167,13 @@
 
     <div class="wrapper">
         <h1 class="main-title">ReloadinGenova</h1>
-
         <div class="bilingual-grid">
             <div class="lang-col it-side">
                 <div class="lang-label">IT</div>
-                <div class="description">
-                    L'obiettivo della tesi è stato quello di progettare la riqualificazione di un'area industriale a Genova, riconnettendo la città con il mare, grazie all'uso degli strumenti parametrici. L’uso degli strumenti parametrici consente di affrontare la progettazione urbana, e in misura maggiore quella architettonica, permettendo di gestire la complessità e di generare molteplici scenari. Per secoli la crescita di Genova si è intrecciata con la storia del suo porto. Come è possibile affrontare un progetto la cui storia è così strettamente legata alle trasformazioni della sua costa?
-                </div>
+                <div class="description">L'obiettivo della tesi è stato quello di progettare la riqualificazione di un'area industriale a Genova, riconnettendo la città con il mare, grazie all'uso degli strumenti parametrici...</div>
             </div>
             <div class="lang-col en-side">
                 <div class="lang-label">EN</div>
-                <div class="description">
-                    The goal of the thesis was to design the redevelopment of an industrial area in Genoa, reconnecting the city with the sea, through the use of parametric tools. The use of parametric tools allows for urban design, and to an even greater extent architectural design, to manage complexity and generate multiple scenarios. For centuries, the growth of Genoa has been intertwined with the history of its port. How is it possible to approach a project whose history is so closely linked to the transformations of its coastline?
-                </div>
+                <div class="description">The goal of the thesis was to design the redevelopment of an industrial area in Genoa, reconnecting the city with the sea, through the use of parametric tools...</div>
             </div>
         </div>
-
-        <div class="video-box"></div>
-
-        <div class="justified-footer">
-            Genova è una città bifronte, contesa tra mare e montagna. Questo ha condotto, nel corso dei secoli, ad un uso intensivo del suo suolo. Genova è una città che ha un forte rapporto con il porto, tanto da far ruotare la sua economia intorno ad esso. Le industrie a partire dall'Ottocento si insediano sulla sua costa, motivo per il quale la città smette di avere un legame visivo con il mare.
-        </div>
-    </div>
-
-    <div class="schema-section">
-        <script>
-            for(let i=0; i<4; i++) {
-                document.write(`
-                    <div class="schema-row">
-                        <div class="box-container gray-box">
-                            <div class="corner tl"></div><div class="corner tr"></div>
-                            <div class="corner bl"></div><div class="corner br"></div>
-                        </div>
-
-                        <svg class="connector-svg">
-                            <line x1="0" y1="50%" x2="100%" y2="50%" class="connector-path" />
-                        </svg>
-
-                        <div class="box-container large-box-container">
-                            <div class="corner tl"></div><div class="corner tr"></div>
-                            <div class="corner bl"></div><div class="corner br"></div>
-                        </div>
-                    </div>
-                `);
-            }
-        </script>
-    </div>
-
-    <script>
-        // Cursore
-        const dot = document.getElementById('cursor-dot');
-        document.addEventListener('mousemove', (e) => {
-            dot.style.left = e.clientX + 'px';
-            dot.style.top = e.clientY + 'px';
-        });
-
-        // Barra Scroll
-        const indicator = document.getElementById('indicator');
-        window.onscroll = function() {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
-            indicator.style.height = scrolled + "%";
-        };
-    </script>
-</body>
-</html>
