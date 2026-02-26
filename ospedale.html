@@ -23,32 +23,23 @@
             width: 10px; height: 10px; 
             background-color: rgb(173, 54, 35);
             border-radius: 50%; position: fixed; 
-            pointer-events: none; 
-            z-index: 99999; 
+            pointer-events: none; z-index: 99999; 
             transform: translate(-50%, -50%);
         }
 
         .header-nav {
-            position: fixed;
-            top: 30px;
-            left: 5%;
-            z-index: 1000;
+            position: fixed; top: 30px; left: 5%; z-index: 1000;
         }
 
         .back-btn { 
-            color: rgb(122, 161, 190); 
-            text-decoration: none; 
-            font-size: 14px; 
-            font-weight: bold; 
+            color: rgb(122, 161, 190); text-decoration: none; 
+            font-size: 14px; font-weight: bold; 
         }
 
         /* --- RIQUADRO BIANCO --- */
         .white-rect {
             position: absolute;
-            top: 10%;
-            left: 5%;
-            right: 5%;
-            bottom: 15%;
+            top: 10%; left: 5%; right: 5%; bottom: 15%;
             background-color: white;
             display: flex;
             padding: 40px;
@@ -59,113 +50,66 @@
             z-index: 10;
         }
 
-        /* Contenitore Testo (Sinistra) */
         .text-side {
             flex: 1;
-            display: none; /* Nascosto per la prima immagine */
+            display: none; 
             flex-direction: column;
             justify-content: center;
             text-align: left;
         }
 
-        .text-side.visible {
-            display: flex;
-        }
+        .text-side.visible { display: flex; }
 
-        /* Contenitore Immagine (Destra) */
         .image-container {
-            flex: 2;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            flex: 2; height: 100%; display: flex;
+            justify-content: center; align-items: center;
             overflow: hidden;
             transition: all 0.3s ease;
         }
 
-        .image-container.full-width {
-            flex: 100%; /* Occupa tutto se il testo è nascosto */
-        }
+        .image-container.full-width { flex: 100%; }
 
         .image-container img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            display: none;
+            max-width: 100%; max-height: 100%;
+            object-fit: contain; display: none;
         }
 
-        .image-container img.active {
-            display: block;
-        }
+        .image-container img.active { display: block; }
 
-        .project-title-large {
-            color: black;
-            font-style: italic;
-            font-size: 26px;
-            margin-bottom: 15px;
-        }
+        .project-title-large { color: black; font-style: italic; font-size: 26px; margin-bottom: 15px; }
+        .project-description { color: rgb(173, 54, 35); font-style: italic; line-height: 1.3; font-size: 16px; }
 
-        .project-description {
-            color: rgb(173, 54, 35);
-            font-style: italic;
-            line-height: 1.3;
-            font-size: 16px;
-        }
-
-        /* --- BARRA ROSSA --- */
+        /* --- BARRA ROSSA FIX --- */
         .slider-wrapper {
-            position: absolute;
-            bottom: 4%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 320px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 2000;
+            position: absolute; bottom: 4%; left: 50%;
+            transform: translateX(-50%); width: 280px; 
+            display: flex; flex-direction: column; align-items: center; z-index: 2000;
         }
 
         .tick-labels {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: black;
+            width: 100%; display: flex; justify-content: space-between;
+            font-size: 12px; font-weight: bold; margin-bottom: 8px;
         }
 
         .slider-ticks {
-            width: 94%;
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
+            width: 92%; display: flex; justify-content: space-between; margin-bottom: 5px;
         }
 
-        .tick {
-            width: 2px;
-            height: 8px;
-            background-color: black;
+        .tick { width: 2px; height: 8px; background-color: black; }
+
+        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; cursor: none; }
+        
+        input[type=range]::-webkit-slider-runnable-track { 
+            width: 100%; height: 4px; background: rgb(173, 54, 35) !important; border-radius: 2px; 
+        }
+        
+        input[type=range]::-webkit-slider-thumb { 
+            -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%; 
+            background: rgb(173, 54, 35) !important; margin-top: -6px; 
         }
 
-        input[type=range] {
-            -webkit-appearance: none;
-            width: 100%;
-            background: transparent;
-            cursor: none;
-        }
-
-        input[type=range]::-webkit-slider-runnable-track {
-            width: 100%; height: 4px; background: rgb(173, 54, 35) !important; border-radius: 2px;
-        }
-
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%;
-            background: rgb(173, 54, 35) !important; margin-top: -6px;
-        }
-
-        input[type=range]::-moz-range-track {
-            width: 100%; height: 4px; background: rgb(173, 54, 35) !important; border-radius: 2px;
+        input[type=range]::-moz-range-track { 
+            width: 100%; height: 4px; background: rgb(173, 54, 35) !important; border-radius: 2px; 
         }
     </style>
 </head>
@@ -190,7 +134,6 @@
             <img src="ospedale2.png">
             <img src="ospedale3.png">
             <img src="ospedale4.png">
-            <img src="ospedale5.png">
         </div>
     </div>
 
@@ -200,16 +143,14 @@
             <span>02</span>
             <span>03</span>
             <span>04</span>
-            <span>05</span>
         </div>
         <div class="slider-ticks">
             <div class="tick"></div>
             <div class="tick"></div>
             <div class="tick"></div>
             <div class="tick"></div>
-            <div class="tick"></div>
         </div>
-        <input type="range" id="imageSlider" min="0" max="4" value="0" step="1" oninput="updateSlider(this.value)">
+        <input type="range" id="imageSlider" min="0" max="3" value="0" step="1" oninput="updateSlider(this.value)">
     </div>
 
     <script>
@@ -225,13 +166,14 @@
         function updateSlider(val) {
             const images = document.querySelectorAll('.image-container img');
             
-            // Gestione Layout: se val è 0 (prima immagine), nascondi testo e espandi immagine
-            if (val == 0) {
-                textCont.classList.remove('visible');
-                imgCont.classList.add('full-width');
-            } else {
+            // Logica: Testo visibile SOLO sulla seconda immagine (indice 1)
+            // Indici: 0=Img1, 1=Img2, 2=Img3, 3=Img4
+            if (val == 1) {
                 textCont.classList.add('visible');
                 imgCont.classList.remove('full-width');
+            } else {
+                textCont.classList.remove('visible');
+                imgCont.classList.add('full-width');
             }
 
             images.forEach((img, index) => {
