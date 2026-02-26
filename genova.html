@@ -85,26 +85,26 @@
             margin-bottom: 150px;
         }
 
-        /* --- SEZIONE SCHEMA (ROBUSTA) --- */
+        /* --- SEZIONE SCHEMA TECNICO --- */
         .schema-section {
             width: 100%;
             padding: 0 5%;
             display: flex;
             flex-direction: column;
-            gap: 250px; /* Spazio tra i 4 blocchi */
-            padding-bottom: 300px;
+            gap: 400px; /* Spazio aumentato per ospitare i tre livelli */
+            padding-bottom: 500px;
         }
 
         .schema-row {
-            display: flex;
             position: relative;
             width: 100%;
-            align-items: flex-start;
+            /* Altezza calcolata per contenere la cascata */
+            min-height: 800px; 
         }
 
-        /* BOX CON VERTICI */
+        /* BOX GENERICO CON VERTICI */
         .box-container {
-            position: relative;
+            position: absolute;
             border: 1px solid rgba(255, 255, 255, 0.2);
             z-index: 10;
         }
@@ -119,45 +119,49 @@
         .bl { bottom: -4px; left: -4px; }
         .br { bottom: -4px; right: -4px; }
 
-        /* Riquadro Grigio (1/5 schermo) */
+        /* 1. Riquadro Grigio (Sinistra - 20vw) */
         .gray-box {
+            left: 0;
+            top: 0;
             width: 20vw;
             height: 160px;
             background-color: #1a1a1a;
-            flex-shrink: 0;
         }
 
-        /* Riquadro Grande (1/2 schermo) - Scende di 80px (metà del grigio) */
-        .large-box {
+        /* 2. Riquadro Medio (Centro - 50vw) */
+        .mid-box {
+            left: 30vw; /* 20vw grigio + 10vw gap */
+            top: 150px; /* Slittato in basso */
             width: 50vw;
             aspect-ratio: 16 / 9;
             background-color: #2a2a2a;
-            margin-left: 10vw;
-            margin-top: 80px; 
-            flex-shrink: 0;
         }
 
-        /* FILO (Creato con i bordi di un div per non farlo sparire) */
-        .connector {
+        /* 3. Riquadro Bianco (Full Width - 90vw circa) */
+        .full-box {
+            left: 0;
+            top: 600px; /* Slittato ulteriormente in basso */
+            width: 90vw;
+            aspect-ratio: 21 / 9; /* Più panoramico essendo largo quanto la pagina */
+            background-color: white;
+        }
+
+        /* --- FILI SVG --- */
+        .connector-svg {
             position: absolute;
-            left: 20vw; /* Inizia dove finisce il grigio */
-            top: 80px;  /* Metà del grigio */
-            width: 10vw;
-            /* L'altezza deve arrivare a metà del riquadro grande */
-            /* Calcolo: metà altezza del grande (che è 50vw * 9/16 / 2) */
-            height: calc((50vw * 9 / 32) + 2px); 
-            border-left: 2px solid rgb(122, 161, 190);
-            border-bottom: 2px solid rgb(122, 161, 190);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
+            overflow: visible;
+            z-index: 5;
         }
 
-        /* Piccola aggiunta per far uscire il filo dritto dal grigio */
-        .connector::before {
-            content: '';
-            position: absolute;
-            top: -2px; left: -5vw; /* Esce orizzontalmente */
-            width: 5vw;
-            height: 2px;
+        .connector-path {
+            fill: none;
+            stroke: rgb(122, 161, 190);
+            stroke-width: 2;
         }
     </style>
 </head>
@@ -175,80 +179,22 @@
 
     <div class="wrapper">
         <h1 class="main-title">ReloadinGenova</h1>
-
         <div class="bilingual-grid">
             <div class="lang-col it-side">
                 <div class="lang-label">IT</div>
-                <div class="description">
-                    L'obiettivo della tesi è stato quello di progettare la riqualificazione di un'area industriale a Genova, riconnettendo la città con il mare, grazie all'uso degli strumenti parametrici. L’uso degli strumenti parametrici consente di affrontare la progettazione urbana, e in misura maggiore quella architettonica, permettendo di gestire la complessità e di generare molteplici scenari. Per secoli la crescita di Genova si è intrecciata con la storia del suo porto. Come è possibile affrontare un progetto la cui storia è così strettamente legata alle trasformazioni della sua costa?
-                </div>
+                <div class="description">L'obiettivo della tesi è stato quello di progettare la riqualificazione di un'area industriale a Genova...</div>
             </div>
             <div class="lang-col en-side">
                 <div class="lang-label">EN</div>
-                <div class="description">
-                    The goal of the thesis was to design the redevelopment of an industrial area in Genoa, reconnecting the city with the sea, through the use of parametric tools. The use of parametric tools allows for urban design, and to an even greater extent architectural design, to manage complexity and generate multiple scenarios. For centuries, the growth of Genoa has been intertwined with the history of its port. How is it possible to approach a project whose history is so closely linked to the transformations of its coastline?
-                </div>
+                <div class="description">The goal of the thesis was to design the redevelopment of an industrial area in Genoa...</div>
             </div>
         </div>
-
         <div class="video-box"></div>
-
-        <div class="justified-footer">
-            Genova è una città bifronte, contesa tra mare e montagna. Questo ha condotto, nel corso dei secoli, ad un uso intensivo del suo suolo. Genova è una città che ha un forte rapporto con il porto, tanto da far ruotare la sua economia intorno ad esso. Le industrie a partire dall'Ottocento si insediano sulla sua costa, motivo per il quale la città smette di avere un legame visivo con il mare.
-        </div>
+        <div class="justified-footer">Genova è una città bifronte, contesa tra mare e montagna...</div>
     </div>
 
-    <div class="schema-section">
-        
-        <div class="schema-row">
-            <div class="box-container gray-box">
-                <div class="corner tl"></div><div class="corner tr"></div>
-                <div class="corner bl"></div><div class="corner br"></div>
-            </div>
-            <div class="connector"></div>
-            <div class="box-container large-box">
-                <div class="corner tl"></div><div class="corner tr"></div>
-                <div class="corner bl"></div><div class="corner br"></div>
-            </div>
+    <div class="schema-section" id="schema-target">
         </div>
-
-        <div class="schema-row">
-            <div class="box-container gray-box">
-                <div class="corner tl"></div><div class="corner tr"></div>
-                <div class="corner bl"></div><div class="corner br"></div>
-            </div>
-            <div class="connector"></div>
-            <div class="box-container large-box">
-                <div class="corner tl"></div><div class="corner tr"></div>
-                <div class="corner bl"></div><div class="corner br"></div>
-            </div>
-        </div>
-
-        <div class="schema-row">
-            <div class="box-container gray-box">
-                <div class="corner tl"></div><div class="corner tr"></div>
-                <div class="corner bl"></div><div class="corner br"></div>
-            </div>
-            <div class="connector"></div>
-            <div class="box-container large-box">
-                <div class="corner tl"></div><div class="corner tr"></div>
-                <div class="corner bl"></div><div class="corner br"></div>
-            </div>
-        </div>
-
-        <div class="schema-row">
-            <div class="box-container gray-box">
-                <div class="corner tl"></div><div class="corner tr"></div>
-                <div class="corner bl"></div><div class="corner br"></div>
-            </div>
-            <div class="connector"></div>
-            <div class="box-container large-box">
-                <div class="corner tl"></div><div class="corner tr"></div>
-                <div class="corner bl"></div><div class="corner br"></div>
-            </div>
-        </div>
-
-    </div>
 
     <script>
         // Cursore
@@ -258,7 +204,7 @@
             dot.style.top = e.clientY + 'px';
         });
 
-        // Barra Scroll
+        // Scroll
         const indicator = document.getElementById('indicator');
         window.onscroll = function() {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -266,6 +212,56 @@
             let scrolled = (winScroll / height) * 100;
             indicator.style.height = scrolled + "%";
         };
+
+        function buildSchema() {
+            const container = document.getElementById('schema-target');
+            const vw = window.innerWidth / 100;
+            
+            // Calcolo altezze dinamiche per i centri
+            const midBoxHeight = (50 * vw) * (9/16);
+            const fullBoxHeight = (90 * vw) * (9/21);
+
+            // Coordinate Y dei centri
+            const centerGray = 80; // 160 / 2
+            const centerMid = 150 + (midBoxHeight / 2);
+            const centerFull = 600 + (fullBoxHeight / 2);
+
+            // Coordinate X dei lati destri
+            const rightGray = 20 * vw;
+            const rightMid = 80 * vw; // 30vw partenza + 50vw larghezza
+            const rightFull = 90 * vw;
+
+            let html = '';
+            for(let i=0; i<4; i++) {
+                html += `
+                <div class="schema-row">
+                    <div class="box-container gray-box">
+                        <div class="corner tl"></div><div class="corner tr"></div>
+                        <div class="corner bl"></div><div class="corner br"></div>
+                    </div>
+
+                    <div class="box-container mid-box">
+                        <div class="corner tl"></div><div class="corner tr"></div>
+                        <div class="corner bl)</div><div class="corner br"></div>
+                    </div>
+
+                    <div class="box-container full-box">
+                        <div class="corner tl"></div><div class="corner tr"></div>
+                        <div class="corner bl"></div><div class="corner br"></div>
+                    </div>
+
+                    <svg class="connector-svg">
+                        <path class="connector-path" d="M ${rightGray},${centerGray} H ${rightGray + 5*vw} V ${centerMid} H ${30*vw}" />
+                        
+                        <path class="connector-path" d="M ${rightMid},${centerMid} H ${95*vw} V ${centerFull} H ${rightFull}" />
+                    </svg>
+                </div>`;
+            }
+            container.innerHTML = html;
+        }
+
+        window.onload = buildSchema;
+        window.onresize = buildSchema;
     </script>
 </body>
 </html>
