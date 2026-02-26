@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Riqualificazione di un complesso ospedaliero</title>
+    <title>Ospedale - 2024</title>
     <style>
         * { box-sizing: border-box; }
         
@@ -18,6 +18,16 @@
             background-size: 60px 60px;
         }
 
+        /* --- CURSORE ROSSO --- */
+        #cursor-dot {
+            width: 10px; height: 10px; 
+            background-color: rgb(173, 54, 35);
+            border-radius: 50%; position: fixed; 
+            pointer-events: none; 
+            z-index: 99999; 
+            transform: translate(-50%, -50%);
+        }
+
         .header-nav {
             position: fixed;
             top: 30px;
@@ -31,14 +41,14 @@
             font-size: 14px; 
             font-weight: bold; 
         }
-        .back-btn:hover { font-style: italic; }
 
+        /* --- RIQUADRO BIANCO --- */
         .white-rect {
             position: absolute;
             top: 10%;
             left: 5%;
             right: 5%;
-            bottom: 12%;
+            bottom: 15%;
             background-color: white;
             display: flex;
             padding: 40px;
@@ -46,8 +56,23 @@
             align-items: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             border: 1px solid rgba(122, 161, 190, 0.1);
+            z-index: 10;
         }
 
+        /* Contenitore Testo (Sinistra) */
+        .text-side {
+            flex: 1;
+            display: none; /* Nascosto per la prima immagine */
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .text-side.visible {
+            display: flex;
+        }
+
+        /* Contenitore Immagine (Destra) */
         .image-container {
             flex: 2;
             height: 100%;
@@ -55,12 +80,11 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
         }
 
-        /* Stato speciale per la prima immagine a tutto schermo */
         .image-container.full-width {
-            flex: 100%;
+            flex: 100%; /* Occupa tutto se il testo è nascosto */
         }
 
         .image-container img {
@@ -74,26 +98,147 @@
             display: block;
         }
 
-        .text-side {
-            flex: 1;
-            display: none; /* Nascosto per la prima immagine */
-            flex-direction: column;
-            justify-content: center;
-            text-align: left; /* Allineato a sinistra come richiesto */
-        }
-
-        /* Visualizza il testo quando non siamo alla prima immagine */
-        .text-side.visible {
-            display: flex;
-        }
-
         .project-title-large {
             color: black;
             font-style: italic;
             font-size: 26px;
             margin-bottom: 15px;
-            font-weight: normal;
         }
 
         .project-description {
             color: rgb(173, 54, 35);
+            font-style: italic;
+            line-height: 1.3;
+            font-size: 16px;
+        }
+
+        /* --- BARRA ROSSA --- */
+        .slider-wrapper {
+            position: absolute;
+            bottom: 4%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .tick-labels {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: black;
+        }
+
+        .slider-ticks {
+            width: 94%;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .tick {
+            width: 2px;
+            height: 8px;
+            background-color: black;
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+            cursor: none;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%; height: 4px; background: rgb(173, 54, 35) !important; border-radius: 2px;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%;
+            background: rgb(173, 54, 35) !important; margin-top: -6px;
+        }
+
+        input[type=range]::-moz-range-track {
+            width: 100%; height: 4px; background: rgb(173, 54, 35) !important; border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor-dot"></div>
+
+    <div class="header-nav">
+        <a href="projects.html" class="back-btn">< BACK</a>
+    </div>
+
+    <div class="white-rect">
+        <div class="text-side" id="text-container">
+            <div class="project-title-large">Riqualificazione di un complesso ospedaliero - 2024</div>
+            <div class="project-description">
+                Il progetto vuole rispondere alla necessità di riqualificare un'area ad oggi occupata da un complesso ospedaliero, ma che in vista dello spostamento di questa funzione in un nuovo luogo, lascia una grande area improvvisamente inutilizzata. Cosa fare di questo lotto? Gli edifici storici e vincolati dalla Sopraintendenza vengono convertiti all'uso di polo scientifico, mentre i loro piani interrati a funzione di data center. Attraverso gli strumenti parametrici è stata predisposta anche una copertura pedonabile, che ha lo scopo di riconnettere l'area con l'esterno del lotto.
+            </div>
+        </div>
+
+        <div class="image-container full-width" id="img-container">
+            <img src="ospedale1.png" class="active">
+            <img src="ospedale2.png">
+            <img src="ospedale3.png">
+            <img src="ospedale4.png">
+            <img src="ospedale5.png">
+        </div>
+    </div>
+
+    <div class="slider-wrapper">
+        <div class="tick-labels">
+            <span>01</span>
+            <span>02</span>
+            <span>03</span>
+            <span>04</span>
+            <span>05</span>
+        </div>
+        <div class="slider-ticks">
+            <div class="tick"></div>
+            <div class="tick"></div>
+            <div class="tick"></div>
+            <div class="tick"></div>
+            <div class="tick"></div>
+        </div>
+        <input type="range" id="imageSlider" min="0" max="4" value="0" step="1" oninput="updateSlider(this.value)">
+    </div>
+
+    <script>
+        const dot = document.getElementById('cursor-dot');
+        document.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+        });
+
+        const textCont = document.getElementById('text-container');
+        const imgCont = document.getElementById('img-container');
+
+        function updateSlider(val) {
+            const images = document.querySelectorAll('.image-container img');
+            
+            // Gestione Layout: se val è 0 (prima immagine), nascondi testo e espandi immagine
+            if (val == 0) {
+                textCont.classList.remove('visible');
+                imgCont.classList.add('full-width');
+            } else {
+                textCont.classList.add('visible');
+                imgCont.classList.remove('full-width');
+            }
+
+            images.forEach((img, index) => {
+                img.classList.remove('active');
+                if(index == val) img.classList.add('active');
+            });
+        }
+    </script>
+</body>
+</html>
