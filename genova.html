@@ -16,7 +16,7 @@
             overflow-x: hidden;
         }
 
-        /* --- CURSORE ROSSO --- */
+        /* --- CURSORE --- */
         #cursor-dot {
             width: 10px; height: 10px; 
             background-color: rgb(173, 54, 35);
@@ -47,7 +47,7 @@
             border-radius: 2px;
         }
 
-        /* --- CONTENUTI SUPERIORI --- */
+        /* --- WRAPPER CONTENUTI --- */
         .wrapper {
             max-width: 1200px;
             margin: 0 auto;
@@ -85,27 +85,26 @@
             margin-bottom: 150px;
         }
 
-        /* --- SEZIONE SCHEMA TECNICO --- */
-        .schema-section {
+        /* --- SEZIONE SCHEMA --- */
+        #schema-master-container {
+            position: relative;
             width: 100%;
             padding: 0 5%;
             display: flex;
             flex-direction: column;
-            gap: 400px; /* Spazio aumentato per ospitare i tre livelli */
-            padding-bottom: 500px;
         }
 
         .schema-row {
+            display: flex;
             position: relative;
             width: 100%;
-            /* Altezza calcolata per contenere la cascata */
-            min-height: 800px; 
+            margin-bottom: 150px; /* Distanza tra i moduli */
+            align-items: flex-start;
         }
 
-        /* BOX GENERICO CON VERTICI */
         .box-container {
-            position: absolute;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.15);
             z-index: 10;
         }
 
@@ -119,43 +118,37 @@
         .bl { bottom: -4px; left: -4px; }
         .br { bottom: -4px; right: -4px; }
 
-        /* 1. Riquadro Grigio (Sinistra - 20vw) */
-        .gray-box {
-            left: 0;
-            top: 0;
-            width: 20vw;
-            height: 160px;
+        .gray-left {
+            width: 20vw; height: 160px;
             background-color: #1a1a1a;
+            flex-shrink: 0;
         }
 
-        /* 2. Riquadro Medio (Centro - 50vw) */
-        .mid-box {
-            left: 30vw; /* 20vw grigio + 10vw gap */
-            top: 150px; /* Slittato in basso */
-            width: 50vw;
-            aspect-ratio: 16 / 9;
+        .mid-right {
+            width: 50vw; aspect-ratio: 16 / 9;
             background-color: #2a2a2a;
+            margin-left: 10vw;
+            margin-top: 80px; /* Offset a metà altezza del grigio */
+            flex-shrink: 0;
         }
 
-        /* 3. Riquadro Bianco (Full Width - 90vw circa) */
-        .full-box {
-            left: 0;
-            top: 600px; /* Slittato ulteriormente in basso */
+        /* Riquadro Bianco Finale (Unico) */
+        .final-white-box {
             width: 90vw;
-            aspect-ratio: 21 / 9; /* Più panoramico essendo largo quanto la pagina */
+            aspect-ratio: 21 / 9;
             background-color: white;
+            margin: 200px auto 300px auto;
+            position: relative;
+            z-index: 10;
         }
 
-        /* --- FILI SVG --- */
-        .connector-svg {
+        /* --- SVG OVERLAY PER I FILI --- */
+        #master-svg {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
             overflow: visible;
-            z-index: 5;
         }
 
         .connector-path {
@@ -179,85 +172,113 @@
 
     <div class="wrapper">
         <h1 class="main-title">ReloadinGenova</h1>
+
         <div class="bilingual-grid">
             <div class="lang-col it-side">
                 <div class="lang-label">IT</div>
-                <div class="description">L'obiettivo della tesi è stato quello di progettare la riqualificazione di un'area industriale a Genova...</div>
+                <div class="description">
+                    L'obiettivo della tesi è stato quello di progettare la riqualificazione di un'area industriale a Genova, riconnettendo la città con il mare, grazie all'uso degli strumenti parametrici. L’uso degli strumenti parametrici consente di affrontare la progettazione urbana, e in misura maggiore quella architettonica, permettendo di gestire la complessità e di generare molteplici scenari. Per secoli la crescita di Genova si è intrecciata con la storia del suo porto. Come è possibile affrontare un progetto la cui storia è così strettamente legata alle trasformazioni della sua costa?
+                </div>
             </div>
             <div class="lang-col en-side">
                 <div class="lang-label">EN</div>
-                <div class="description">The goal of the thesis was to design the redevelopment of an industrial area in Genoa...</div>
+                <div class="description">
+                    The goal of the thesis was to design the redevelopment of an industrial area in Genoa, reconnecting the city with the sea, through the use of parametric tools. The use of parametric tools allows for urban design, and to an even greater extent architectural design, to manage complexity and generate multiple scenarios. For centuries, the growth of Genoa has been intertwined with the history of its port. How is it possible to approach a project whose history is so closely linked to the transformations of its coastline?
+                </div>
             </div>
         </div>
+
         <div class="video-box"></div>
-        <div class="justified-footer">Genova è una città bifronte, contesa tra mare e montagna...</div>
+
+        <div class="justified-footer">
+            Genova è una città bifronte, contesa tra mare e montagna. Questo ha condotto, nel corso dei secoli, ad un uso intensivo del suo suolo. Genova è una città che ha un forte rapporto con il porto, tanto da far ruotare la sua economia intorno ad esso. Le industrie a partire dall'Ottocento si insediano sulla sua costa, motivo per il quale la città smette di avere un legame visivo con il mare.
+        </div>
     </div>
 
-    <div class="schema-section" id="schema-target">
+    <div id="schema-master-container">
+        <svg id="master-svg"></svg>
+
+        <div id="rows-container"></div>
+
+        <div id="final-box" class="box-container final-white-box">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl"></div><div class="corner br"></div>
         </div>
+    </div>
 
     <script>
-        // Cursore
         const dot = document.getElementById('cursor-dot');
         document.addEventListener('mousemove', (e) => {
             dot.style.left = e.clientX + 'px';
             dot.style.top = e.clientY + 'px';
         });
 
-        // Scroll
         const indicator = document.getElementById('indicator');
         window.onscroll = function() {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
-            indicator.style.height = scrolled + "%";
+            indicator.style.height = (winScroll / height) * 100 + "%";
         };
 
         function buildSchema() {
-            const container = document.getElementById('schema-target');
-            const vw = window.innerWidth / 100;
+            const rowsContainer = document.getElementById('rows-container');
+            const svg = document.getElementById('master-svg');
+            const finalBox = document.getElementById('final-box');
             
-            // Calcolo altezze dinamiche per i centri
-            const midBoxHeight = (50 * vw) * (9/16);
-            const fullBoxHeight = (90 * vw) * (9/21);
+            rowsContainer.innerHTML = '';
+            svg.innerHTML = '';
 
-            // Coordinate Y dei centri
-            const centerGray = 80; // 160 / 2
-            const centerMid = 150 + (midBoxHeight / 2);
-            const centerFull = 600 + (fullBoxHeight / 2);
-
-            // Coordinate X dei lati destri
-            const rightGray = 20 * vw;
-            const rightMid = 80 * vw; // 30vw partenza + 50vw larghezza
-            const rightFull = 90 * vw;
-
-            let html = '';
+            let rowsHtml = '';
             for(let i=0; i<4; i++) {
-                html += `
-                <div class="schema-row">
-                    <div class="box-container gray-box">
-                        <div class="corner tl"></div><div class="corner tr"></div>
-                        <div class="corner bl"></div><div class="corner br"></div>
+                rowsHtml += `
+                    <div class="schema-row" id="row-${i}">
+                        <div class="box-container gray-left">
+                            <div class="corner tl"></div><div class="corner tr"></div>
+                            <div class="corner bl"></div><div class="corner br"></div>
+                        </div>
+                        <div class="box-container mid-right">
+                            <div class="corner tl"></div><div class="corner tr"></div>
+                            <div class="corner bl"></div><div class="corner br"></div>
+                        </div>
                     </div>
-
-                    <div class="box-container mid-box">
-                        <div class="corner tl"></div><div class="corner tr"></div>
-                        <div class="corner bl)</div><div class="corner br"></div>
-                    </div>
-
-                    <div class="box-container full-box">
-                        <div class="corner tl"></div><div class="corner tr"></div>
-                        <div class="corner bl"></div><div class="corner br"></div>
-                    </div>
-
-                    <svg class="connector-svg">
-                        <path class="connector-path" d="M ${rightGray},${centerGray} H ${rightGray + 5*vw} V ${centerMid} H ${30*vw}" />
-                        
-                        <path class="connector-path" d="M ${rightMid},${centerMid} H ${95*vw} V ${centerFull} H ${rightFull}" />
-                    </svg>
-                </div>`;
+                `;
             }
-            container.innerHTML = html;
+            rowsContainer.innerHTML = rowsHtml;
+
+            // Disegno i fili dopo un micro-timeout per assicurarmi che i box siano renderizzati
+            setTimeout(() => {
+                const finalRect = finalBox.getBoundingClientRect();
+                const containerRect = document.getElementById('schema-master-container').getBoundingClientRect();
+                
+                const finalCenterY = (finalRect.top + finalRect.height/2) - containerRect.top;
+                const finalRightX = finalRect.right - containerRect.left;
+
+                for(let i=0; i<4; i++) {
+                    const row = document.getElementById(`row-${i}`);
+                    const gray = row.querySelector('.gray-left').getBoundingClientRect();
+                    const mid = row.querySelector('.mid-right').getBoundingClientRect();
+
+                    const grayMidY = (gray.top + gray.height/2) - containerRect.top;
+                    const grayRightX = gray.right - containerRect.left;
+                    
+                    const midLeftX = mid.left - containerRect.left;
+                    const midRightX = mid.right - containerRect.left;
+                    const midMidY = (mid.top + mid.height/2) - containerRect.top;
+
+                    // 1. Filo Grigio -> Medio (entra a sinistra)
+                    const path1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                    path1.setAttribute("class", "connector-path");
+                    path1.setAttribute("d", `M ${grayRightX},${grayMidY} H ${grayRightX + (midLeftX - grayRightX)/2} V ${midMidY} H ${midLeftX}`);
+                    svg.appendChild(path1);
+
+                    // 2. Filo Medio -> Finale Bianco (entra a destra del finale)
+                    const path2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                    path2.setAttribute("class", "connector-path");
+                    // Esce da destra del medio, va orizzontale, scende fino al finale, entra da destra
+                    path2.setAttribute("d", `M ${midRightX},${midMidY} H ${finalRightX + 40} V ${finalCenterY} H ${finalRightX}`);
+                    svg.appendChild(path2);
+                }
+            }, 100);
         }
 
         window.onload = buildSchema;
