@@ -2,36 +2,98 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Riqualificazione di un complesso ospedaliero</title>
+    <title>Ospedale - 2024</title>
     <style>
-        body {
-            margin: 0; cursor: none; background-color: white;
+        * { box-sizing: border-box; }
+        
+        body, html {
+            margin: 0; padding: 0;
+            height: 100%; width: 100%;
+            font-family: Arial, sans-serif;
+            cursor: none;
+            overflow: hidden;
+            background-color: white;
             background-image: linear-gradient(rgb(122, 161, 190) 1px, transparent 1px),
                               linear-gradient(90deg, rgb(122, 161, 190) 1px, transparent 1px);
-            background-size: 60px 60px; /* Quadretti grandi */
-            min-height: 100vh; font-family: Arial, sans-serif; padding: 60px;
+            background-size: 60px 60px;
         }
-        .back-btn { position: fixed; top: 20px; left: 20px; color: rgb(122, 161, 190); text-decoration: none; font-size: 14px; z-index: 100; font-weight: bold; }
+
+        .header-nav {
+            position: fixed;
+            top: 30px;
+            left: 5%;
+            z-index: 1000;
+        }
+
+        .back-btn { 
+            color: rgb(122, 161, 190); 
+            text-decoration: none; 
+            font-size: 14px; 
+            font-weight: bold; 
+        }
         .back-btn:hover { font-style: italic; }
-        h1 { font-weight: bold; font-size: 24px; margin-top: 20px; color: black; }
-        #cursor-dot {
-            width: 10px; height: 10px; background-color: rgb(173, 54, 35);
-            border-radius: 50%; position: fixed; pointer-events: none;
-            z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s ease-out;
+
+        .white-rect {
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            right: 5%;
+            bottom: 12%;
+            background-color: white;
+            display: flex;
+            padding: 40px;
+            gap: 40px;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(122, 161, 190, 0.1);
         }
-    </style>
-</head>
-<body>
-    <div id="cursor-dot"></div>
-    <a href="projects.html" class="back-btn">< BACK</a>
-    <h1>Riqualificazione di un complesso ospedaliero</h1>
-    
-    <script>
-        const dot = document.getElementById('cursor-dot');
-        document.addEventListener('mousemove', (e) => {
-            dot.style.left = e.clientX + 'px';
-            dot.style.top = e.clientY + 'px';
-        });
-    </script>
-</body>
-</html>
+
+        .image-container {
+            flex: 2;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        /* Stato speciale per la prima immagine a tutto schermo */
+        .image-container.full-width {
+            flex: 100%;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+
+        .image-container img.active {
+            display: block;
+        }
+
+        .text-side {
+            flex: 1;
+            display: none; /* Nascosto per la prima immagine */
+            flex-direction: column;
+            justify-content: center;
+            text-align: left; /* Allineato a sinistra come richiesto */
+        }
+
+        /* Visualizza il testo quando non siamo alla prima immagine */
+        .text-side.visible {
+            display: flex;
+        }
+
+        .project-title-large {
+            color: black;
+            font-style: italic;
+            font-size: 26px;
+            margin-bottom: 15px;
+            font-weight: normal;
+        }
+
+        .project-description {
+            color: rgb(173, 54, 35);
