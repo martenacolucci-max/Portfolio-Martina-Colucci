@@ -138,7 +138,7 @@
 
         /* Riquadro Bianco Finale - Proporzioni B5 Orizzontale (250/176) */
         .final-white-box {
-            width: 70vw; /* Regolato per stare nei margini */
+            width: 70vw; 
             aspect-ratio: 250 / 176;
             background-color: white;
             margin: 300px auto 400px auto;
@@ -252,8 +252,7 @@
                 const containerRect = document.getElementById('schema-master-container').getBoundingClientRect();
                 
                 const finalRightX = finalRect.right - containerRect.left;
-                const finalHeight = finalRect.height;
-                const finalTopY = finalRect.top - containerRect.top;
+                const finalCenterY = (finalRect.top + finalRect.height/2) - containerRect.top;
 
                 for(let i=0; i<4; i++) {
                     const row = document.getElementById(`row-${i}`);
@@ -267,25 +266,28 @@
                     const midRightX = mid.right - containerRect.left;
                     const midMidY = (mid.top + mid.height/2) - containerRect.top;
 
-                    // 1. Filo Grigio -> Medio (entra a sinistra)
+                    // 1. Filo Grigio -> Medio
                     const path1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
                     path1.setAttribute("class", "connector-path");
                     path1.setAttribute("d", `M ${grayRightX},${grayMidY} H ${grayRightX + (midLeftX - grayRightX)/2} V ${midMidY} H ${midLeftX}`);
                     svg.appendChild(path1);
 
-                    // 2. Filo Medio -> Finale Bianco (ENTRATA A DESTRA PARALLELA)
+                    // 2. Filo Medio -> Finale Bianco (ARRIVO SULLA STESSA LINEA ORIZZONTALE)
                     const path2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
                     path2.setAttribute("class", "connector-path");
                     
-                    // Spaziatura tra i fili verticali (staccati tra loro)
+                    // Spaziatura per mantenere i fili verticali paralleli e staccati
                     const lineOffset = 20 + (i * 15); 
-                    // Punti di entrata distribuiti sul lato destro del box finale
-                    const entryY = finalTopY + (finalHeight / 2) - 30 + (i * 20);
 
+                    // Percorso: 
+                    // - Esce orizzontalmente dal medio
+                    // - Si sposta lateralmente a diverse distanze (offset) per non sovrapporsi in verticale
+                    // - Scende in verticale
+                    // - Arriva tutto sulla stessa linea orizzontale (finalCenterY)
                     path2.setAttribute("d", `
                         M ${midRightX},${midMidY} 
                         H ${finalRightX + lineOffset} 
-                        V ${entryY} 
+                        V ${finalCenterY} 
                         H ${finalRightX}
                     `);
                     svg.appendChild(path2);
