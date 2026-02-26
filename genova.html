@@ -16,7 +16,7 @@
             overflow-x: hidden;
         }
 
-        /* --- CURSORE ROSSO --- */
+        /* --- CURSORE --- */
         #cursor-dot {
             width: 10px; height: 10px; 
             background-color: rgb(173, 54, 35);
@@ -25,7 +25,7 @@
             transform: translate(-50%, -50%);
         }
 
-        /* --- NAVIGAZIONE BACK --- */
+        /* --- NAVIGAZIONE --- */
         .header-nav {
             position: fixed; top: 30px; left: 5%; z-index: 1000;
         }
@@ -34,7 +34,7 @@
             font-size: 14px; font-weight: bold; 
         }
 
-        /* --- BARRA DI SCORRIMENTO ROSSA --- */
+        /* --- BARRA SCROLL ROSSA --- */
         .scroll-container {
             position: fixed; right: 15px; top: 20%;
             height: 60%; width: 4px;
@@ -47,7 +47,7 @@
             border-radius: 2px;
         }
 
-        /* --- CONTENUTO SUPERIORE --- */
+        /* --- WRAPPER CONTENUTI --- */
         .wrapper {
             max-width: 1200px;
             margin: 0 auto;
@@ -85,26 +85,31 @@
             margin-bottom: 150px;
         }
 
-        /* --- SEZIONE SCHEMA TECNICO (Full Width) --- */
+        /* --- SEZIONE SCHEMA (FUORI DAL WRAPPER PER USARE TUTTA LA LARGHEZZA) --- */
         .schema-section {
             width: 100%;
             padding: 0 5%;
             display: flex;
             flex-direction: column;
-            gap: 250px; /* Più spazio perché i riquadri sono grandi */
-            padding-bottom: 300px;
+            gap: 100px; /* Distanza tra le righe */
+            padding-bottom: 200px;
         }
 
         .schema-row {
             display: flex;
-            align-items: flex-start;
+            align-items: center; /* Allinea i centri dei riquadri orizzontalmente */
             position: relative;
             width: 100%;
+            height: 400px; /* Altezza fissa per gestire il filo */
         }
 
-        .box-with-corners {
+        /* BOX CON VERTICI */
+        .box-container {
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .corner {
@@ -117,45 +122,34 @@
         .bl { bottom: -4px; left: -4px; }
         .br { bottom: -4px; right: -4px; }
 
-        /* Riquadro Grigio (1/5) */
+        /* Riquadro Grigio (1/5 schermo) */
         .gray-box {
             width: 20vw;
-            height: 180px;
+            height: 200px;
             background-color: #1a1a1a;
-            flex-shrink: 0;
-            z-index: 5;
         }
 
-        /* SVG del Filo */
+        /* Riquadro Grande (1/2 schermo) */
+        .large-box-container {
+            width: 50vw;
+            aspect-ratio: 16 / 9;
+            background-color: #2a2a2a;
+            margin-left: 10vw; /* Spazio per il filo */
+        }
+
+        /* FILO SVG */
         .connector-svg {
             position: absolute;
-            top: 0;
-            left: 20vw;
-            width: 15vw;
+            left: 20vw; /* Inizia dove finisce il grigio */
+            width: 10vw; /* Copre lo spazio vuoto */
             height: 100%;
             pointer-events: none;
-            overflow: visible;
         }
 
         .connector-path {
             fill: none;
             stroke: rgb(122, 161, 190);
             stroke-width: 2;
-        }
-
-        /* Riquadro Grande (Metà schermo - 50vw) */
-        .large-box-wrapper {
-            margin-top: 90px; /* Parte dalla metà del grigio */
-            margin-left: 10vw; /* Distanza orizzontale */
-            width: 50vw;
-            flex-shrink: 0;
-            z-index: 5;
-        }
-
-        .large-box {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            background-color: #2a2a2a;
         }
 
     </style>
@@ -197,8 +191,29 @@
         </div>
     </div>
 
-    <div class="schema-section" id="schema-container">
-        </div>
+    <div class="schema-section">
+        <script>
+            for(let i=0; i<4; i++) {
+                document.write(`
+                    <div class="schema-row">
+                        <div class="box-container gray-box">
+                            <div class="corner tl"></div><div class="corner tr"></div>
+                            <div class="corner bl"></div><div class="corner br"></div>
+                        </div>
+
+                        <svg class="connector-svg">
+                            <line x1="0" y1="50%" x2="100%" y2="50%" class="connector-path" />
+                        </svg>
+
+                        <div class="box-container large-box-container">
+                            <div class="corner tl"></div><div class="corner tr"></div>
+                            <div class="corner bl"></div><div class="corner br"></div>
+                        </div>
+                    </div>
+                `);
+            }
+        </script>
+    </div>
 
     <script>
         // Cursore
@@ -216,6 +231,6 @@
             let scrolled = (winScroll / height) * 100;
             indicator.style.height = scrolled + "%";
         };
-
-        // Generatore Schema con calcolo del punto medio
-        const container = document.getElementById
+    </script>
+</body>
+</html>
