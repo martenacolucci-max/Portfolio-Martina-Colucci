@@ -16,7 +16,7 @@
             overflow-x: hidden;
         }
 
-        /* --- CURSORE --- */
+        /* --- CURSORE ROSSO --- */
         #cursor-dot {
             width: 10px; height: 10px; 
             background-color: rgb(173, 54, 35);
@@ -47,7 +47,7 @@
             border-radius: 2px;
         }
 
-        /* --- WRAPPER CONTENUTI --- */
+        /* --- CONTENUTI SUPERIORI --- */
         .wrapper {
             max-width: 1200px;
             margin: 0 auto;
@@ -85,13 +85,13 @@
             margin-bottom: 150px;
         }
 
-        /* --- SEZIONE SCHEMA (A TUTTA LARGHEZZA) --- */
+        /* --- SEZIONE SCHEMA (ROBUSTA) --- */
         .schema-section {
             width: 100%;
             padding: 0 5%;
             display: flex;
             flex-direction: column;
-            gap: 200px; /* Spazio tra i blocchi */
+            gap: 250px; /* Spazio tra i 4 blocchi */
             padding-bottom: 300px;
         }
 
@@ -102,10 +102,10 @@
             align-items: flex-start;
         }
 
-        /* RIQUADRI CON VERTICI */
+        /* BOX CON VERTICI */
         .box-container {
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             z-index: 10;
         }
 
@@ -119,4 +119,153 @@
         .bl { bottom: -4px; left: -4px; }
         .br { bottom: -4px; right: -4px; }
 
-        /* Riquadro
+        /* Riquadro Grigio (1/5 schermo) */
+        .gray-box {
+            width: 20vw;
+            height: 160px;
+            background-color: #1a1a1a;
+            flex-shrink: 0;
+        }
+
+        /* Riquadro Grande (1/2 schermo) - Scende di 80px (metà del grigio) */
+        .large-box {
+            width: 50vw;
+            aspect-ratio: 16 / 9;
+            background-color: #2a2a2a;
+            margin-left: 10vw;
+            margin-top: 80px; 
+            flex-shrink: 0;
+        }
+
+        /* FILO (Creato con i bordi di un div per non farlo sparire) */
+        .connector {
+            position: absolute;
+            left: 20vw; /* Inizia dove finisce il grigio */
+            top: 80px;  /* Metà del grigio */
+            width: 10vw;
+            /* L'altezza deve arrivare a metà del riquadro grande */
+            /* Calcolo: metà altezza del grande (che è 50vw * 9/16 / 2) */
+            height: calc((50vw * 9 / 32) + 2px); 
+            border-left: 2px solid rgb(122, 161, 190);
+            border-bottom: 2px solid rgb(122, 161, 190);
+            pointer-events: none;
+        }
+
+        /* Piccola aggiunta per far uscire il filo dritto dal grigio */
+        .connector::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -5vw; /* Esce orizzontalmente */
+            width: 5vw;
+            height: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor-dot"></div>
+
+    <div class="header-nav">
+        <a href="projects.html" class="back-btn">< BACK</a>
+    </div>
+
+    <div class="scroll-container">
+        <div class="scroll-bar" id="indicator"></div>
+    </div>
+
+    <div class="wrapper">
+        <h1 class="main-title">ReloadinGenova</h1>
+
+        <div class="bilingual-grid">
+            <div class="lang-col it-side">
+                <div class="lang-label">IT</div>
+                <div class="description">
+                    L'obiettivo della tesi è stato quello di progettare la riqualificazione di un'area industriale a Genova, riconnettendo la città con il mare, grazie all'uso degli strumenti parametrici. L’uso degli strumenti parametrici consente di affrontare la progettazione urbana, e in misura maggiore quella architettonica, permettendo di gestire la complessità e di generare molteplici scenari. Per secoli la crescita di Genova si è intrecciata con la storia del suo porto. Come è possibile affrontare un progetto la cui storia è così strettamente legata alle trasformazioni della sua costa?
+                </div>
+            </div>
+            <div class="lang-col en-side">
+                <div class="lang-label">EN</div>
+                <div class="description">
+                    The goal of the thesis was to design the redevelopment of an industrial area in Genoa, reconnecting the city with the sea, through the use of parametric tools. The use of parametric tools allows for urban design, and to an even greater extent architectural design, to manage complexity and generate multiple scenarios. For centuries, the growth of Genoa has been intertwined with the history of its port. How is it possible to approach a project whose history is so closely linked to the transformations of its coastline?
+                </div>
+            </div>
+        </div>
+
+        <div class="video-box"></div>
+
+        <div class="justified-footer">
+            Genova è una città bifronte, contesa tra mare e montagna. Questo ha condotto, nel corso dei secoli, ad un uso intensivo del suo suolo. Genova è una città che ha un forte rapporto con il porto, tanto da far ruotare la sua economia intorno ad esso. Le industrie a partire dall'Ottocento si insediano sulla sua costa, motivo per il quale la città smette di avere un legame visivo con il mare.
+        </div>
+    </div>
+
+    <div class="schema-section">
+        
+        <div class="schema-row">
+            <div class="box-container gray-box">
+                <div class="corner tl"></div><div class="corner tr"></div>
+                <div class="corner bl"></div><div class="corner br"></div>
+            </div>
+            <div class="connector"></div>
+            <div class="box-container large-box">
+                <div class="corner tl"></div><div class="corner tr"></div>
+                <div class="corner bl"></div><div class="corner br"></div>
+            </div>
+        </div>
+
+        <div class="schema-row">
+            <div class="box-container gray-box">
+                <div class="corner tl"></div><div class="corner tr"></div>
+                <div class="corner bl"></div><div class="corner br"></div>
+            </div>
+            <div class="connector"></div>
+            <div class="box-container large-box">
+                <div class="corner tl"></div><div class="corner tr"></div>
+                <div class="corner bl"></div><div class="corner br"></div>
+            </div>
+        </div>
+
+        <div class="schema-row">
+            <div class="box-container gray-box">
+                <div class="corner tl"></div><div class="corner tr"></div>
+                <div class="corner bl"></div><div class="corner br"></div>
+            </div>
+            <div class="connector"></div>
+            <div class="box-container large-box">
+                <div class="corner tl"></div><div class="corner tr"></div>
+                <div class="corner bl"></div><div class="corner br"></div>
+            </div>
+        </div>
+
+        <div class="schema-row">
+            <div class="box-container gray-box">
+                <div class="corner tl"></div><div class="corner tr"></div>
+                <div class="corner bl"></div><div class="corner br"></div>
+            </div>
+            <div class="connector"></div>
+            <div class="box-container large-box">
+                <div class="corner tl"></div><div class="corner tr"></div>
+                <div class="corner bl"></div><div class="corner br"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Cursore
+        const dot = document.getElementById('cursor-dot');
+        document.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+        });
+
+        // Barra Scroll
+        const indicator = document.getElementById('indicator');
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            indicator.style.height = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
