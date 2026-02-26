@@ -214,4 +214,16 @@
         const dot = document.getElementById('cursor-dot');
         document.addEventListener('mousemove', (e) => {
             dot.style.left = e.clientX + 'px';
-            dot.style.top =
+            dot.style.top = e.clientY + 'px';
+        });
+
+        const indicator = document.getElementById('indicator');
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            indicator.style.height = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
