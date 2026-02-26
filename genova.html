@@ -25,295 +25,39 @@
             transform: translate(-50%, -50%);
         }
 
-        /* --- NAVIGAZIONE --- */
-        .header-nav {
-            position: fixed; top: 30px; left: 5%; z-index: 1000;
-        }
-        .back-btn { 
-            color: rgb(122, 161, 190); text-decoration: none; 
-            font-size: 14px; font-weight: bold; 
-        }
+        .header-nav { position: fixed; top: 30px; left: 5%; z-index: 1000; }
+        .back-btn { color: rgb(122, 161, 190); text-decoration: none; font-size: 14px; font-weight: bold; }
 
-        /* --- BARRA SCROLL ROSSA --- */
+        /* --- SCROLL PROGRESS --- */
         .scroll-container {
-            position: fixed; right: 15px; top: 20%;
-            height: 60%; width: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px; z-index: 1000;
+            position: fixed; right: 15px; top: 20%; height: 60%; width: 4px;
+            background: rgba(255, 255, 255, 0.1); border-radius: 2px; z-index: 1000;
         }
-        .scroll-bar {
-            width: 100%; height: 0%;
-            background-color: rgb(173, 54, 35);
-            border-radius: 2px;
-        }
+        .scroll-bar { width: 100%; height: 0%; background-color: rgb(173, 54, 35); border-radius: 2px; }
 
-        /* --- WRAPPER CONTENUTI --- */
         .wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 120px 5% 50px 5%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            max-width: 1200px; margin: 0 auto; padding: 120px 5% 50px 5%;
+            display: flex; flex-direction: column; align-items: center;
         }
 
-        .main-title {
-            color: rgb(173, 54, 35);
-            font-size: 52px;
-            margin-bottom: 80px;
-            text-align: center;
-            font-weight: normal;
-        }
+        .main-title { color: rgb(173, 54, 35); font-size: 52px; margin-bottom: 80px; text-align: center; font-weight: normal; }
 
-        .bilingual-grid {
-            display: flex; width: 100%; gap: 80px; margin-bottom: 100px;
-        }
+        /* No corsivo come richiesto */
+        .bilingual-grid { display: flex; width: 100%; gap: 80px; margin-bottom: 100px; }
         .lang-col { flex: 1; }
-        .lang-label { font-size: 28px; font-weight: bold; margin-bottom: 15px; }
-        .description { font-size: 16px; line-height: 1.6; }
+        .lang-label { font-size: 28px; font-weight: bold; margin-bottom: 15px; font-style: normal; }
+        .description { font-size: 16px; line-height: 1.6; font-style: normal; }
         .it-side { text-align: right; }
         .en-side { text-align: left; }
 
-        .video-box {
-            width: 100%; aspect-ratio: 16 / 9;
-            background-color: white; margin-bottom: 80px;
-        }
+        .video-box { width: 100%; aspect-ratio: 16 / 9; background-color: white; margin-bottom: 80px; }
+        .justified-footer { width: 100%; text-align: justify; font-size: 18px; line-height: 1.8; margin-bottom: 150px; font-style: normal; }
 
-        .justified-footer {
-            width: 100%; text-align: justify;
-            font-size: 18px; line-height: 1.8;
-            margin-bottom: 150px;
-        }
+        /* --- SCHEMA TECNICO --- */
+        #schema-master-container { position: relative; width: 100%; padding: 0 5%; display: flex; flex-direction: column; }
+        .schema-row { display: flex; position: relative; width: 100%; margin-bottom: 250px; align-items: flex-start; }
 
-        /* --- SEZIONE SCHEMA --- */
-        #schema-master-container {
-            position: relative;
-            width: 100%;
-            padding: 0 5%;
-            display: flex;
-            flex-direction: column;
-        }
+        .box-container { position: relative; border: 1px solid rgba(255, 255, 255, 0.15); z-index: 10; background-color: #1a1a1a; }
+        .box-label { position: absolute; top: -30px; left: 0; font-size: 13px; font-weight: bold; color: rgb(122, 161, 190); letter-spacing: 1px; font-style: normal; }
 
-        .schema-row {
-            display: flex;
-            position: relative;
-            width: 100%;
-            margin-bottom: 220px; 
-            align-items: flex-start;
-        }
-
-        .box-container {
-            position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            z-index: 10;
-        }
-
-        /* Etichette sopra i riquadri grigi */
-        .box-label {
-            position: absolute;
-            top: -30px;
-            left: 0;
-            font-size: 12px;
-            font-weight: bold;
-            color: rgb(122, 161, 190);
-            letter-spacing: 1px;
-        }
-
-        .corner {
-            width: 8px; height: 8px;
-            background-color: rgb(122, 161, 190);
-            position: absolute;
-        }
-        .tl { top: -4px; left: -4px; }
-        .tr { top: -4px; right: -4px; }
-        .bl { bottom: -4px; left: -4px; }
-        .br { bottom: -4px; right: -4px; }
-
-        .gray-left {
-            width: 20vw; height: 160px;
-            background-color: #1a1a1a;
-            flex-shrink: 0;
-        }
-
-        .mid-right {
-            width: 50vw; aspect-ratio: 16 / 9;
-            background-color: #2a2a2a;
-            margin-left: 10vw;
-            margin-top: 80px; 
-            flex-shrink: 0;
-        }
-
-        /* --- RIQUADRO BIANCO FINALE (B5 Orizzontale) --- */
-        .final-white-box {
-            width: 70vw; 
-            aspect-ratio: 250 / 176;
-            background-color: white;
-            margin: 300px auto 400px auto;
-            position: relative;
-            z-index: 10;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .final-white-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Freccia di navigazione */
-        .nav-arrow {
-            position: absolute;
-            right: 20px;
-            bottom: 20px;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(0, 0, 0, 0.05);
-            color: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 20;
-            transition: background 0.3s;
-            border-radius: 4px;
-        }
-        .nav-arrow:hover {
-            background-color: rgba(0, 0, 0, 0.1);
-        }
-
-        /* --- SVG OVERLAY --- */
-        #master-svg {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            overflow: visible;
-        }
-
-        .connector-path {
-            fill: none;
-            stroke: rgb(122, 161, 190);
-            stroke-width: 2;
-        }
-    </style>
-</head>
-<body>
-
-    <div id="cursor-dot"></div>
-
-    <div class="header-nav">
-        <a href="projects.html" class="back-btn">< BACK</a>
-    </div>
-
-    <div class="scroll-container">
-        <div class="scroll-bar" id="indicator"></div>
-    </div>
-
-    <div class="wrapper">
-        <h1 class="main-title">ReloadinGenova</h1>
-        
-        <div class="bilingual-grid">
-            <div class="lang-col it-side">
-                <div class="lang-label">IT</div>
-                <div class="description">
-                    L'obiettivo della tesi è stato quello di progettare la riqualificazione di un'area industriale a Genova, riconnettendo la città con il mare, grazie all'uso degli strumenti parametrici. L’uso degli strumenti parametrici consente di affrontare la progettazione urbana, e in misura maggiore quella architettonica, permettendo di gestire la complessità e di generare molteplici scenari. Per secoli la crescita di Genova si è intrecciata con la storia del suo porto. Come è possibile affrontare un progetto la cui storia è così strettamente legata alle trasformazioni della sua costa?
-                </div>
-            </div>
-            <div class="lang-col en-side">
-                <div class="lang-label">EN</div>
-                <div class="description">
-                    The goal of the thesis was to design the redevelopment of an industrial area in Genoa, reconnecting the city with the sea, through the use of parametric tools. The use of parametric tools allows for urban design, and to an even greater extent architectural design, to manage complexity and generate multiple scenarios. For centuries, the growth of Genoa has been intertwined with the history of its port. How is it possible to approach a project whose history is so closely linked to the transformations of its coastline?
-                </div>
-            </div>
-        </div>
-
-        <div class="video-box"></div>
-
-        <div class="justified-footer">
-            Genova è una città bifronte, contesa tra mare e montagna. Questo ha condotto, nel corso dei secoli, ad un uso intensivo del suo suolo. Genova è una città che ha un forte rapporto con il porto, tanto da far ruotare la sua economia intorno ad esso. Le industrie a partire dall'Ottocento si insediano sulla sua costa, motivo per il quale la città smette di avere un legame visivo con il mare.
-        </div>
-    </div>
-
-    <div id="schema-master-container">
-        <svg id="master-svg"></svg>
-        <div id="rows-container"></div>
-        
-        <div id="final-box" class="box-container final-white-box">
-            <div class="corner tl"></div><div class="corner tr"></div>
-            <div class="corner bl"></div><div class="corner br"></div>
-            
-            <img src="finale1.png" id="main-image-display" alt="Progetto Finale">
-            
-            <div class="nav-arrow" onclick="nextImage()">→</div>
-        </div>
-    </div>
-
-    <script>
-        // Gestione Immagini Finali
-        const finalImages = ["finale1.png", "finale2.png", "finale3.png"]; 
-        let currentImgIndex = 0;
-
-        function nextImage() {
-            currentImgIndex = (currentImgIndex + 1) % finalImages.length;
-            document.getElementById('main-image-display').src = finalImages[currentImgIndex];
-        }
-
-        // Cursore
-        const dot = document.getElementById('cursor-dot');
-        document.addEventListener('mousemove', (e) => {
-            dot.style.left = e.clientX + 'px';
-            dot.style.top = e.clientY + 'px';
-        });
-
-        // Scroll progress
-        const indicator = document.getElementById('indicator');
-        window.onscroll = function() {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            indicator.style.height = (winScroll / height) * 100 + "%";
-        };
-
-        // Costruzione Schema
-        const labels = ["MASTERPLAN", "VOLUME", "DISTRIBUZIONE", "DISPOSITIVI ESTERNI"];
-
-        function buildSchema() {
-            const rowsContainer = document.getElementById('rows-container');
-            const svg = document.getElementById('master-svg');
-            const finalBox = document.getElementById('final-box');
-            
-            rowsContainer.innerHTML = '';
-            svg.innerHTML = '';
-
-            let rowsHtml = '';
-            for(let i=0; i<4; i++) {
-                rowsHtml += `
-                    <div class="schema-row" id="row-${i}">
-                        <div class="box-container gray-left">
-                            <div class="box-label">${labels[i]}</div>
-                            <div class="corner tl"></div><div class="corner tr"></div>
-                            <div class="corner bl"></div><div class="corner br"></div>
-                        </div>
-                        <div class="box-container mid-right">
-                            <div class="corner tl"></div><div class="corner tr"></div>
-                            <div class="corner bl"></div><div class="corner br"></div>
-                        </div>
-                    </div>
-                `;
-            }
-            rowsContainer.innerHTML = rowsHtml;
-
-            setTimeout(() => {
-                const finalRect = finalBox.getBoundingClientRect();
-                const containerRect = document.getElementById('schema-master-container').getBoundingClientRect();
-                
-                const finalRightX = finalRect.right - containerRect.left;
-                const finalCenterY = (finalRect.top + finalRect.height/2) - containerRect.top;
-
-                for(let i=0; i<4; i++) {
-                    const row = document.getElementById(`row-${i}`);
-                    const gray = row.querySelector('.gray-left').getBoundingClientRect();
-                    const mid = row.querySelector('.mid-right').getBounding
+        .corner { width: 8px; height: 8px; background-color: rgb(122, 161,
