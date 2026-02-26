@@ -10,7 +10,7 @@
             margin: 0; padding: 0;
             height: 100%; width: 100%;
             font-family: Arial, sans-serif;
-            cursor: none;
+            cursor: none; /* Nasconde il cursore di sistema */
             overflow: hidden;
             background-color: white;
             background-image: linear-gradient(rgb(122, 161, 190) 1px, transparent 1px),
@@ -18,10 +18,19 @@
             background-size: 60px 60px;
         }
 
-        /* Navigazione Back */
+        /* Cursore Rosso - Priorità Massima */
+        #cursor-dot {
+            width: 10px; height: 10px; 
+            background-color: rgb(173, 54, 35);
+            border-radius: 50%; position: fixed; 
+            pointer-events: none; 
+            z-index: 99999; /* Portato al massimo */
+            transform: translate(-50%, -50%);
+        }
+
         .header-nav {
             position: fixed;
-            top: 30px; /* Più spazio dal bordo alto */
+            top: 30px;
             left: 5%;
             z-index: 1000;
         }
@@ -32,23 +41,22 @@
             font-size: 14px; 
             font-weight: bold; 
         }
-        .back-btn:hover { font-style: italic; }
 
-        /* RIQUADRO BIANCO CON OMBRA */
+        /* RIQUADRO BIANCO */
         .white-rect {
             position: absolute;
-            top: 10%; /* Aumentato il distacco dal tasto BACK (prima era 5%) */
+            top: 10%;
             left: 5%;
             right: 5%;
-            bottom: 12%;
+            bottom: 15%; /* Aumentato spazio per lo slider */
             background-color: white;
             display: flex;
             padding: 40px;
             gap: 40px;
             align-items: center;
-            /* Ombra: elegante e diffusa */
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             border: 1px solid rgba(122, 161, 190, 0.1);
+            z-index: 10;
         }
 
         .image-container {
@@ -84,7 +92,6 @@
             font-style: italic;
             font-size: 26px;
             margin-bottom: 15px;
-            font-weight: normal;
         }
 
         .project-description {
@@ -94,17 +101,17 @@
             font-size: 16px;
         }
 
-        /* SLIDER */
+        /* SLIDER - Portato sopra il riquadro */
         .slider-wrapper {
             position: absolute;
-            bottom: 3%;
+            bottom: 4%;
             left: 50%;
             transform: translateX(-50%);
             width: 320px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            z-index: 500;
+            z-index: 2000; /* Assicura che sia sopra il bianco */
         }
 
         .tick-labels {
@@ -133,15 +140,20 @@
         input[type=range] {
             width: 100%;
             cursor: none;
-            accent-color: rgb(173, 54, 35);
+            accent-color: rgb(173, 54, 35); /* Colore rosso della barra */
+            -webkit-appearance: none;
+            background: #e0e0e0;
+            height: 4px;
+            border-radius: 2px;
         }
 
-        #cursor-dot {
-            width: 10px; height: 10px; 
-            background-color: rgb(173, 54, 35);
-            border-radius: 50%; position: fixed; 
-            pointer-events: none; z-index: 9999; 
-            transform: translate(-50%, -50%);
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            background: rgb(173, 54, 35);
+            border-radius: 50%;
+            cursor: none;
         }
     </style>
 </head>
@@ -183,4 +195,27 @@
             <div class="tick"></div>
             <div class="tick"></div>
             <div class="tick"></div>
-            <div
+            <div class="tick"></div>
+        </div>
+        <input type="range" id="imageSlider" min="0" max="4" value="0" step="1" oninput="updateSlider(this.value)">
+    </div>
+
+    <script>
+        // Gestione Cursore - Fix movimento
+        const dot = document.getElementById('cursor-dot');
+        document.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+        });
+
+        // Gestione Slider
+        function updateSlider(val) {
+            const images = document.querySelectorAll('.image-container img');
+            images.forEach((img, index) => {
+                img.classList.remove('active');
+                if(index == val) img.classList.add('active');
+            });
+        }
+    </script>
+</body>
+</html>
