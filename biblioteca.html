@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Biblioteca sospesa - Martina Colucci</title>
+    <title>Biblioteca sospesa - 2023</title>
     <style>
         * { box-sizing: border-box; }
         body, html {
@@ -12,105 +12,123 @@
             cursor: none;
             overflow: hidden;
             background-color: white;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* --- SEZIONE SUPERIORE (70%) --- */
-        .top-section {
-            height: 70%;
-            width: 100%;
-            position: relative;
             background-image: linear-gradient(rgb(122, 161, 190) 1px, transparent 1px),
                               linear-gradient(90deg, rgb(122, 161, 190) 1px, transparent 1px);
             background-size: 60px 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
 
-        .back-btn { 
-            position: absolute; top: 20px; left: 20px; 
-            color: rgb(122, 161, 190); text-decoration: none; 
-            font-size: 14px; font-weight: bold; z-index: 100;
-        }
-
-        /* Riquadro Bianco ottimizzato B5 */
-        .photo-rect {
-            width: 85%;
-            height: 75%;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 15px rgba(0,0,0,0.05);
-        }
-
-        .photo-rect img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* L'immagine occupa tutto il riquadro */
-            display: none; /* Nascoste di base */
-        }
-
-        .photo-rect img.active {
-            display: block;
-        }
-
-        /* --- BARRA DI SCORRIMENTO --- */
-        .slider-controls {
-            margin-top: 20px;
-            width: 300px;
+        /* Header con Back e Titolo */
+        .header-nav {
+            position: fixed;
+            top: 20px;
+            left: 5%;
+            z-index: 100;
             display: flex;
             align-items: center;
             gap: 15px;
+        }
+
+        .back-btn { 
+            color: rgb(122, 161, 190); 
+            text-decoration: none; 
+            font-size: 14px; 
+            font-weight: bold; 
+        }
+        .back-btn:hover { font-style: italic; }
+
+        .page-title {
+            color: black;
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        /* RIQUADRO BIANCO PRINCIPALE */
+        .white-rect {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            right: 5%;
+            bottom: 12%; /* Lascia spazio sotto per lo slider */
+            background-color: white;
+            display: flex;
+            padding: 40px;
+            gap: 40px;
+            align-items: center;
+        }
+
+        /* Contenitore Immagine (Sinistra) */
+        .image-container {
+            flex: 2; /* Più spazio all'immagine */
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Non taglia l'immagine */
+            display: none;
+        }
+
+        .image-container img.active {
+            display: block;
+        }
+
+        /* Contenitore Testo (Destra) */
+        .text-container {
+            flex: 1; /* Spazio ridotto per il testo */
+            color: rgb(173, 54, 35); /* Rosso richiesto */
+            font-style: italic;
+            text-align: right;
+            line-height: 1.3; /* Interlinea minore */
+            font-size: 16px;
+        }
+
+        /* SLIDER E CONTROLLI */
+        .slider-wrapper {
+            position: absolute;
+            bottom: 3%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             z-index: 50;
         }
 
+        .slider-ticks {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+            margin-bottom: 5px;
+        }
+
+        .tick {
+            width: 2px;
+            height: 8px;
+            background-color: black;
+        }
+
+        .tick-labels {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
         input[type=range] {
-            flex-grow: 1;
+            width: 100%;
             cursor: none;
             accent-color: rgb(173, 54, 35);
         }
 
-        .nav-label {
-            font-size: 12px;
-            color: black;
-            font-weight: bold;
-        }
-
-        /* --- SEZIONE INFERIORE (30%) --- */
-        .bottom-section {
-            height: 30%;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: linear-gradient(rgb(122, 161, 190) 1px, transparent 1px),
-                              linear-gradient(90deg, rgb(122, 161, 190) 1px, transparent 1px);
-            background-size: 60px 60px;
-        }
-
-        .description-text {
-            width: 50%;
-            text-align: center;
-            line-height: 2.2;
-            font-style: italic;
-            color: black;
-            font-size: 16px;
-        }
-
-        .description-text span {
-            background-color: white;
-            padding: 0.3em 1%;
-            box-shadow: 0.3em 0 0 white, -0.3em 0 0 white;
-            box-decoration-break: clone;
-            -webkit-box-decoration-break: clone;
-        }
-
+        /* Cursore */
         #cursor-dot {
             width: 10px; height: 10px; 
             background-color: rgb(173, 54, 35);
@@ -124,28 +142,38 @@
 
     <div id="cursor-dot"></div>
 
-    <div class="top-section">
+    <div class="header-nav">
         <a href="projects.html" class="back-btn">< BACK</a>
-        
-      <div class="photo-rect">
-    <img src="biblioteca1.png" class="active" alt="Tavola 1">
-    <img src="biblioteca2.png" alt="Tavola 2">
-    <img src="biblioteca3.png" alt="Tavola 3">
-    <img src="biblioteca4.png" alt="Tavola 4">
-    <img src="biblioteca5.png" alt="Tavola 5">
-</div>
+        <span class="page-title">Biblioteca sospesa - 2023</span>
+    </div>
 
-        <div class="slider-controls">
-            <span class="nav-label">01</span>
-            <input type="range" id="imageSlider" min="0" max="4" value="0" oninput="updateSlider(this.value)">
-            <span class="nav-label">05</span>
+    <div class="white-rect">
+        <div class="image-container">
+            <img src="biblioteca1.png" class="active" alt="01">
+            <img src="biblioteca2.png" alt="02">
+            <img src="biblioteca3.png" alt="03">
+            <img src="biblioteca4.png" alt="04">
+            <img src="biblioteca5.png" alt="05">
+        </div>
+        
+        <div class="text-container">
+            L'edificio è ubicato a Torino nel quartiere Cit Turin. Il progetto prevede la realizzazione di un edificio polifunzionale, sorretto da una struttura totalmente in acciaio a vista con una forma a ponte, per non interferire con la presenza di una rampa che collega il lotto alla stazione metropolitana. Si è pensato di realizzare un edificio che sembrasse sospeso, lasciando completamente a vista la sua struttura portante.
         </div>
     </div>
 
-    <div class="bottom-section">
-        <div class="description-text">
-            <span>L'edificio è ubicato a Torino nel quartiere Cit Turin. Il progetto prevede la realizzazione di un edificio polifunzionale, sorretto da una struttura totalmente in acciaio a vista con una forma a ponte, per non interferire con la presenza di una rampa che collega il lotto alla stazione metropolitana. Si è pensato di realizzare un edificio che sembrasse sospeso, lasciando completamente a vista la sua struttura portante.</span>
+    <div class="slider-wrapper">
+        <div class="tick-labels">
+            <span>01</span>
+            <span>05</span>
         </div>
+        <div class="slider-ticks">
+            <div class="tick"></div>
+            <div class="tick"></div>
+            <div class="tick"></div>
+            <div class="tick"></div>
+            <div class="tick"></div>
+        </div>
+        <input type="range" id="imageSlider" min="0" max="4" value="0" step="1" oninput="updateSlider(this.value)">
     </div>
 
     <script>
@@ -156,7 +184,7 @@
         });
 
         function updateSlider(val) {
-            const images = document.querySelectorAll('.photo-rect img');
+            const images = document.querySelectorAll('.image-container img');
             images.forEach((img, index) => {
                 img.classList.remove('active');
                 if(index == val) img.classList.add('active');
