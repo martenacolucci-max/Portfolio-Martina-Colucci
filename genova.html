@@ -28,13 +28,13 @@
         .header-nav { position: fixed; top: 30px; left: 5%; z-index: 1000; }
         .back-btn { color: rgb(122, 161, 190); text-decoration: none; font-size: 14px; font-weight: bold; }
 
-        /* SCROLL BAR */
         .scroll-container {
             position: fixed; right: 15px; top: 20%; height: 60%; width: 4px;
             background: rgba(255, 255, 255, 0.1); border-radius: 2px; z-index: 1000;
         }
         .scroll-bar { width: 100%; height: 0%; background-color: rgb(173, 54, 35); border-radius: 2px; }
 
+        /* --- CONTENUTI --- */
         .wrapper {
             max-width: 1200px; margin: 0 auto; padding: 120px 5% 50px 5%;
             display: flex; flex-direction: column; align-items: center;
@@ -49,17 +49,18 @@
         .it-side { text-align: right; }
         .en-side { text-align: left; }
 
+        /* VIDEO */
         .video-box { width: 100%; aspect-ratio: 16 / 9; background-color: white; margin-bottom: 80px; overflow: hidden; }
         .video-box video { width: 100%; height: 100%; object-fit: cover; }
 
         .justified-footer { width: 100%; text-align: justify; font-size: 18px; line-height: 1.8; margin-bottom: 150px; font-style: normal; }
 
-        /* --- SCHEMA TECNICO --- */
+        /* --- SCHEMA --- */
         #schema-master-container { position: relative; width: 100%; padding: 0 5%; display: flex; flex-direction: column; }
-        .schema-row { display: flex; position: relative; width: 100%; margin-bottom: 250px; align-items: flex-start; }
+        .schema-row { display: flex; position: relative; width: 100%; margin-bottom: 300px; align-items: flex-start; }
 
         .box-container { position: relative; border: 1px solid rgba(255, 255, 255, 0.15); z-index: 10; background-color: #1a1a1a; }
-        .box-label { position: absolute; top: -30px; left: 0; font-size: 13px; font-weight: bold; color: rgb(122, 161, 190); letter-spacing: 1px; font-style: normal; }
+        .box-label { position: absolute; top: -35px; left: 0; font-size: 13px; font-weight: bold; color: rgb(122, 161, 190); letter-spacing: 1px; font-style: normal; white-space: nowrap; }
 
         .corner { width: 8px; height: 8px; background-color: rgb(122, 161, 190); position: absolute; }
         .tl { top: -4px; left: -4px; } .tr { top: -4px; right: -4px; }
@@ -68,7 +69,7 @@
         .gray-left { width: 20vw; height: 160px; flex-shrink: 0; }
         .mid-right { width: 50vw; aspect-ratio: 16 / 9; background-color: #2a2a2a; margin-left: 10vw; margin-top: 80px; flex-shrink: 0; }
 
-        /* RIQUADRO BIANCO FINALE - B5 Orizzontale */
+        /* FINALE B5 */
         .final-white-box {
             width: 70vw; aspect-ratio: 250 / 176; background-color: white;
             margin: 400px auto 400px auto; overflow: hidden; display: flex; justify-content: center; align-items: center; position: relative;
@@ -82,7 +83,7 @@
             z-index: 20; border-radius: 4px;
         }
 
-        #master-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+        #master-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 5; }
         .connector-path { fill: none; stroke: rgb(122, 161, 190); stroke-width: 2; }
     </style>
 </head>
@@ -95,6 +96,7 @@
 
     <div class="wrapper">
         <h1 class="main-title">ReloadinGenova</h1>
+        
         <div class="bilingual-grid">
             <div class="lang-col it-side">
                 <div class="lang-label">IT</div>
@@ -102,7 +104,7 @@
             </div>
             <div class="lang-col en-side">
                 <div class="lang-label">EN</div>
-                <div class="description">The goal of the thesis was to design the redevelopment of an industrial area in Genoa, reconnecting the city with the sea, through the use of parametric tools. The use of parametric tools allows for urban design, and to an even greater extent architectural design, to manage complexity and generate multiple scenarios. For centuries, the growth of Genoa has been intertwined with the history of its port. How is it possible to approach a project whose history is so closely linked to the transformations of its coastline?</div>
+                <div class="description">The objective of the thesis was to design the redevelopment of an industrial area in Genoa, reconnecting the city with the sea through the use of parametric tools. The use of parametric tools allows urban design, and even more so architectural design, to be addressed by managing complexity and generating multiple scenarios. For centuries, the growth of Genoa has been intertwined with the history of its port. How is it possible to approach a project whose history is so closely linked to the transformations of its coast?</div>
             </div>
         </div>
 
@@ -122,14 +124,17 @@
             <div class="box-container gray-left"><div class="box-label">MASTERPLAN</div><div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div></div>
             <div class="box-container mid-right"><div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div></div>
         </div>
+
         <div class="schema-row" id="row-1">
             <div class="box-container gray-left"><div class="box-label">VOLUME</div><div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div></div>
             <div class="box-container mid-right"><div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div></div>
         </div>
+
         <div class="schema-row" id="row-2">
             <div class="box-container gray-left"><div class="box-label">DISTRIBUZIONE</div><div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div></div>
             <div class="box-container mid-right"><div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div></div>
         </div>
+
         <div class="schema-row" id="row-3">
             <div class="box-container gray-left"><div class="box-label">DISPOSITIVI ESTERNI</div><div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div></div>
             <div class="box-container mid-right"><div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div></div>
@@ -143,7 +148,6 @@
     </div>
 
     <script>
-        // Immagini finali - assicurati che i nomi siano corretti
         const finalImages = ["finale1.png", "finale2.png"]; 
         let currentImgIndex = 0;
         function nextImage() {
@@ -165,12 +169,15 @@
         function drawLines() {
             const svg = document.getElementById('master-svg');
             const finalBox = document.getElementById('final-box');
-            const container = document.getElementById('schema-master-container').getBoundingClientRect();
-            svg.innerHTML = '';
-
+            const container = document.getElementById('schema-master-container');
+            if (!container || !finalBox || !svg) return;
+            
+            const containerRect = container.getBoundingClientRect();
             const finalRect = finalBox.getBoundingClientRect();
-            const finalRightX = finalRect.right - container.left;
-            const finalCenterY = (finalRect.top + finalRect.height / 2) - container.top;
+            const finalRightX = finalRect.right - containerRect.left;
+            const finalCenterY = (finalRect.top + finalRect.height / 2) - containerRect.top;
+
+            let pathContent = "";
 
             for (let i = 0; i < 4; i++) {
                 const row = document.getElementById(`row-${i}`);
@@ -178,30 +185,25 @@
                 const gray = row.querySelector('.gray-left').getBoundingClientRect();
                 const mid = row.querySelector('.mid-right').getBoundingClientRect();
 
-                const grayX = gray.right - container.left;
-                const grayY = (gray.top + gray.height / 2) - container.top;
-                const midLX = mid.left - container.left;
-                const midRX = mid.right - container.left;
-                const midY = (mid.top + mid.height / 2) - container.top;
+                const grayX = gray.right - containerRect.left;
+                const grayY = (gray.top + gray.height / 2) - containerRect.top;
+                const midLX = mid.left - containerRect.left;
+                const midRX = mid.right - containerRect.left;
+                const midY = (mid.top + mid.height / 2) - containerRect.top;
 
                 // Linea 1: Grigio -> Medio
-                const p1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                p1.setAttribute("class", "connector-path");
-                p1.setAttribute("d", `M ${grayX},${grayY} H ${grayX + 50} V ${midY} H ${midLX}`);
-                svg.appendChild(p1);
+                pathContent += `<path class="connector-path" d="M ${grayX},${grayY} H ${grayX + 40} V ${midY} H ${midLX}" />`;
 
-                // Linea 2: Medio -> Finale (parallele, arrivo centro destra)
+                // Linea 2: Medio -> Finale (parallele, arrivo centro)
                 const offset = 20 + (i * 25);
-                const p2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                p2.setAttribute("class", "connector-path");
-                p2.setAttribute("d", `M ${midRX},${midY} H ${finalRightX + offset} V ${finalCenterY} H ${finalRightX}`);
-                svg.appendChild(p2);
+                pathContent += `<path class="connector-path" d="M ${midRX},${midY} H ${finalRightX + offset} V ${finalCenterY} H ${finalRightX}" />`;
             }
+            svg.innerHTML = pathContent;
         }
 
-        // Esegue il disegno solo dopo che tutto è caricato
-        window.onload = () => { setTimeout(drawLines, 500); };
-        window.onresize = drawLines;
+        // Avvio sicuro
+        window.addEventListener('load', () => { setTimeout(drawLines, 500); });
+        window.addEventListener('resize', drawLines);
     </script>
 </body>
 </html>
