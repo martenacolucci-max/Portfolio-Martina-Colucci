@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -90,7 +90,7 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 150px; /* Spazio tra le 4 ripetizioni */
+            gap: 200px; 
             padding-bottom: 200px;
         }
 
@@ -101,33 +101,50 @@
             width: 100%;
         }
 
-        /* Riquadro Grigio Scuro (1/5 dello schermo) */
+        /* Riquadri con Vertici */
+        .box-with-corners {
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* I quadratini ai vertici (122 161 190) */
+        .corner {
+            width: 6px;
+            height: 6px;
+            background-color: rgb(122, 161, 190);
+            position: absolute;
+        }
+        .tl { top: -3px; left: -3px; }
+        .tr { top: -3px; right: -3px; }
+        .bl { bottom: -3px; left: -3px; }
+        .br { bottom: -3px; right: -3px; }
+
         .gray-box {
             width: 20vw;
-            height: 150px;
+            height: 180px;
             background-color: #1a1a1a;
-            position: relative;
             flex-shrink: 0;
         }
 
-        /* Il Filo (Colore 122 161 190) */
-        .connector-line {
+        /* Filo SVG per precisione tecnica */
+        .connector-svg {
             position: absolute;
-            /* Parte dalla metà dell'altezza del grigio */
-            top: 75px; 
+            top: 0;
             left: 20vw;
-            width: 10vw; /* Spazio di connessione */
-            height: calc(50% + 2px); /* Si adatta all'offset verticale */
-            border-left: 2px solid rgb(122, 161, 190);
-            border-bottom: 2px solid rgb(122, 161, 190);
+            width: 15vw;
+            height: 500px; /* Altezza sufficiente per coprire l'offset */
             pointer-events: none;
         }
 
-        /* Riquadro 16:9 (1/3 dello schermo) */
+        .connector-path {
+            fill: none;
+            stroke: rgb(122, 161, 190);
+            stroke-width: 2;
+        }
+
         .large-box-wrapper {
-            /* Parte dalla metà dell'altezza del riquadro precedente */
-            margin-top: 75px; 
-            margin-left: 10vw;
+            margin-top: 90px; /* Parte dalla metà del riquadro grigio (180/2) */
+            margin-left: 15vw; /* Distanza per il filo */
             width: 33.33vw;
             flex-shrink: 0;
         }
@@ -135,8 +152,7 @@
         .large-box {
             width: 100%;
             aspect-ratio: 16 / 9;
-            background-color: #333; /* Placeholder per contenuto futuro */
-            border: 1px solid rgba(255,255,255,0.1);
+            background-color: #333;
         }
 
     </style>
@@ -163,7 +179,6 @@
                     L'obiettivo della tesi è stato quello di progettare la riqualificazione di un'area industriale a Genova, riconnettendo la città con il mare, grazie all'uso degli strumenti parametrici. L’uso degli strumenti parametrici consente di affrontare la progettazione urbana, e in misura maggiore quella architettonica, permettendo di gestire la complessità e di generare molteplici scenari. Per secoli la crescita di Genova si è intrecciata con la storia del suo porto. Come è possibile affrontare un progetto la cui storia è così strettamente legata alle trasformazioni della sua costa?
                 </div>
             </div>
-
             <div class="lang-col en-side">
                 <div class="lang-label">EN</div>
                 <div class="description">
@@ -179,34 +194,31 @@
         </div>
 
         <div class="schema-container">
-            <div class="schema-row">
-                <div class="gray-box"></div>
-                <div class="connector-line"></div>
-                <div class="large-box-wrapper">
-                    <div class="large-box"></div>
-                </div>
-            </div>
-            <div class="schema-row">
-                <div class="gray-box"></div>
-                <div class="connector-line"></div>
-                <div class="large-box-wrapper">
-                    <div class="large-box"></div>
-                </div>
-            </div>
-            <div class="schema-row">
-                <div class="gray-box"></div>
-                <div class="connector-line"></div>
-                <div class="large-box-wrapper">
-                    <div class="large-box"></div>
-                </div>
-            </div>
-            <div class="schema-row">
-                <div class="gray-box"></div>
-                <div class="connector-line"></div>
-                <div class="large-box-wrapper">
-                    <div class="large-box"></div>
-                </div>
-            </div>
+            
+            <script>
+                for(let i=0; i<4; i++) {
+                    document.write(`
+                        <div class="schema-row">
+                            <div class="box-with-corners gray-box">
+                                <div class="corner tl"></div><div class="corner tr"></div>
+                                <div class="corner bl"></div><div class="corner br"></div>
+                            </div>
+
+                            <svg class="connector-svg">
+                                <path class="connector-path" d="M 0,90 L 50,90 L 50,183.7 L 225,183.7" />
+                            </svg>
+
+                            <div class="large-box-wrapper">
+                                <div class="box-with-corners large-box">
+                                    <div class="corner tl"></div><div class="corner tr"></div>
+                                    <div class="corner bl"></div><div class="corner br"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                }
+            </script>
+
         </div>
     </div>
 
