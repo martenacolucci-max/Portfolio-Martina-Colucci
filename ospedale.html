@@ -50,7 +50,6 @@
             z-index: 10;
         }
 
-        /* Testo a sinistra */
         .text-side {
             flex: 1;
             display: none; 
@@ -75,7 +74,6 @@
         .extra-img-box { width: 100%; margin-top: auto; }
         .extra-img-box img { max-width: 250px; height: auto; }
 
-        /* Immagini a destra */
         .image-container {
             flex: 2; height: 100%; display: flex;
             justify-content: center; align-items: center;
@@ -90,8 +88,10 @@
         }
 
         .image-container img.active-img { display: block; }
+        
+        /* Modifica qui: ospedale1 ora è contain per vedere tutta la parte colorata */
+        .contain { object-fit: contain; } 
         .cover { object-fit: cover; }
-        .contain { object-fit: contain; }
 
         /* --- SLIDER ROSSO --- */
         .slider-wrapper {
@@ -126,7 +126,11 @@
         </div>
 
         <div class="image-container" id="gallery">
-            <img src="ospedale1.png" class="active-img cover"> <img src="ospedale2.png" class="contain">          <img src="ospedale3.png" class="contain">          <img src="ospedale4.png" class="cover">            <img src="ospedale5.png" class="contain">          </div>
+            <img src="ospedale1.png" class="active-img contain"> <img src="ospedale2.png" class="contain">
+            <img src="ospedale3.png" class="contain">
+            <img src="ospedale4.png" class="cover">
+            <img src="ospedale5.png" class="contain">
+        </div>
     </div>
 
     <div class="slider-wrapper">
@@ -141,40 +145,4 @@
         const dot = document.getElementById('cursor-dot');
         const sidebar = document.getElementById('sidebar');
         const gallery = document.getElementById('gallery');
-        const desc = document.getElementById('main-desc');
-        const slider = document.getElementById('imageSlider');
-        const images = document.querySelectorAll('#gallery img');
-
-        const textStandard = "Il progetto vuole rispondere alla necessità di riqualificare un'area ad oggi occupata da un complesso ospedaliero, ma che in vista dello spostamento di questa funzione in un nuovo luogo, lascia una grande area improvvisamente inutilizzata. Cosa fare di questo lotto? Gli edifici storici e vincolati dalla Sopraintendenza vengono convertiti all'uso di polo scientifico, mentre i loro piani interrati a funzione di data center. Attraverso gli strumenti parametrici è stata predisposta anche una copertura pedonabile, che ha lo scopo di riconnettere l'area con l'esterno del lotto.";
-        const textSpeciale = "Dettaglio tecnico della copertura pedonabile su un edificio riconvertito in parcheggio.";
-
-        document.addEventListener('mousemove', (e) => {
-            dot.style.left = e.clientX + 'px';
-            dot.style.top = e.clientY + 'px';
-        });
-
-        function updateUI() {
-            let val = parseInt(slider.value);
-
-            // 1. Gestione Immagini
-            images.forEach((img, i) => {
-                img.classList.toggle('active-img', i === val);
-            });
-
-            // 2. Gestione Layout (Testo visibile su 02, 03, 05 -> indici 1, 2, 4)
-            if (val === 1 || val === 2 || val === 4) {
-                sidebar.classList.add('active-text');
-                gallery.classList.remove('full-width');
-                // 3. Gestione Testo
-                desc.innerText = (val === 4) ? textSpeciale : textStandard;
-            } else {
-                sidebar.classList.remove('active-text');
-                gallery.classList.add('full-width');
-            }
-        }
-
-        slider.addEventListener('input', updateUI);
-        updateUI(); // Inizializza
-    </script>
-</body>
-</html>
+        const desc = document.getElementById('main-desc
