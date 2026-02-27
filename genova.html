@@ -88,7 +88,21 @@
         /* FINALE B5 ORIZZONTALE */
         .final-white-box {
             width: 70vw; aspect-ratio: 250 / 176; background-color: white;
-            margin: 0 auto 400px auto; overflow: hidden; display: flex; justify-content: center; align-items: center; position: relative;
+            margin: 0 auto 80px auto; overflow: hidden; display: flex; justify-content: center; align-items: center; position: relative;
+        }
+
+        /* DOPPIO RIQUADRO GRIGIO FINALE */
+        .dual-box-row {
+            display: flex;
+            justify-content: space-between;
+            width: 70vw;
+            margin: 0 auto 300px auto;
+            gap: 20px;
+        }
+        .side-box {
+            flex: 1;
+            aspect-ratio: 16 / 9;
+            background-color: #1a1a1a;
         }
 
         .nav-arrow {
@@ -217,6 +231,17 @@
             <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             <img src="genova10.png" id="main-image-display">
             <div class="nav-arrow" onclick="switchToGenova11()">→</div>
+        </div>
+
+        <div class="dual-box-row">
+            <div class="box-container side-box">
+                <div class="img-wrapper"><img src="genova12.png"></div>
+                <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+            </div>
+            <div class="box-container side-box">
+                <div class="img-wrapper"><img src="genova13.png"></div>
+                <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+            </div>
         </div>
     </div>
 
