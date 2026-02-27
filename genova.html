@@ -49,8 +49,9 @@
         .it-side { text-align: right; }
         .en-side { text-align: left; }
 
+        /* VIDEO BOX CON SCALATURA FISSA */
         .video-box { width: 100%; aspect-ratio: 16 / 9; background-color: white; margin-bottom: 80px; overflow: hidden; }
-        .video-box video { width: 100%; height: 100%; object-fit: cover; }
+        .video-box video { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 
         .justified-footer { width: 100%; text-align: justify; font-size: 18px; line-height: 1.8; margin-bottom: 150px; font-style: normal; }
 
@@ -58,24 +59,32 @@
         #schema-master-container { position: relative; width: 100%; padding: 0 5%; display: flex; flex-direction: column; }
         .schema-row { display: flex; position: relative; width: 100%; margin-bottom: 300px; align-items: flex-start; }
 
-        .box-container { position: relative; border: 1px solid rgba(255, 255, 255, 0.15); z-index: 10; background-color: #1a1a1a; overflow: hidden; }
+        .box-container { position: relative; border: 1px solid rgba(255, 255, 255, 0.15); z-index: 10; background-color: #1a1a1a; }
         
         .box-label { 
             position: absolute; top: -35px; left: 0; 
             font-size: 13px; font-weight: bold; 
             color: rgb(122, 161, 190); letter-spacing: 1px; 
             font-style: normal; white-space: nowrap;
-            text-shadow: 1px 1px 2px black;
-            z-index: 20;
+            z-index: 25;
         }
 
         .corner { width: 8px; height: 8px; background-color: rgb(122, 161, 190); position: absolute; z-index: 30; }
         .tl { top: -4px; left: -4px; } .tr { top: -4px; right: -4px; }
         .bl { bottom: -4px; left: -4px; } .br { bottom: -4px; right: -4px; }
 
-        .box-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        /* Gestione scalatura immagini universale */
+        .img-wrapper { width: 100%; height: 100%; overflow: hidden; position: relative; }
+        .img-wrapper img, .final-white-box img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            object-position: center; 
+            display: block; 
+        }
 
-        .gray-left { width: 20vw; height: 160px; flex-shrink: 0; }
+        /* Riquadri Sinistra: fissato aspect-ratio per coerenza tra computer */
+        .gray-left { width: 20vw; aspect-ratio: 4 / 3; flex-shrink: 0; }
         .mid-right { width: 50vw; aspect-ratio: 16 / 9; background-color: #2a2a2a; margin-left: 10vw; margin-top: 80px; flex-shrink: 0; }
 
         /* FINALE B5 ORIZZONTALE */
@@ -131,10 +140,11 @@
         <div class="schema-row" id="row-0">
             <div class="box-container gray-left">
                 <div class="box-label">MASTERPLAN</div>
-                <img src="genova2.png">
+                <div class="img-wrapper"><img src="genova2.png"></div>
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
             <div class="box-container mid-right">
+                <div class="img-wrapper"></div>
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
         </div>
@@ -142,10 +152,11 @@
         <div class="schema-row" id="row-1">
             <div class="box-container gray-left">
                 <div class="box-label">VOLUME</div>
-                <img src="genova3.png">
+                <div class="img-wrapper"><img src="genova3.png"></div>
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
             <div class="box-container mid-right">
+                <div class="img-wrapper"></div>
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
         </div>
@@ -153,10 +164,11 @@
         <div class="schema-row" id="row-2">
             <div class="box-container gray-left">
                 <div class="box-label">DISTRIBUZIONE</div>
-                <img src="genova4.png">
+                <div class="img-wrapper"><img src="genova4.png"></div>
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
             <div class="box-container mid-right">
+                <div class="img-wrapper"></div>
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
         </div>
@@ -164,10 +176,11 @@
         <div class="schema-row" id="row-3">
             <div class="box-container gray-left">
                 <div class="box-label">DISPOSITIVI ESTERNI</div>
-                <img src="genova5.png">
+                <div class="img-wrapper"><img src="genova5.png"></div>
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
             <div class="box-container mid-right">
+                <div class="img-wrapper"></div>
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
         </div>
