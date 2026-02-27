@@ -18,7 +18,7 @@
             background-size: 60px 60px;
         }
 
-        /* --- CURSORE --- */
+        /* --- CURSORE ROSSO --- */
         #cursor-dot {
             width: 10px; height: 10px; 
             background-color: rgb(173, 54, 35);
@@ -27,14 +27,8 @@
             transform: translate(-50%, -50%);
         }
 
-        .header-nav {
-            position: fixed; top: 30px; left: 5%; z-index: 1000;
-        }
-
-        .back-btn { 
-            color: rgb(122, 161, 190); text-decoration: none; 
-            font-size: 14px; font-weight: bold; 
-        }
+        .header-nav { position: fixed; top: 30px; left: 5%; z-index: 1000; }
+        .back-btn { color: rgb(122, 161, 190); text-decoration: none; font-size: 14px; font-weight: bold; }
 
         /* --- RIQUADRO PRINCIPALE --- */
         .white-rect {
@@ -52,57 +46,55 @@
         }
 
         .text-side {
-            flex: 1;
-            display: none; 
-            flex-direction: column;
-            justify-content: center;
-            text-align: left;
-            height: 100%;
+            flex: 1; display: none; 
+            flex-direction: column; justify-content: center;
+            text-align: left; height: 100%;
         }
-
         .text-side.active-text { display: flex; }
 
-        .project-title-large { 
-            color: black; font-style: italic; font-size: 26px; 
-            margin-bottom: 15px; font-weight: normal; 
-        }
-
-        .project-description { 
-            color: rgb(173, 54, 35); font-style: italic; 
-            line-height: 1.3; font-size: 16px;
-        }
+        .project-title-large { color: black; font-style: italic; font-size: 26px; margin-bottom: 15px; font-weight: normal; }
+        .project-description { color: rgb(173, 54, 35); font-style: italic; line-height: 1.3; font-size: 16px; }
 
         /* Immagini a destra - Nessuna transizione di movimento */
         .image-container {
             flex: 2; height: 100%; display: flex;
             justify-content: center; align-items: center;
-            overflow: hidden;
-            position: relative; 
+            overflow: hidden; position: relative; 
         }
 
         .image-container.full-width { flex: 100%; }
-
-        .image-container img {
-            width: 100%; height: 100%;
-            display: none;
-        }
-
+        .image-container img { width: 100%; height: 100%; display: none; }
         .image-container img.active-img { display: block; }
         .contain { object-fit: contain; }
 
-        /* --- TITOLO OVERLAY SPOSTATO ANCORA A DESTRA --- */
+        /* --- BLOCCO TITOLO E SOTTOTITOLO OVERLAY --- */
         #photo-title-overlay {
             position: absolute;
-            bottom: 30px; 
-            left: 65%; /* Spostato al 65% (ancora più a destra) */
-            transform: translateX(-50%); 
+            bottom: 60px; /* Spostato più in su */
+            left: 65%; /* Mantenuto lo spostamento a destra richiesto */
+            transform: translateX(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Allinea i testi tra loro al centro */
+            pointer-events: none;
+            display: block;
+        }
+
+        .main-title-text {
             color: white;
             font-size: 34px;
             font-style: italic;
-            z-index: 100;
             white-space: nowrap;
-            pointer-events: none;
-            display: block;
+        }
+
+        .subtitle-text {
+            color: #888; /* Grigio scuro */
+            font-size: 13px;
+            font-style: normal;
+            margin-top: 5px;
+            letter-spacing: 1px;
+            text-align: center;
         }
 
         /* --- SLIDER ROSSO --- */
@@ -135,7 +127,10 @@
         </div>
 
         <div class="image-container" id="gallery">
-            <div id="photo-title-overlay">Agire sui bordi</div>
+            <div id="photo-title-overlay">
+                <div class="main-title-text">Agire sui bordi</div>
+                <div class="subtitle-text">Torino, Scalo Vanchiglia</div>
+            </div>
 
             <img src="bordi1.png" class="active-img contain"> 
             <img src="bordi2.png" class="contain">          
