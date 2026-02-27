@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Pubblicazione - Ospedale</title>
+    <style>
+        * { box-sizing: border-box; }
+        
+        body, html {
+            margin: 0; padding: 0;
+            height: 100%; width: 100%;
+            font-family: Arial, sans-serif;
+            cursor: none;
+            background-color: white;
+            background-image: linear-gradient(rgb(122, 161, 190) 1px, transparent 1px),
+                              linear-gradient(90deg, rgb(122, 161, 190) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        #cursor-dot {
+            width: 10px; height: 10px; 
+            background-color: rgb(173, 54, 35);
+            border-radius: 50%; position: fixed; 
+            pointer-events: none; z-index: 99999; 
+            transform: translate(-50%, -50%);
+        }
+
+        .header-nav { position: fixed; top: 30px; left: 5%; z-index: 1000; }
+        .back-btn { color: rgb(122, 161, 190); text-decoration: none; font-size: 14px; font-weight: bold; }
+
+        .content-wrapper {
+            width: 100%;
+            padding-top: 150px; /* Per tenerlo in alto ma non attaccato al bordo */
+            display: flex;
+            justify-content: center;
+        }
+
+        .publication-text {
+            max-width: 800px;
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.6;
+            color: black;
+            font-style: italic; /* Manteniamo lo stile elegante degli altri testi */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor-dot"></div>
+
+    <div class="header-nav">
+        <a href="ospedale.html" class="back-btn">< BACK</a>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="publication-text">
+            Pubblicazione del progetto sul libro: Progettare la città possibile, Strategie e scenari per la trasformazione delle Molinette, Federica Joe Gardella, Luciana Mastrolia, Celid, Torino, 2025.
+        </div>
+    </div>
+
+    <script>
+        const dot = document.getElementById('cursor-dot');
+        document.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+        });
+    </script>
+</body>
+</html>
