@@ -89,8 +89,7 @@
 
         .image-container img.active-img { display: block; }
         
-        /* bordi1 occupa tutto (cover), le altre sono intere (contain) */
-        .cover { object-fit: cover; }
+        /* bordi1 ora è intera (contain), non più tagliata (cover) */
         .contain { object-fit: contain; }
 
         /* --- SLIDER ROSSO --- */
@@ -123,7 +122,12 @@
         </div>
 
         <div class="image-container" id="gallery">
-            <img src="bordi1.png" class="active-img cover"> <img src="bordi2.png" class="contain">          <img src="bordi3.png" class="contain">          <img src="bordi4.png" class="contain">          <img src="bordi5.png" class="contain">          </div>
+            <img src="bordi1.png" class="active-img contain"> 
+            <img src="bordi2.png" class="contain">          
+            <img src="bordi3.png" class="contain">          
+            <img src="bordi4.png" class="contain">          
+            <img src="bordi5.png" class="contain">          
+        </div>
     </div>
 
     <div class="slider-wrapper">
@@ -142,7 +146,6 @@
         const slider = document.getElementById('imageSlider');
         const images = document.querySelectorAll('#gallery img');
 
-        // I due testi forniti
         const text1 = "Il lotto è situato nel quartiere torinese Barriera di Milano, in corrispondenza dell'ex Trincerone, uno scalo merci ormai dismesso. Il progetto è stato affrontato tramite l'utilizzo degli strumenti parametrici, con lo scopo di gestire la complessità del lotto e di produrre scenari diversi prefigurando possibili futuri per quest'area di trasformazione.";
         const text2 = "Lo studio delle tipologie edilizie, come elemento che compone la città, ha condotto ad analisi a diversa scala. Tra queste vi è la tipologia della villa a schiera. Gli appartamenti sono rivolti ad un'utenza unifamiliare e sono divisi su due livelli, al piano terra la zona giorno, e al piano superiore la zona notte. Ogni unità abitativa, inoltre, ha anche un giardino privato. Ogni appartamento ha un terrazzo sul lato opposto rispetto ai due che gli sono accanto, in modo che sia garantita la privacy.";
 
@@ -154,17 +157,14 @@
         function updateUI() {
             let val = parseInt(slider.value);
 
-            // 1. Gestione Immagini
             images.forEach((img, i) => {
                 img.classList.toggle('active-img', i === val);
             });
 
-            // 2. Logica Layout: Testo visibile solo da bordi2 in poi
             if (val > 0) {
                 sidebar.classList.add('active-text');
                 gallery.classList.remove('full-width');
                 
-                // 3. Scelta del testo: bordi2/3 -> testo1, bordi4/5 -> testo2
                 if (val === 1 || val === 2) {
                     desc.innerText = text1;
                 } else if (val === 3 || val === 4) {
@@ -177,7 +177,7 @@
         }
 
         slider.addEventListener('input', updateUI);
-        updateUI(); // Stato iniziale
+        updateUI(); 
     </script>
 </body>
 </html>
