@@ -67,17 +67,40 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            position: relative;
         }
 
-        .image-container img {
+        /* Wrapper per gestire l'immagine e la scritta sovrapposta */
+        .img-wrapper {
+            display: none; /* Nascosti di base */
+            width: 100%;
+            height: 100%;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .img-wrapper.active {
+            display: flex; /* Mostra solo quello attivo */
+        }
+
+        .img-wrapper img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            display: none;
         }
 
-        .image-container img.active {
-            display: block;
+        /* Stile scritte "Pianta piano..." */
+        .label-plan {
+            position: absolute;
+            bottom: 20px; /* Distanza dal fondo dell'immagine */
+            left: 20px;   /* Distanza dal bordo sinistro */
+            color: black;
+            font-size: 13px; /* Medio/Piccolo */
+            font-weight: normal;
+            pointer-events: none;
+            background-color: rgba(255, 255, 255, 0.4); /* Opzionale: per leggibilità */
+            padding: 2px 4px;
         }
 
         .text-side {
@@ -102,7 +125,7 @@
             font-size: 16px;
         }
 
-        /* --- FIX DEFINITIVO BARRA ROSSA --- */
+        /* --- SLIDER --- */
         .slider-wrapper {
             position: absolute;
             bottom: 4%;
@@ -145,39 +168,21 @@
             cursor: none;
         }
 
-        /* Linea (Chrome, Safari, Edge) */
         input[type=range]::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 4px;
-            background: rgb(173, 54, 35) !important;
-            border-radius: 2px;
+            width: 100%; height: 4px; background: rgb(173, 54, 35); border-radius: 2px;
         }
 
-        /* Pallino (Chrome, Safari, Edge) */
         input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 16px;
-            width: 16px;
-            border-radius: 50%;
-            background: rgb(173, 54, 35) !important;
-            margin-top: -6px;
+            -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%;
+            background: rgb(173, 54, 35); margin-top: -6px;
         }
 
-        /* Linea (Firefox) */
         input[type=range]::-moz-range-track {
-            width: 100%;
-            height: 4px;
-            background: rgb(173, 54, 35) !important;
-            border-radius: 2px;
+            width: 100%; height: 4px; background: rgb(173, 54, 35); border-radius: 2px;
         }
 
-        /* Pallino (Firefox) */
         input[type=range]::-moz-range-thumb {
-            height: 16px;
-            width: 16px;
-            border-radius: 50%;
-            background: rgb(173, 54, 35) !important;
-            border: none;
+            height: 16px; width: 16px; border-radius: 50%; background: rgb(173, 54, 35); border: none;
         }
     </style>
 </head>
@@ -191,11 +196,27 @@
 
     <div class="white-rect">
         <div class="image-container">
-            <img src="biblioteca1.png" class="active">
-            <img src="biblioteca2.png">
-            <img src="biblioteca3.png">
-            <img src="biblioteca4.png">
-            <img src="biblioteca5.png">
+            <div class="img-wrapper active">
+                <img src="biblioteca1.png">
+            </div>
+
+            <div class="img-wrapper">
+                <img src="biblioteca2.png">
+            </div>
+
+            <div class="img-wrapper">
+                <img src="biblioteca3.png">
+                <div class="label-plan">Pianta piano terra</div>
+            </div>
+
+            <div class="img-wrapper">
+                <img src="biblioteca4.png">
+                <div class="label-plan">Pianta piano tipo</div>
+            </div>
+
+            <div class="img-wrapper">
+                <img src="biblioteca5.png">
+            </div>
         </div>
         
         <div class="text-side">
@@ -208,18 +229,10 @@
 
     <div class="slider-wrapper">
         <div class="tick-labels">
-            <span>01</span>
-            <span>02</span>
-            <span>03</span>
-            <span>04</span>
-            <span>05</span>
+            <span>01</span><span>02</span><span>03</span><span>04</span><span>05</span>
         </div>
         <div class="slider-ticks">
-            <div class="tick"></div>
-            <div class="tick"></div>
-            <div class="tick"></div>
-            <div class="tick"></div>
-            <div class="tick"></div>
+            <div class="tick"></div><div class="tick"></div><div class="tick"></div><div class="tick"></div><div class="tick"></div>
         </div>
         <input type="range" id="imageSlider" min="0" max="4" value="0" step="1" oninput="updateSlider(this.value)">
     </div>
@@ -232,10 +245,11 @@
         });
 
         function updateSlider(val) {
-            const images = document.querySelectorAll('.image-container img');
-            images.forEach((img, index) => {
-                img.classList.remove('active');
-                if(index == val) img.classList.add('active');
+            // Seleziona i wrapper invece delle singole immagini
+            const wrappers = document.querySelectorAll('.img-wrapper');
+            wrappers.forEach((wrap, index) => {
+                wrap.classList.remove('active');
+                if(index == val) wrap.classList.add('active');
             });
         }
     </script>
