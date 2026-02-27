@@ -28,7 +28,7 @@
         .header-nav { position: fixed; top: 30px; left: 5%; z-index: 1000; }
         .back-btn { color: rgb(122, 161, 190); text-decoration: none; font-size: 14px; font-weight: bold; }
 
-        /* BARRA SCROLL */
+        /* SCROLL BAR */
         .scroll-container {
             position: fixed; right: 15px; top: 20%; height: 60%; width: 4px;
             background: rgba(255, 255, 255, 0.1); border-radius: 2px; z-index: 1000;
@@ -42,11 +42,11 @@
 
         .main-title { color: rgb(173, 54, 35); font-size: 52px; margin-bottom: 80px; text-align: center; font-weight: normal; font-style: normal; }
 
+        /* GRIGLIA BILINGUE IT (Bianco) / EN (Grigio) */
         .bilingual-grid { display: flex; width: 100%; gap: 80px; margin-bottom: 100px; }
         .lang-col { flex: 1; }
         .lang-label { font-size: 28px; font-weight: bold; margin-bottom: 15px; font-style: normal; }
         .description { font-size: 16px; line-height: 1.6; font-style: normal; }
-        
         .it-side { text-align: right; color: white; }
         .en-side { text-align: left; color: #888; }
 
@@ -60,14 +60,7 @@
         .schema-row { display: flex; position: relative; width: 100%; margin-bottom: 300px; align-items: flex-start; }
 
         .box-container { position: relative; border: 1px solid rgba(255, 255, 255, 0.15); z-index: 10; background-color: #1a1a1a; }
-        
-        .box-label { 
-            position: absolute; top: -35px; left: 0; 
-            font-size: 13px; font-weight: bold; 
-            color: rgb(122, 161, 190); letter-spacing: 1px; 
-            font-style: normal; white-space: nowrap;
-            z-index: 25;
-        }
+        .box-label { position: absolute; top: -35px; left: 0; font-size: 13px; font-weight: bold; color: rgb(122, 161, 190); letter-spacing: 1px; font-style: normal; white-space: nowrap; z-index: 25; }
 
         .corner { width: 8px; height: 8px; background-color: rgb(122, 161, 190); position: absolute; z-index: 30; }
         .tl { top: -4px; left: -4px; } .tr { top: -4px; right: -4px; }
@@ -76,39 +69,24 @@
         .img-wrapper { width: 100%; height: 100%; overflow: hidden; position: relative; }
         .img-wrapper img, .img-wrapper video, .final-white-box img, .side-box img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
 
+        /* Rapporti d'aspetto originali per la parte superiore */
         .gray-left { width: 20vw; aspect-ratio: 4 / 3; flex-shrink: 0; }
         .mid-right { width: 50vw; aspect-ratio: 16 / 9; background-color: #2a2a2a; margin-left: 10vw; margin-top: 80px; flex-shrink: 0; }
 
-        .inter-grid {
-            display: flex; width: 100%; gap: 80px; margin: 0 auto 150px auto;
-            max-width: 1200px; padding: 0 5%;
-            position: relative; z-index: 10;
-        }
+        .inter-grid { display: flex; width: 100%; gap: 80px; margin: 0 auto 150px auto; max-width: 1200px; padding: 0 5%; position: relative; z-index: 10; }
 
-        /* --- FINALE B5 VERTICALE --- */
+        /* --- FINALE B5 ORIZZONTALE --- */
         .final-white-box {
-            width: 30vw; 
-            aspect-ratio: 176 / 250; 
-            background-color: white;
-            margin: 0 auto 100px auto; 
-            overflow: hidden; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            position: relative;
+            width: 70vw; aspect-ratio: 250 / 176; background-color: white;
+            margin: 0 auto 150px auto; overflow: hidden; display: flex; justify-content: center; align-items: center; position: relative;
         }
 
-        /* DOPPIO RIQUADRO VERTICALE FINALE */
+        /* --- DOPPIO RIQUADRO FINALE B5 VERTICALE --- */
         .dual-box-row {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            margin: 0 auto 300px auto;
-            gap: 40px;
+            display: flex; justify-content: center; width: 100%; margin: 0 auto 300px auto; gap: 40px;
         }
         .side-box {
-            width: 30vw;
-            aspect-ratio: 176 / 250;
+            width: 30vw; aspect-ratio: 176 / 250; /* Formato B5 Verticale */
             background-color: #1a1a1a;
         }
 
@@ -136,11 +114,11 @@
         <div class="bilingual-grid">
             <div class="lang-col it-side">
                 <div class="lang-label">IT</div>
-                <div class="description">L'obiettivo della tesi è stato quello di progettare la riqualificazione di un'area industriale a Genova, riconnettendo la città con il mare, grazie all'uso degli strumenti parametrici. L’uso degli strumenti parametrici consente di affrontare la progettazione urbana, e in misura maggiore quella architettonica, permettendo di gestire la complessità e di generare molteplici scenari. Per secoli la crescita di Genova si è intrecciata con la storia del suo porto...</div>
+                <div class="description">L'obiettivo della tesi è stato quello di progettare la riqualificazione di un'area industriale a Genova...</div>
             </div>
             <div class="lang-col en-side">
                 <div class="lang-label">EN</div>
-                <div class="description">The goal of the thesis was to design the redevelopment of an industrial area in Genoa, reconnecting the city with the sea, through the use of parametric tools. The use of parametric tools allows for urban design, and to an even greater extent architectural design, to manage complexity and generate multiple scenarios...</div>
+                <div class="description">The goal of the thesis was to design the redevelopment of an industrial area in Genoa...</div>
             </div>
         </div>
 
@@ -149,8 +127,8 @@
         </div>
 
         <div class="justified-footer-grid">
-            <div class="lang-col it-side">Genova è una città bifronte, contesa tra mare e montagna. Questo ha condotto, nel corso dei secoli, ad un uso intensivo del suo suolo...</div>
-            <div class="lang-col en-side">Genoa is a two-faced city, caught between the sea and the mountains. Over the centuries, this has led to intensive land use...</div>
+            <div class="lang-col it-side">Genova è una città bifronte...</div>
+            <div class="lang-col en-side">Genoa is a two-faced city...</div>
         </div>
     </div>
 
@@ -183,105 +161,4 @@
 
         <div class="schema-row" id="row-2">
             <div class="box-container gray-left">
-                <div class="box-label">DISTRIBUZIONE</div>
-                <div class="img-wrapper"><img src="genova4.png"></div>
-                <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-            </div>
-            <div class="box-container mid-right">
-                <div class="img-wrapper"><video autoplay muted loop playsinline><source src="genova8.mp4" type="video/mp4"></video></div>
-                <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-            </div>
-        </div>
-
-        <div class="schema-row" id="row-3">
-            <div class="box-container gray-left">
-                <div class="box-label">DISPOSITIVI ESTERNI</div>
-                <div class="img-wrapper"><img src="genova5.png"></div>
-                <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-            </div>
-            <div class="box-container mid-right">
-                <div class="img-wrapper"><video autoplay muted loop playsinline><source src="genova9.mp4" type="video/mp4"></video></div>
-                <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-            </div>
-        </div>
-
-        <div class="inter-grid">
-            <div class="lang-col it-side"><div class="lang-label">IT</div><div class="description">I quattro algoritmi ci sono stati utili per gestire e mettere a sistema la complessità...</div></div>
-            <div class="lang-col en-side"><div class="lang-label">EN</div><div class="description">The four algorithms were useful for managing and organizing complexity...</div></div>
-        </div>
-
-        <div id="final-box" class="box-container final-white-box">
-            <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-            <img src="genova10.png" id="main-image-display">
-            <div class="nav-arrow" onclick="switchToGenova11()">→</div>
-        </div>
-
-        <div class="dual-box-row">
-            <div class="box-container side-box">
-                <div class="img-wrapper"><img src="genova12.png"></div>
-                <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-            </div>
-            <div class="box-container side-box">
-                <div class="img-wrapper"><img src="genova13.png"></div>
-                <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function switchToGenova11() {
-            const display = document.getElementById('main-image-display');
-            if (display.src.includes("genova10.png")) {
-                display.src = "genova11.png";
-            } else {
-                display.src = "genova10.png";
-            }
-        }
-
-        const dot = document.getElementById('cursor-dot');
-        document.addEventListener('mousemove', (e) => {
-            dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
-        });
-
-        window.onscroll = function() {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            document.getElementById('indicator').style.height = (winScroll / height) * 100 + "%";
-        };
-
-        function drawLines() {
-            const svg = document.getElementById('master-svg');
-            const finalBox = document.getElementById('final-box');
-            const container = document.getElementById('schema-master-container');
-            if (!container || !finalBox || !svg) return;
-            
-            const containerRect = container.getBoundingClientRect();
-            const finalRect = finalBox.getBoundingClientRect();
-            const finalRightX = finalRect.right - containerRect.left;
-            const finalCenterY = (finalRect.top + finalRect.height / 2) - containerRect.top;
-
-            let pathContent = "";
-            for (let i = 0; i < 4; i++) {
-                const row = document.getElementById(`row-${i}`);
-                if(!row) continue;
-                const gray = row.querySelector('.gray-left').getBoundingClientRect();
-                const mid = row.querySelector('.mid-right').getBoundingClientRect();
-
-                const grayX = gray.right - containerRect.left;
-                const grayY = (gray.top + gray.height / 2) - containerRect.top;
-                const midLX = mid.left - containerRect.left;
-                const midRX = mid.right - containerRect.left;
-                const midY = (mid.top + mid.height / 2) - containerRect.top;
-
-                pathContent += `<path class="connector-path" d="M ${grayX},${grayY} H ${grayX + 40} V ${midY} H ${midLX}" />`;
-                const offset = 20 + (i * 25);
-                pathContent += `<path class="connector-path" d="M ${midRX},${midY} H ${finalRightX + offset} V ${finalCenterY} H ${finalRightX}" />`;
-            }
-            svg.innerHTML = pathContent;
-        }
-
-        window.addEventListener('load', () => { setTimeout(drawLines, 500); });
-        window.addEventListener('resize', drawLines);
-    </script>
-</body>
-</html>
+                <div class
