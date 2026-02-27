@@ -35,26 +35,25 @@
         }
         .scroll-bar { width: 100%; height: 0%; background-color: rgb(173, 54, 35); border-radius: 2px; }
 
+        /* WRAPPER GENERALE */
         .wrapper {
             max-width: 1200px; margin: 0 auto; padding: 120px 5% 50px 5%;
             display: flex; flex-direction: column; align-items: center;
         }
 
-        .main-title { color: rgb(173, 54, 35); font-size: 52px; margin-bottom: 80px; text-align: center; font-weight: normal; font-style: normal; }
+        .main-title { color: rgb(173, 54, 35); font-size: 52px; margin-bottom: 80px; text-align: center; font-weight: normal; }
 
-        /* GRIGLIA BILINGUE UNIVERSALE */
-        .bilingual-grid { display: flex; width: 100%; gap: 80px; margin-bottom: 100px; }
-        .lang-col { flex: 1; }
-        .lang-label { font-size: 28px; font-weight: bold; margin-bottom: 15px; font-style: normal; }
-        .description { font-size: 16px; line-height: 1.6; font-style: normal; }
+        /* GRIGLIE BILINGUE */
+        .bilingual-grid { display: flex; width: 100%; gap: 60px; margin-bottom: 100px; align-items: flex-start; }
+        .lang-col { flex: 1; display: flex; flex-direction: column; }
+        .lang-label { font-size: 24px; font-weight: bold; margin-bottom: 15px; }
+        .description { font-size: 16px; line-height: 1.7; text-align: justify; }
         
         .it-side { text-align: right; color: white; }
         .en-side { text-align: left; color: #888; } /* Inglese in grigio */
 
-        .video-box { width: 100%; aspect-ratio: 16 / 9; background-color: white; margin-bottom: 80px; overflow: hidden; }
-        .video-box video { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-
-        .justified-footer-grid { display: flex; width: 100%; gap: 80px; margin-bottom: 150px; text-align: justify; font-size: 18px; line-height: 1.8; }
+        .video-box { width: 100%; aspect-ratio: 16 / 9; background-color: white; margin-bottom: 100px; overflow: hidden; }
+        .video-box video { width: 100%; height: 100%; object-fit: cover; }
 
         /* --- SCHEMA TECNICO --- */
         #schema-master-container { position: relative; width: 100%; padding: 0 5%; display: flex; flex-direction: column; }
@@ -66,8 +65,7 @@
             position: absolute; top: -35px; left: 0; 
             font-size: 13px; font-weight: bold; 
             color: rgb(122, 161, 190); letter-spacing: 1px; 
-            font-style: normal; white-space: nowrap;
-            z-index: 25;
+            white-space: nowrap; z-index: 25;
         }
 
         .corner { width: 8px; height: 8px; background-color: rgb(122, 161, 190); position: absolute; z-index: 30; }
@@ -75,40 +73,33 @@
         .bl { bottom: -4px; left: -4px; } .br { bottom: -4px; right: -4px; }
 
         .img-wrapper { width: 100%; height: 100%; overflow: hidden; position: relative; }
-        .img-wrapper img, .img-wrapper video, .final-white-box img, .side-box video { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+        .img-wrapper img, .img-wrapper video { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-        .gray-left { width: 25vw; aspect-ratio: 176 / 250; flex-shrink: 0; }
-        .mid-right { width: 50vw; aspect-ratio: 16 / 9; background-color: #2a2a2a; margin-left: 10vw; margin-top: 80px; flex-shrink: 0; }
+        /* Dimensioni Riquadri Superiori */
+        .gray-left { width: 22vw; aspect-ratio: 4 / 3; flex-shrink: 0; }
+        .mid-right { width: 50vw; aspect-ratio: 16 / 9; margin-left: 10vw; margin-top: 80px; flex-shrink: 0; }
 
-        /* GRIGLIA ALGORITMI */
+        /* TESTO ALGORITMI */
         .inter-grid {
-            display: flex; width: 100%; gap: 80px; margin: 0 auto 150px auto;
-            max-width: 1200px; padding: 0 5%;
-            position: relative; z-index: 10;
+            display: flex; width: 100%; gap: 60px; margin: 0 auto 150px auto;
+            max-width: 1200px; padding: 0 5%; position: relative; z-index: 10;
         }
 
-        /* --- FINALE B5 ORIZZONTALE (Target) --- */
+        /* --- FINALE B5 ORIZZONTALE (Bianco) --- */
         .final-white-box {
             width: 70vw; aspect-ratio: 250 / 176; background-color: white;
-            margin: 0 auto 150px auto; overflow: hidden; display: flex; justify-content: center; align-items: center; position: relative;
+            margin: 0 auto 150px auto; overflow: hidden; display: flex; 
+            justify-content: center; align-items: center; position: relative;
         }
+        .final-white-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- DOPPIO RIQUADRO FINALE HORIZONTAL (Video) --- */
+        /* --- DOPPIO RIQUADRO ORIZZONTALE FINALE (Video) --- */
         .dual-box-row {
-            display: flex;
-            justify-content: space-between; /* Space them out across the width */
-            width: 70vw; /* Match width of final-white-box for alignment */
-            margin: 0 auto 300px auto;
-            gap: 20px; /* Slight gap between them */
-            position: relative;
-            z-index: 10;
+            display: flex; justify-content: center; width: 70vw; 
+            margin: 0 auto 300px auto; gap: 40px; position: relative; z-index: 10;
         }
         .side-box {
-            flex: 1; /* Both take equal width */
-            aspect-ratio: 16 / 9; /* Horizontal landscape ratio */
-            background-color: #1a1a1a;
-            border: 1px solid rgba(255, 255, 255, 0.15); /* Match technical look */
-            overflow: hidden;
+            flex: 1; aspect-ratio: 16 / 9; overflow: hidden;
         }
 
         .nav-arrow {
@@ -135,11 +126,15 @@
         <div class="bilingual-grid">
             <div class="lang-col it-side">
                 <div class="lang-label">IT</div>
-                <div class="description">L'obiettivo della tesi è stato quello di progettare la riqualificazione di un'area industriale a Genova, riconnettendo la città con il mare, grazie all'uso degli strumenti parametrici. L’uso degli strumenti parametrici consente di affrontare la progettazione urbana, e in misura maggiore quella architettonica, permettendo di gestire la complessità e di generare molteplici scenari. Per secoli la crescita di Genova si è intrecciata con la storia del suo porto.</div>
+                <div class="description">
+                    L'obiettivo della tesi è stato quello di progettare la riqualificazione di un'area industriale a Genova, riconnettendo la città con il mare, grazie all'uso degli strumenti parametrici. L’uso degli strumenti parametrici consente di affrontare la progettazione urbana, e in misura maggiore quella architettonica, permettendo di gestire la complessità e di generare molteplici scenari. Per secoli la crescita di Genova si è intrecciata con la storia del suo porto. Come è possibile affrontare un progetto la cui storia è così strettamente legata alle trasformazioni della sua costa?
+                </div>
             </div>
             <div class="lang-col en-side">
                 <div class="lang-label">EN</div>
-                <div class="description">The goal of the thesis was to design the redevelopment of an industrial area in Genoa, reconnecting the city with the sea, through the use of parametric tools. The use of parametric tools allows for urban design, and to an even greater extent architectural design, to manage complexity and generate multiple scenarios. For centuries, the growth of Genoa has been intertwined with the history of its port.</div>
+                <div class="description">
+                    The goal of the thesis was to design the redevelopment of an industrial area in Genoa, reconnecting the city with the sea, through the use of parametric tools. The use of parametric tools allows for urban design, and to an even greater extent architectural design, to manage complexity and generate multiple scenarios. For centuries, the growth of Genoa has been intertwined with the history of its port. How is it possible to approach a project whose history is so closely linked to the transformations of its coastline?
+                </div>
             </div>
         </div>
 
@@ -147,12 +142,16 @@
             <video autoplay muted loop playsinline><source src="genova1.mp4" type="video/mp4"></video>
         </div>
 
-        <div class="justified-footer-grid">
+        <div class="bilingual-grid" style="margin-bottom: 150px;">
             <div class="lang-col it-side">
-                Genova è una città bifronte, contesa tra mare e montagna. Questo ha condotto, nel corso dei secoli, ad un uso intensivo del suo suolo. Genova è una città che ha un forte rapporto con il porto, tanto da far ruotare la sua economia intorno ad esso. Le industrie a partire dall'Ottocento si insediano sulla sua costa, motivo per il quale la città smette di avere un legame visivo con il mare.
+                <div class="description">
+                    Genova è una città bifronte, contesa tra mare e montagna. Questo ha condotto, nel corso dei secoli, ad un uso intensivo del suo suolo. Genova è una città che ha un forte rapporto con il porto, tanto da far ruotare la sua economia intorno ad esso. Le industrie a partire dall'Ottocento si insediano sulla sua costa, motivo per il quale la città smette di avere un legame visivo con il mare.
+                </div>
             </div>
             <div class="lang-col en-side">
-                Genoa is a two-faced city, caught between the sea and the mountains. Over the centuries, this has led to intensive land use. Genoa has a strong bond with its port, so much so that its economy revolves around it. Starting from the nineteenth century, industries settled along its coast, which is why the city lost its visual link with the sea.
+                <div class="description">
+                    Genoa is a two-faced city, caught between the sea and the mountains. Over the centuries, this has led to intensive land use. Genoa has a strong bond with its port, so much so that its economy revolves around it. Starting from the nineteenth century, industries settled along its coast, which is why the city lost its visual link with the sea.
+                </div>
             </div>
         </div>
     </div>
@@ -167,9 +166,7 @@
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
             <div class="box-container mid-right">
-                <div class="img-wrapper">
-                    <video autoplay muted loop playsinline><source src="genova6.mp4" type="video/mp4"></video>
-                </div>
+                <div class="img-wrapper"><video autoplay muted loop playsinline><source src="genova6.mp4" type="video/mp4"></video></div>
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
         </div>
@@ -181,9 +178,7 @@
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
             <div class="box-container mid-right">
-                <div class="img-wrapper">
-                    <video autoplay muted loop playsinline><source src="genova7.mp4" type="video/mp4"></video>
-                </div>
+                <div class="img-wrapper"><video autoplay muted loop playsinline><source src="genova7.mp4" type="video/mp4"></video></div>
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
         </div>
@@ -195,9 +190,7 @@
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
             <div class="box-container mid-right">
-                <div class="img-wrapper">
-                    <video autoplay muted loop playsinline><source src="genova8.mp4" type="video/mp4"></video>
-                </div>
+                <div class="img-wrapper"><video autoplay muted loop playsinline><source src="genova8.mp4" type="video/mp4"></video></div>
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
         </div>
@@ -209,9 +202,7 @@
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
             <div class="box-container mid-right">
-                <div class="img-wrapper">
-                    <video autoplay muted loop playsinline><source src="genova9.mp4" type="video/mp4"></video>
-                </div>
+                <div class="img-wrapper"><video autoplay muted loop playsinline><source src="genova9.mp4" type="video/mp4"></video></div>
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
         </div>
@@ -235,19 +226,14 @@
 
         <div class="dual-box-row">
             <div class="box-container side-box">
-                <div class="img-wrapper">
-                    <video autoplay muted loop playsinline><source src="genova12.mp4" type="video/mp4"></video>
-                </div>
+                <div class="img-wrapper"><video autoplay muted loop playsinline><source src="genova12.mp4" type="video/mp4"></video></div>
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
             <div class="box-container side-box">
-                <div class="img-wrapper">
-                    <video autoplay muted loop playsinline><source src="genova13.mp4" type="video/mp4"></video>
-                </div>
+                <div class="img-wrapper"><video autoplay muted loop playsinline><source src="genova13.mp4" type="video/mp4"></video></div>
                 <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
             </div>
         </div>
-
     </div>
 
     <script>
@@ -270,14 +256,15 @@
         function drawLines() {
             const svg = document.getElementById('master-svg');
             const finalBox = document.getElementById('final-box');
-            const containerRect = document.getElementById('schema-master-container').getBoundingClientRect();
-            if (!finalBox || !svg) return;
+            const container = document.getElementById('schema-master-container');
+            if (!container || !finalBox || !svg) return;
             
-            svg.innerHTML = '';
+            const containerRect = container.getBoundingClientRect();
             const finalRect = finalBox.getBoundingClientRect();
             const finalRightX = finalRect.right - containerRect.left;
             const finalCenterY = (finalRect.top + finalRect.height / 2) - containerRect.top;
 
+            let pathContent = "";
             for (let i = 0; i < 4; i++) {
                 const row = document.getElementById(`row-${i}`);
                 if(!row) continue;
@@ -290,10 +277,11 @@
                 const midRX = mid.right - containerRect.left;
                 const midY = (mid.top + mid.height / 2) - containerRect.top;
 
-                svg.innerHTML += `<path class="connector-path" d="M ${grayX},${grayY} H ${grayX + 40} V ${midY} H ${midLX}" />`;
+                pathContent += `<path class="connector-path" d="M ${grayX},${grayY} H ${grayX + 40} V ${midY} H ${midLX}" />`;
                 const offset = 20 + (i * 25);
-                svg.innerHTML += `<path class="connector-path" d="M ${midRX},${midY} H ${finalRightX + offset} V ${finalCenterY} H ${finalRightX}" />`;
+                pathContent += `<path class="connector-path" d="M ${midRX},${midY} H ${finalRightX + offset} V ${finalCenterY} H ${finalRightX}" />`;
             }
+            svg.innerHTML = pathContent;
         }
 
         window.addEventListener('load', () => { setTimeout(drawLines, 500); });
