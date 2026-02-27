@@ -5,37 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - Martina Colucci</title>
     <style>
+        * { box-sizing: border-box; }
+        
         body, html {
             margin: 0; padding: 0;
             width: 100%; height: 100%;
             overflow: hidden;
             background-color: white;
             font-family: Arial, sans-serif;
-            cursor: none;
+            cursor: none; /* Nascondiamo il cursore di sistema */
+            /* La tua griglia azzurra distintiva */
+            background-image: linear-gradient(rgb(122, 161, 190) 1px, transparent 1px),
+                              linear-gradient(90deg, rgb(122, 161, 190) 1px, transparent 1px);
+            background-size: 60px 60px;
         }
-        #video-container {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 1;
-        }
-        video {
-            width: 100%; height: 100%;
-            object-fit: cover;
-        }
-        #enter-btn {
-            position: fixed;
-            bottom: 40px; right: 40px;
-            background-color: black;
-            color: white;
-            border: none;
-            padding: 12px 35px;
-            font-size: 16px;
-            font-family: Arial, sans-serif;
-            text-decoration: none;
-            display: none;
-            z-index: 10;
-        }
+
+        /* --- CURSORE ROSSO --- */
         #cursor-dot {
             width: 10px; height: 10px;
             background-color: rgb(173, 54, 35);
@@ -46,23 +31,78 @@
             transform: translate(-50%, -50%);
             transition: transform 0.1s ease-out;
         }
+
+        /* --- CONTENITORE VIDEO --- */
+        #video-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+        }
+
+        video {
+            width: 100%; height: 100%;
+            object-fit: cover; /* Il video riempie tutto lo schermo */
+        }
+
+        /* --- TASTO ENTER CON FADE-IN --- */
+        #enter-btn {
+            position: fixed;
+            bottom: 40px; right: 40px;
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-size: 16px;
+            text-decoration: none;
+            z-index: 10;
+            
+            /* Stato iniziale invisibile */
+            opacity: 0;
+            visibility: hidden;
+            
+            /* Transizione di 1 secondo per il fade-in */
+            transition: opacity 1s ease-out, visibility 1s ease-out, background-color 0.3s ease;
+        }
+
+        /* Classe attivata via JavaScript al termine del video */
+        #enter-btn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #enter-btn:hover {
+            background-color: rgb(173, 54, 35); /* Diventa rosso al passaggio */
+        }
     </style>
 </head>
 <body>
+
     <div id="cursor-dot"></div>
+
     <div id="video-container">
-        <video autoplay muted loop playsinline>
-            <source src="tuo-video.mp4" type="video/mp4">
+        <video autoplay muted playsinline id="introVideo">
+            <source src="intro1.mp4" type="video/mp4">
+            Il tuo browser non supporta il video.
         </video>
     </div>
+
     <a href="projects.html" id="enter-btn">Enter</a>
 
     <script>
-        setTimeout(() => { document.getElementById('enter-btn').style.display = 'block'; }, 3000);
+        const video = document.getElementById('introVideo');
+        const btn = document.getElementById('enter-btn');
         const dot = document.getElementById('cursor-dot');
+
+        // Segue il movimento del mouse
         document.addEventListener('mousemove', (e) => {
             dot.style.left = e.clientX + 'px';
             dot.style.top = e.clientY + 'px';
+        });
+
+        // Attiva la dissolvenza (fade-in) solo quando il video è finito
+        video.addEventListener('ended', () => {
+            btn.classList.add('show');
         });
     </script>
 </body>
