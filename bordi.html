@@ -18,6 +18,7 @@
             background-size: 60px 60px;
         }
 
+        /* --- CURSORE --- */
         #cursor-dot {
             width: 10px; height: 10px; 
             background-color: rgb(173, 54, 35);
@@ -29,6 +30,7 @@
         .header-nav { position: fixed; top: 30px; left: 5%; z-index: 1000; }
         .back-btn { color: rgb(122, 161, 190); text-decoration: none; font-size: 14px; font-weight: bold; }
 
+        /* --- RIQUADRO PRINCIPALE --- */
         .white-rect {
             position: absolute;
             top: 10%; left: 5%; right: 5%; bottom: 15%;
@@ -56,32 +58,32 @@
         .project-title-large { color: black; font-style: italic; font-size: 26px; margin-bottom: 15px; font-weight: normal; }
         .project-description { color: rgb(173, 54, 35); font-style: italic; line-height: 1.3; font-size: 16px; }
 
+        /* Immagini a destra - Rimosso transition per evitare lo scivolamento */
         .image-container {
             flex: 2; height: 100%; display: flex;
             justify-content: center; align-items: center;
             overflow: hidden;
-            position: relative;
-            /* Rimosso transition per evitare lo scatto da sinistra */
+            position: relative; 
         }
 
         .image-container.full-width { flex: 100%; }
-
         .image-container img { width: 100%; height: 100%; display: none; }
         .image-container img.active-img { display: block; }
         .contain { object-fit: contain; }
 
-        /* --- TITOLO OVERLAY SULLA FOTO --- */
+        /* --- TITOLO AGGIUNTO NELL'ANGOLO IN BASSO A DESTRA --- */
         #photo-title {
             position: absolute;
-            bottom: 20px;
-            right: 20px;
+            bottom: 10px;
+            right: 10px;
             color: white;
             font-size: 32px;
             font-style: italic;
-            display: none; /* Visibile solo su bordi1 */
             z-index: 30;
+            display: block;
         }
 
+        /* --- SLIDER ROSSO --- */
         .slider-wrapper {
             position: absolute; bottom: 4%; left: 50%;
             transform: translateX(-50%); width: 350px; 
@@ -100,7 +102,9 @@
 
     <div id="cursor-dot"></div>
 
-    <div class="header-nav"><a href="projects.html" class="back-btn">< BACK</a></div>
+    <div class="header-nav">
+        <a href="projects.html" class="back-btn">< BACK</a>
+    </div>
 
     <div class="white-rect" id="mainRect">
         <div class="text-side" id="sidebar">
@@ -110,6 +114,7 @@
 
         <div class="image-container" id="gallery">
             <div id="photo-title">Agire sui bordi</div>
+            
             <img src="bordi1.png" class="active-img contain"> 
             <img src="bordi2.png" class="contain">          
             <img src="bordi3.png" class="contain">          
@@ -152,10 +157,11 @@
             });
 
             if (val > 0) {
+                // Stato quando si scorre (BIANCO)
                 mainRect.style.backgroundColor = "white";
                 sidebar.classList.add('active-text');
                 gallery.classList.remove('full-width');
-                photoTitle.style.display = "none"; // Nascondi titolo
+                photoTitle.style.display = "none"; // Scompare il titolo overlay
                 
                 if (val === 1 || val === 2) {
                     desc.innerText = text1;
@@ -163,10 +169,11 @@
                     desc.innerText = text2;
                 }
             } else {
+                // Stato iniziale (NERO)
                 mainRect.style.backgroundColor = "black";
                 sidebar.classList.remove('active-text');
                 gallery.classList.add('full-width');
-                photoTitle.style.display = "block"; // Mostra titolo solo su bordi1
+                photoTitle.style.display = "block"; // Ricompare il titolo overlay
             }
         }
 
