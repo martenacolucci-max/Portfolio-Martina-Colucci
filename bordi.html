@@ -91,12 +91,12 @@
         .image-container img.active-img { display: block; }
         .contain { object-fit: contain; }
 
-        /* --- TITOLO OVERLAY AL CENTRO IN BASSO --- */
+        /* --- TITOLO OVERLAY SPOSTATO A DESTRA --- */
         #photo-title-overlay {
             position: absolute;
             bottom: 30px; /* Distanza dal bordo inferiore */
-            left: 50%;
-            transform: translateX(-50%); /* Centra perfettamente */
+            left: 60%; /* Spostato al 60% (50% centro + 10% destra) */
+            transform: translateX(-50%); /* Mantiene il testo centrato rispetto al punto di ancoraggio */
             color: white;
             font-size: 34px;
             font-style: italic;
